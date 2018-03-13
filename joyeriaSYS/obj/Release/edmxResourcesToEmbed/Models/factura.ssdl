@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JoyeriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+      <PropertyRef Name="Model" />
+      <PropertyRef Name="ProductVersion" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAT_CATEGORIA">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CLI_CLIENTES">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEncargado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NombreJoyeria" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Celular" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="10" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Provincia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Canton" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CQR_CODIGO_QR">
+    <Key>
+      <PropertyRef Name="idQR" />
+    </Key>
+    <Property Name="idQR" Type="int" Nullable="false" />
+    <Property Name="urlImagen" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DEF_DETALLE_FACTURA">
+    <Key>
+      <PropertyRef Name="idDetalleFactura" />
+    </Key>
+    <Property Name="idDetalleFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idFactura" Type="int" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="CantidadProducto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FAC_FACTURA">
+    <Key>
+      <PropertyRef Name="idFactura" />
+    </Key>
+    <Property Name="idFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFactura" Type="int" Nullable="false" />
+    <Property Name="CodTabla" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="montoFactura" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="saldo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="totalDevuelto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="totalPiezas" Type="int" Nullable="false" />
+    <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="fechaLiquidacion" Type="datetime" Nullable="false" />
+    <Property Name="idCliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRO_PRODUCTO">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+    </Key>
+    <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProducto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCategoria" Type="int" Nullable="false" />
+    <Property Name="CodigoNumerico" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inventario" Type="int" />
+  </EntityType>
+  <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
+    <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
+    <End Role="CQR_CODIGO_QR" Type="Self.CQR_CODIGO_QR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_PRODUCTO">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="CQR_CODIGO_QR">
+        <PropertyRef Name="idProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
+    <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="1" />
+    <End Role="DEF_DETALLE_FACTURA" Type="Self.DEF_DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAC_FACTURA">
+        <PropertyRef Name="idFactura" />
+      </Principal>
+      <Dependent Role="DEF_DETALLE_FACTURA">
+        <PropertyRef Name="idFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
+    <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
+    <End Role="DEF_DETALLE_FACTURA" Type="Self.DEF_DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_PRODUCTO">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="DEF_DETALLE_FACTURA">
+        <PropertyRef Name="idProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
+    <End Role="CLI_CLIENTES" Type="Self.CLI_CLIENTES" Multiplicity="1" />
+    <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLI_CLIENTES">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="FAC_FACTURA">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_PRODUCTO_CAT_CATEGORIA">
+    <End Role="CAT_CATEGORIA" Type="Self.CAT_CATEGORIA" Multiplicity="1" />
+    <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_CATEGORIA">
+        <PropertyRef Name="idCategoria" />
+      </Principal>
+      <Dependent Role="PRO_PRODUCTO">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JoyeriaModelStoreContainer">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_CATEGORIA" EntityType="Self.CAT_CATEGORIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLI_CLIENTES" EntityType="Self.CLI_CLIENTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CQR_CODIGO_QR" EntityType="Self.CQR_CODIGO_QR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DEF_DETALLE_FACTURA" EntityType="Self.DEF_DETALLE_FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAC_FACTURA" EntityType="Self.FAC_FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRO_PRODUCTO" EntityType="Self.PRO_PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [__MigrationHistory].[MigrationId] AS [MigrationId], 
+    [__MigrationHistory].[ContextKey] AS [ContextKey], 
+    [__MigrationHistory].[Model] AS [Model], 
+    [__MigrationHistory].[ProductVersion] AS [ProductVersion]
+    FROM [dbo].[__MigrationHistory] AS [__MigrationHistory]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
+      <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
+      <End Role="CQR_CODIGO_QR" EntitySet="CQR_CODIGO_QR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA" Association="Self.FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
+      <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+      <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" Association="Self.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
+      <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
+      <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAC_FACTURA_CLI_CLIENTES" Association="Self.FK_FAC_FACTURA_CLI_CLIENTES">
+      <End Role="CLI_CLIENTES" EntitySet="CLI_CLIENTES" />
+      <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_PRODUCTO_CAT_CATEGORIA" Association="Self.FK_PRO_PRODUCTO_CAT_CATEGORIA">
+      <End Role="CAT_CATEGORIA" EntitySet="CAT_CATEGORIA" />
+      <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
