@@ -16,8 +16,8 @@
                                 <video id="preview"></video>
                                 <div class="12u$" id="reader" style="width: 300px; height: 250px">
                                     <label for="demo-cliente">Leer los productos de la factura:</label>
-                                        <asp:TextBox ID="txtCodigo"  AutoPostBack="true" OnTextChanged="txtCodigo_TextChanged" placeholder="Aqui se muestra el idproducto" runat="server"></asp:TextBox>
-                                    <asp:TextBox ID="txtNumeroFactura" placeholder="Aquí la factura" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo"  AutoPostBack="true" OnTextChanged="txtCodigo_TextChanged" placeholder="Aqui se muestra el idproducto" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtNumeroFactura" AutoPostBack="true" OnTextChanged="txtNumeroFactura_TextChanged" placeholder="Aquí la factura" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="12u$">
                                     <label for="demo-cliente">Producto</label>
