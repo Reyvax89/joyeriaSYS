@@ -23,6 +23,7 @@ namespace joyeriaSYS
         {
             if (!IsPostBack)
             {
+                Session["Factura"] = "-1";
                 cargarClientes();
                 cargarProductos();
                 CargarTablaFacturas();
@@ -31,9 +32,9 @@ namespace joyeriaSYS
         protected void gvwFacturas_SelectedIndexChanged(object sender, EventArgs e)
         {
             hdfIdFactura.Value = gvwFacturas.SelectedRow.Cells[0].Text;
-            txtCodTabla.Text = gvwFacturas.SelectedRow.Cells[2].Text;
+            //txtCodTabla.Text = gvwFacturas.SelectedRow.Cells[2].Text;
             txtCodFactura.Text = gvwFacturas.SelectedRow.Cells[1].Text;
-            ddlCliente.SelectedValue = gvwFacturas.SelectedRow.Cells[6].Text;
+            ddlCliente.SelectedValue = gvwFacturas.SelectedRow.Cells[5].Text;
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
 
@@ -172,7 +173,7 @@ namespace joyeriaSYS
 
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("NoFactura", typeof(System.String));
-                dt.Columns.Add("CodTabla", typeof(System.String));
+                //dt.Columns.Add("CodTabla", typeof(System.String));
                 dt.Columns.Add("montoFactura", typeof(System.String));
                 dt.Columns.Add("estado", typeof(System.String));
                 dt.Columns.Add("totalPiezas", typeof(System.String));
@@ -186,7 +187,7 @@ namespace joyeriaSYS
 
                     fila["idFactura"] = r.idFactura;
                     fila["NoFactura"] = r.NoFactura;
-                    fila["CodTabla"] = r.CodTabla;
+                    //fila["CodTabla"] = r.CodTabla;
                     fila["montoFactura"] = r.montoFactura;
                     fila["estado"] = r.estado;
                     fila["totalPiezas"] = r.totalPiezas;
@@ -270,7 +271,7 @@ namespace joyeriaSYS
         public int guardarFactura()
         {
             var nuevaFactura = new FAC_FACTURA();
-            nuevaFactura.CodTabla = txtCodTabla.Text;
+            //nuevaFactura.CodTabla = txtCodTabla.Text;
             nuevaFactura.estado = false;
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
@@ -290,6 +291,8 @@ namespace joyeriaSYS
         {
             hdfIdDetalleFactura.Value = "-1";
             hdfIdFactura.Value = "-1";
+            Session["Factura"] = txtCodFactura.Text;
+            Response.Redirect("frmImprimirFacturas.aspx");
         }
 
         private void ExportToExcel(string nameReport, GridView wControl)
