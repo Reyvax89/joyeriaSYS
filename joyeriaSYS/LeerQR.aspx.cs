@@ -163,15 +163,22 @@ namespace joyeriaSYS
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
+                // Recorrer las filas.
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
-                    DataRow fila = dt.NewRow();
-
-                    fila["idDetalleFactura"] = r.idDetalleFactura;
-                    fila["idFactura"] = r.idFactura;
-                    fila["idProducto"] = r.idProducto;
-                    fila["CantidadProducto"] = r.CantidadProducto;
-                    dt.Rows.Add(fila);
+                    // Crear una fila por cada unidad del producto.
+                    int cantidad = Convert.ToInt32(r.CantidadProducto);
+                    for (int i = 0; i < cantidad; i++)
+                    {
+                        // Crear la fila, asignar valores y agregarla.
+                        DataRow fila = dt.NewRow();
+                        fila["idDetalleFactura"] = r.idDetalleFactura;
+                        fila["idFactura"] = r.idFactura;
+                        fila["idProducto"] = r.idProducto;
+                        // La catidad siempre va ser 1.
+                        fila["CantidadProducto"] = "1";
+                        dt.Rows.Add(fila);
+                    }
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
