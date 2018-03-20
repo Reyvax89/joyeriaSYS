@@ -77,6 +77,48 @@ namespace joyeriaSYS
                 cargarProductos(productoActual.IdProducto);
                 CargarTablaDetalleFacturas(facturaActual.idFactura);
                 //poner en detalle un campo para ir descontando los productos escaneados
+
+                cargarTablaFacturas(codFactura);
+            }
+            catch (Exception ex)
+            {
+                var err = ex.Message;
+            }
+        }
+
+        private void cargarTablaFacturas(int codFactura)
+        {
+            try
+            {
+                var facturaActual = new FAC_FACTURA();
+                facturaActual.NoFactura = codFactura;
+                var dt = new DataTable();
+                var row = objFact.ConsultaPorNumeroDeFactura(facturaActual);
+
+                dt.Columns.Add("idFactura", typeof(System.String));
+                dt.Columns.Add("NoFactura", typeof(System.String));
+                dt.Columns.Add("CodTabla", typeof(System.String));
+                dt.Columns.Add("montoFactura", typeof(System.String));
+                dt.Columns.Add("estado", typeof(System.String));
+                dt.Columns.Add("totalPiezas", typeof(System.String));
+                dt.Columns.Add("idCliente", typeof(System.String));
+                //dt.Columns.Add("fechaCreacion", typeof(System.String));
+                //dt.Columns.Add("fechaLiquidacion", typeof(System.String));
+
+                DataRow fila = dt.NewRow();
+
+                fila["idFactura"] = row.idFactura;
+                fila["NoFactura"] = row.NoFactura;
+                fila["CodTabla"] = row.CodTabla;
+                fila["montoFactura"] = row.montoFactura;
+                fila["estado"] = row.estado;
+                fila["totalPiezas"] = row.totalPiezas;
+                fila["idCliente"] = row.idCliente;
+                //fila["fechaCreacion"] = r.fechaCreacion;
+                //fila["fechaLiquidacion"] = r.fechaLiquidacion;
+                dt.Rows.Add(fila);
+                gvwFacturas.DataSource = dt;
+                gvwFacturas.DataBind();
             }
             catch (Exception ex)
             {
