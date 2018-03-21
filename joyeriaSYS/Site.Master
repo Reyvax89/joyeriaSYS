@@ -12,6 +12,7 @@
         <%--<%: Scripts.Render("~/bundles/modernizr") %>--%>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
+	<link rel="stylesheet" type="text/css" href="Content/Site.css">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <%--<script src="Scripts/jquery-1.10.2.min.js" ></script>--%>
     <script src="Scripts/jquery-1.10.2.min.js"></script>
