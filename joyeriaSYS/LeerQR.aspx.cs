@@ -8,6 +8,7 @@ using System.Data;
 using joyeriaSYS.Models;
 using joyeriaSYS.Controles.clases;
 using System.Web.UI;
+using System.Collections.Generic;
 
 namespace joyeriaSYS
 {
@@ -19,7 +20,10 @@ namespace joyeriaSYS
         private DetalleFactura objDeF = new DetalleFactura();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                cargarFacturas();
+            }
         }
 
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,17 +44,17 @@ namespace joyeriaSYS
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
         {
             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-            var codFactura = (txtNumeroFactura.Text != "") ? Convert.ToInt32(txtNumeroFactura.Text) : 0;
+            var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
             if (codFactura != 0 && codFactura != 0)
             {
                 gestionarCargaDatos(codProducto, codFactura);
             }
         }
 
-        protected void txtNumeroFactura_TextChanged(object sender, EventArgs e)
+        protected void ddlFactura_DropDownChanged(object sender, EventArgs e)
         {
             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-            var codFactura = (txtNumeroFactura.Text != "") ? Convert.ToInt32(txtNumeroFactura.Text) : 0;
+            var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
             if (codFactura != 0 && codFactura != 0)
             {
                 gestionarCargaDatos(codProducto, codFactura);
@@ -97,7 +101,6 @@ namespace joyeriaSYS
 
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("NoFactura", typeof(System.String));
-                dt.Columns.Add("CodTabla", typeof(System.String));
                 dt.Columns.Add("montoFactura", typeof(System.String));
                 dt.Columns.Add("estado", typeof(System.String));
                 dt.Columns.Add("totalPiezas", typeof(System.String));
@@ -109,7 +112,6 @@ namespace joyeriaSYS
 
                 fila["idFactura"] = row.idFactura;
                 fila["NoFactura"] = row.NoFactura;
-                fila["CodTabla"] = row.CodTabla;
                 fila["montoFactura"] = row.montoFactura;
                 fila["estado"] = row.estado;
                 fila["totalPiezas"] = row.totalPiezas;
@@ -119,6 +121,36 @@ namespace joyeriaSYS
                 dt.Rows.Add(fila);
                 gvwFacturas.DataSource = dt;
                 gvwFacturas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                var err = ex.Message;
+            }
+        }
+
+        private void cargarFacturas()
+        {
+            try
+            {
+                var dt = new DataTable();
+                var rows = objFact.Consultar();
+
+                ddlFactura.DataTextField = "NoFactura";
+                ddlFactura.DataValueField = "NoFacturaValue";
+                dt.Columns.Add("NoFactura", typeof(System.String));
+                dt.Columns.Add("NoFacturaValue", typeof(System.String));
+
+                foreach (FAC_FACTURA r in rows)
+                {
+                    DataRow fila = dt.NewRow();
+
+                    fila["NoFactura"] = r.NoFactura;
+                    fila["NoFacturaValue"] = r.NoFactura;
+                    dt.Rows.Add(fila);
+                }
+                ddlFactura.DataSource = dt;
+                ddlFactura.DataBind();
+                ddlFactura.SelectedValue = ddlFactura.ToString();
             }
             catch (Exception ex)
             {
@@ -198,14 +230,16 @@ namespace joyeriaSYS
                     rows = objDeF.ConsultarPorIdFactura(idFactura);
                 }
 
-                dt.Columns.Add("idDetalleFactura", typeof(System.String));
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("idProducto", typeof(System.String));
+                dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 // Recorrer las filas.
+                int posicionConsidencia = -1;
+                int contadorGeneral = 0;
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
                     // Crear una fila por cada unidad del producto.
@@ -214,16 +248,36 @@ namespace joyeriaSYS
                     {
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
-                        fila["idDetalleFactura"] = r.idDetalleFactura;
                         fila["idFactura"] = r.idFactura;
                         fila["idProducto"] = r.idProducto;
+
+                        // Revisar si hay considencia con el codigo que se busca.
+                        var productoConsulta = new PRO_PRODUCTO();
+                        productoConsulta.IdProducto = r.idProducto;
+                        var arrayProducto = objProd.ConsultarPorId(productoConsulta);
+                        foreach (PRO_PRODUCTO producto in arrayProducto)
+                        {
+                            // Cargar el codigo del producto en la fila.
+                            fila["codProducto"] = producto.CodigoNumerico;
+                            // Ver si hay considencias con el codigo que se busca.
+                            var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
+                            if (codProducto == producto.CodigoNumerico)
+                            {
+                                posicionConsidencia = contadorGeneral;
+                            }
+                        }
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
                         dt.Rows.Add(fila);
+                        contadorGeneral++;
                     }
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
+                if (posicionConsidencia != -1)
+                {
+                    gvwDetalleFactura.SelectRow(posicionConsidencia);
+                }
             }
             catch (Exception ex)
             {

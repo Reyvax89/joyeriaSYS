@@ -144,6 +144,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="frmCrearFactura.aspx" />
+    <Content Include="frmImprimirFacturas.aspx" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\factura.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -271,6 +272,13 @@
     </Compile>
     <Compile Include="frmCrearFactura.aspx.designer.cs">
       <DependentUpon>frmCrearFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmImprimirFacturas.aspx.cs">
+      <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmImprimirFacturas.aspx.designer.cs">
+      <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

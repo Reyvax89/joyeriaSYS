@@ -23,8 +23,25 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
-input[type="select"] {
-    max-width: 280px;
+select {
+    min-width: 280px;
+}
+
+.margin-b {
+	margin-bottom: 15px;
+}
+
+content {
+	padding-top: 30px;
+}
+
+table {
+	min-width: 100%;
+	margin-bottom: 30px;
+}
+
+ul {
+	list-style: none;
 }
 
 /* Responsive: Portrait tablets and up */
