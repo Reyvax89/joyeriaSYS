@@ -234,6 +234,7 @@ namespace joyeriaSYS
                 dt.Columns.Add("idProducto", typeof(System.String));
                 dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
+                dt.Columns.Add("Eliminar", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
@@ -244,30 +245,38 @@ namespace joyeriaSYS
                 {
                     // Crear una fila por cada unidad del producto.
                     int cantidad = Convert.ToInt32(r.CantidadProducto);
+                    int flag = 0;
                     for (int i = 0; i < cantidad; i++)
                     {
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
                         fila["idFactura"] = r.idFactura;
                         fila["idProducto"] = r.idProducto;
-
+                  
                         // Revisar si hay considencia con el codigo que se busca.
                         var productoConsulta = new PRO_PRODUCTO();
                         productoConsulta.IdProducto = r.idProducto;
                         var arrayProducto = objProd.ConsultarPorId(productoConsulta);
+
                         foreach (PRO_PRODUCTO producto in arrayProducto)
                         {
                             // Cargar el codigo del producto en la fila.
                             fila["codProducto"] = producto.CodigoNumerico;
-                            // Ver si hay considencias con el codigo que se busca.
-                            var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-                            if (codProducto == producto.CodigoNumerico)
+                            fila["Eliminar"] = "false";
+                            if (flag == 0)
                             {
-                                posicionConsidencia = contadorGeneral;
+                                // Ver si hay considencias con el codigo que se busca.
+                                var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
+                                if (codProducto == producto.CodigoNumerico)
+                                {
+                                    posicionConsidencia = contadorGeneral;
+                                    fila["Eliminar"] = "true";
+                                }
                             }
                         }
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
+                     
                         dt.Rows.Add(fila);
                         contadorGeneral++;
                     }
@@ -277,6 +286,13 @@ namespace joyeriaSYS
                 if (posicionConsidencia != -1)
                 {
                     gvwDetalleFactura.SelectRow(posicionConsidencia);
+
+                }
+                gvwDetalleFactura.DeleteRow(1);
+                gvwDetalleFactura.DataBind();
+                foreach (System.Web.UI.WebControls.GridViewRow item in gvwDetalleFactura.Rows)
+                {
+                    
                 }
             }
             catch (Exception ex)
