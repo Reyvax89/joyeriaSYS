@@ -16,16 +16,17 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <%--<script src="Scripts/jquery-1.10.2.min.js" ></script>--%>
     <script src="Scripts/jquery-1.10.2.min.js"></script>
-                <script src="Scripts/bootstrap.js" ></script>
-                <script src="Scripts/respond.js" ></script>
-                <script src="Scripts/WebForms/WebForms.js"></script>
-                <script src="Scripts/WebForms/WebUIValidation.js" ></script>
-                <script src="Scripts/WebForms/MenuStandards.js" ></script>
-                <script src="Scripts/WebForms/GridView.js" ></script>
-                <script src="Scripts/WebForms/DetailsView.js" ></script>
-                <script src="Scripts/WebForms/TreeView.js" ></script>
-                <script src="Scripts/WebForms/WebParts.js" ></script>
-                <script src="Scripts/WebForms/Focus.js" ></script>
+    <script src="Scripts/bootstrap.js" ></script>
+    <script src="Scripts/respond.js" ></script>
+    <script src="Scripts/WebForms/WebForms.js"></script>
+    <script src="Scripts/WebForms/WebUIValidation.js" ></script>
+    <script src="Scripts/WebForms/MenuStandards.js" ></script>
+    <script src="Scripts/WebForms/GridView.js" ></script>
+    <script src="Scripts/WebForms/DetailsView.js" ></script>
+    <script src="Scripts/WebForms/TreeView.js" ></script>
+    <script src="Scripts/WebForms/WebParts.js" ></script>
+    <script src="Scripts/WebForms/Focus.js" ></script>
+	<script src="Scripts/leerQR.js" ></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
 </head>

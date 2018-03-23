@@ -95,7 +95,12 @@
                                 <asp:BoundField DataField="idProducto" HeaderText="Id Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="codProducto" HeaderText="Código Producto" AccessibleHeaderText="codProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
-                                <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
+								<asp:templatefield HeaderText="Eliminar">
+									<itemtemplate>
+										<asp:checkbox ID="cbSelect"
+										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Eliminar"))%>'></asp:checkbox>
+									</itemtemplate>
+								</asp:templatefield>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>
