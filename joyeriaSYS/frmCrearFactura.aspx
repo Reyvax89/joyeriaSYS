@@ -10,45 +10,61 @@
                     <asp:HiddenField ID="hdfIdFactura" Visible="true" Value="-1" runat="server" />
                     <asp:HiddenField ID="hdfIdDetalleFactura" Visible="true" Value="-1" runat="server" />
                     <div class="content">
-                        <section>
-                            <h3 class="major">Creación de factura por tabla</h3>
-                    <div class="row uniform">
+                        <section>                        
+                    <div class="container uniform">
+						<h1 class="major">Creación de factura por tabla</h1>
                         <%--<div class="6u 12u$(xsmall)">
                             <label for="demo-name">Código Tabla:</label>
                             <asp:TextBox ID="txtCodTabla" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
                         </div>--%>
-                        <div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Número de Factura:</label>
-                            <asp:TextBox ID="txtCodFactura" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Número de Factura:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtCodFactura" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="12u$">
-                            <label for="demo-cliente">Cliente</label>
-                            <div class="select-wrapper">
-                                <asp:DropDownList ID="ddlCliente" name="demo-cliente" runat="server">
-                                </asp:DropDownList>
-                            </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-cliente">Cliente</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlCliente" name="demo-cliente" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
                         </div>
-                        <div class="12u$">
-                            <label for="demo-cliente">Producto</label>
-                            <div class="select-wrapper">
-                                <asp:DropDownList ID="ddlProducto" name="demo-cliente" runat="server">
-                                </asp:DropDownList>
-                            </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-cliente">Producto</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlProducto" name="demo-cliente" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
                         </div>
-                        <div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Cantidad:</label>
-                            <asp:TextBox ID="txtCantidad" AutoPostBack="false" name="demo-name" runat="server"></asp:TextBox>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Cantidad:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtCantidad" AutoPostBack="false" name="demo-name" runat="server"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="12u$">
-                            <ul class="actions">
-                                <li>
-                                    <asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="special" />
-                                </li>
-                                <li>
-                                    <asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="special" />
-                                </li>
-                            </ul>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="btn btn-primary special" />
+								<asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="btn btn-info" />
+							</div>
                         </div>
+						</div>
                         </section>
                     </div>
                 </div>
@@ -56,7 +72,7 @@
             <!-- Two -->
             <section id="two" class="wrapper alt spotlight style2">
                 <div class="inner">
-                    <div class="content">
+                    <div class="container">
                         <asp:GridView runat="server" ID="gvwDetalleFactura" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwDetalleFactura_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="idDetalleFactura" HeaderText="idDetalleFactura" AccessibleHeaderText="idDetalleFactura" InsertVisible="False"></asp:BoundField>
@@ -78,7 +94,7 @@
                 </div>
             </section>
             <!-- Three -->
-							<section id="three" class="wrapper spotlight style3">
+							<section id="three" class="container spotlight style3">
 								<div class="inner">
 									<div class="content">
 										<asp:GridView runat="server" ID="gvwFacturas" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwFacturas_SelectedIndexChanged">
