@@ -10,73 +10,44 @@
                     </a>
                     <asp:HiddenField ID="hdfId" Visible="true" Value="-1" runat="server" />
                     <div class="content">
-                        <section>                      
-                    <div class="container uniform">
-						<h1 class="major">Mantenimiento Clientes</h1>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-									<label for="demo-name">Nombre Encargado:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtNombreEncargado" runat="server" ></asp:TextBox>
-							</div>
+                        <section>
+                            <h3 class="major">Mantenimiento Clientes</h3>
+                    <div class="row uniform">
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Nombre Encargado:</label>
+                            <asp:TextBox ID="txtNombreEncargado" runat="server" ></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Nombre Joyería:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtNombreJoyeria"  runat="server"></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Nombre Joyería:</label>
+                            <asp:TextBox ID="txtNombreJoyeria"  runat="server"></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Célular:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtCelular" TextMode="Phone" placeholder="88888888" runat="server" ></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Célular:</label>
+                            <asp:TextBox ID="txtCelular" TextMode="Phone" placeholder="88888888" runat="server" ></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Teléfono:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtTelefono" TextMode="Phone" placeholder="22222222"  runat="server"></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Teléfono:</label>
+                            <asp:TextBox ID="txtTelefono" TextMode="Phone" placeholder="22222222"  runat="server"></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Dirección:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtDirección"  runat="server"></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Dirección:</label>
+                            <asp:TextBox ID="txtDirección"  runat="server"></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Provincia:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtProvincia" runat="server" ></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Provincia:</label>
+                            <asp:TextBox ID="txtProvincia" runat="server" ></asp:TextBox>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Cantón:</label>
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtCanton"   runat="server"></asp:TextBox>
-							</div>
+                        <div class="6u 12u$(xsmall)">
+                            <label for="demo-name">Cantón:</label>
+                            <asp:TextBox ID="txtCanton"   runat="server"></asp:TextBox>
                         </div>
-                        <div class="row 12u$">
-							<div class="col-sm-5 col-md-3">
-								
-							</div>
-							<div class="col-sm-7 col-md-9">
-								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
-								<input type="reset" value="Reset" class="btn btn-default">
-							</div>
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li>
+                                    <asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="special" /></li>
+                                <li>
+                                    <input type="reset" value="Reset"></li>
+                            </ul>
                         </div>
                         </section>
                     </div>

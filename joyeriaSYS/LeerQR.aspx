@@ -69,12 +69,15 @@
 									</div>
 								</div>
 								<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-												
-									</div>
-									<div class="col-sm-7 col-md-9">
-										<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Text="Finalizar Factura" CssClass="btn btn-primary special" />
-										<asp:Button ID="btnValidar" style="display:none;" runat="server" Text="Finalizar Factura" CssClass="special" />
+									<div class="col-sm-12 col-md-12">
+										<ul class="actions">
+											<li>
+												<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Text="Finalizar Factura" CssClass="special" />
+											</li>
+											<li>
+												<asp:Button ID="btnValidar" style="display:none;" runat="server" Text="Finalizar Factura" CssClass="special" />
+											</li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -92,12 +95,7 @@
                                 <asp:BoundField DataField="idProducto" HeaderText="Id Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="codProducto" HeaderText="Código Producto" AccessibleHeaderText="codProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
-								<asp:templatefield HeaderText="Eliminar">
-									<itemtemplate>
-										<asp:checkbox ID="cbSelect"
-										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Eliminar"))%>'></asp:checkbox>
-									</itemtemplate>
-								</asp:templatefield>
+                                <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>

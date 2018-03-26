@@ -3,10 +3,12 @@ using joyeriaSYS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace joyeriaSYS
 {
@@ -17,6 +19,7 @@ namespace joyeriaSYS
         private Factura objFact = new Factura();
         private Categoria objCateg = new Categoria();
         private DetalleFactura objDeF = new DetalleFactura();
+        //private Excel objExcel = new Excel();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,14 +39,14 @@ namespace joyeriaSYS
                     //Poner alert "Seleccione una factura a imprimir"
                 }
             }
-                
+
         }
 
         private void CargarTablaDetalleFacturas(int idFactura)
         {
             try
             {
-                var dt = new DataTable();
+                var dt = new System.Data.DataTable();
                 var rows = objDeF.Consultar();
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
@@ -61,10 +64,10 @@ namespace joyeriaSYS
                 // Recorrer las filas.
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
-                    // Crear una fila por cada unidad del producto.
-                    int cantidad = Convert.ToInt32(r.CantidadProducto);
-                    for (int i = 0; i < cantidad; i++)
-                    {
+                    //// Crear una fila por cada unidad del producto.
+                    //int cantidad = Convert.ToInt32(r.CantidadProducto);
+                    //for (int i = 0; i < cantidad; i++)
+                    //{
                         var tempProducto = new PRO_PRODUCTO();
                         var tempCategoria = new CAT_CATEGORIA();
 
@@ -80,7 +83,7 @@ namespace joyeriaSYS
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = r.CantidadProducto;
                         dt.Rows.Add(fila);
-                    }
+                    //}
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
@@ -94,7 +97,7 @@ namespace joyeriaSYS
         {
             try
             {
-                var dt = new DataTable();
+                var dt = new System.Data.DataTable();
                 var rows = objFact.Consultar();
 
                 ddlFacturas.DataTextField = "NoFactura";
@@ -121,7 +124,54 @@ namespace joyeriaSYS
 
         protected void btnImprimir_Click(object sender, EventArgs e)
         {
+            string sFile = "C:\\Users\\cerva\\Desktop\\Copia de facturero ACERO.xls";
+            string sTemplate = "C:\\Template.xls";
+            object opc = Type.Missing;
 
+            var excelApp = new Excel.Application();
+            // Make the object visible.
+            //excelApp.Visible = true;
+
+            var excelBook = excelApp.Workbooks.Open(sFile, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc);
+            var excelSheet = (Excel.Worksheet)excelBook.Sheets.get_Item(1);
+
+            //Ponemos la fecha actual, el vendedor y el metal respectivamente.
+            excelSheet.Cells[3, 5] = "03/03/1989";
+            excelSheet.Cells[5, 3] = "Bryan";
+            excelSheet.Cells[6, 3] = "Platino";
+            //Ponemos la descripci+on del producto.
+            for(int i = 8; i< 42; i++)
+            {
+                excelSheet.Cells[i, 2] = "Arete";
+            }
+            //Ponemos el codigo del producto.
+            for (int i = 8; i < 42; i++)
+            {
+                excelSheet.Cells[i, 3] = "44";
+            }
+            //Ponemos la cantidad de producto por factura.
+            for (int i = 8; i < 42; i++)
+            {
+                excelSheet.Cells[i, 4] = "00";
+            }
+
+            excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+            MostrarMensaje("Excel creado");
+            excelBook = null;
+            excelSheet = null;
+            excelApp = null;
+            System.GC.Collect();
+        }
+
+        public void MostrarMensaje(string Mensaje)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('" + Mensaje + "');", true);
         }
     }
 }

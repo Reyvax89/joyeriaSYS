@@ -5,7 +5,7 @@
 //    }
 //}
 $(document).ready(function () {
-    /*let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
         $('#ContentPlaceHolder1_txtCodigo').val(content);
         alert("Se escaneó");
@@ -18,9 +18,6 @@ $(document).ready(function () {
         }
     }).catch(function (e) {
         console.error(e);
-    });*/
+    });
     
-	$('#MainContent_txtCodigo').change(function () {
-
-	});
 });
