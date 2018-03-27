@@ -40,6 +40,25 @@ namespace joyeriaSYS
 
         protected void btnCalcular_Click(object sender, EventArgs e)
         {
+            var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
+            var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
+            var facturaActual = new FAC_FACTURA();
+            var productoActual = new PRO_PRODUCTO();
+            productoActual.CodigoNumerico = codProducto;
+            productoActual = objProd.ConsultarPorCodigoProducto(productoActual);
+            facturaActual.NoFactura = codFactura;
+            facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
+            var rows = objDeF.Consultar();
+            rows = objDeF.ConsultarPorIdFactura(facturaActual.idFactura);
+            List<int> cantidades = getListaCantidades();
+            int contador = 0;
+            foreach (DEF_DETALLE_FACTURA r in rows)
+            {
+                r.CantidadProducto = cantidades[contador];
+                objDeF.Actualizar(r);
+                contador++;
+            }
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Los datos de la factura fueron procesados.')", true);
 
         }
 
