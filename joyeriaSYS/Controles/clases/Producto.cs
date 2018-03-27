@@ -54,6 +54,14 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public IEnumerable<PRO_PRODUCTO> ConsultarPorNombre(PRO_PRODUCTO objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.Where(cat => cat.NombreProducto == objeto.NombreProducto).ToList();
+            }
+        }
+
         public PRO_PRODUCTO ConsultarPorCodigoProducto(PRO_PRODUCTO objeto)
         {
             //var temp = new PRO_PRODUCTO();

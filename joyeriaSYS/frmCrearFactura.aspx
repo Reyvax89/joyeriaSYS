@@ -78,6 +78,7 @@
                                 <asp:BoundField DataField="idDetalleFactura" HeaderText="idDetalleFactura" AccessibleHeaderText="idDetalleFactura" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="idFactura" HeaderText="idFactura" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="idProducto" HeaderText="idProducto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
+								<asp:BoundField DataField="idCategoria" HeaderText="Metal" AccessibleHeaderText="idCategoria" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CantidadProducto" HeaderText="CantidadProducto" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
                             </Columns>

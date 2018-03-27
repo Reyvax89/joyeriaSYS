@@ -3,10 +3,12 @@ using joyeriaSYS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace joyeriaSYS
 {
@@ -17,6 +19,8 @@ namespace joyeriaSYS
         private Factura objFact = new Factura();
         private Categoria objCateg = new Categoria();
         private DetalleFactura objDeF = new DetalleFactura();
+        private string[,] arregloTemporal = new string[35,3];
+        //private Excel objExcel = new Excel();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,35 +40,31 @@ namespace joyeriaSYS
                     //Poner alert "Seleccione una factura a imprimir"
                 }
             }
-                
+
         }
 
         private void CargarTablaDetalleFacturas(int idFactura)
         {
             try
             {
-                var dt = new DataTable();
+                var dt = new System.Data.DataTable();
                 var rows = objDeF.Consultar();
+                //var contadorDeFilas = 0;
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
                 if (idFactura != -1)
                 {
                     rows = objDeF.ConsultarPorIdFactura(idFactura);
                 }
-
+                
                 dt.Columns.Add("categoria", typeof(System.String));
                 dt.Columns.Add("idProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
-                //dt.Columns.Add("Precio", typeof(System.String));
-                //dt.Columns.Add("Inventario", typeof(System.String));
 
                 // Recorrer las filas.
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
-                    // Crear una fila por cada unidad del producto.
-                    int cantidad = Convert.ToInt32(r.CantidadProducto);
-                    for (int i = 0; i < cantidad; i++)
-                    {
+                    //// Crear una fila por cada unidad del producto.
                         var tempProducto = new PRO_PRODUCTO();
                         var tempCategoria = new CAT_CATEGORIA();
 
@@ -77,10 +77,9 @@ namespace joyeriaSYS
                         DataRow fila = dt.NewRow();
                         fila["categoria"] = tempCategoria.Nombre;
                         fila["idProducto"] = tempProducto.CodigoNumerico;
-                        // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = r.CantidadProducto;
-                        dt.Rows.Add(fila);
-                    }
+                    
+                    dt.Rows.Add(fila);
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
@@ -90,11 +89,23 @@ namespace joyeriaSYS
                 var err = ex.Message;
             }
         }
+
+        private void llenaArregloConCeros()
+        {
+            for (int i = 0; i < arregloTemporal.GetLength(0); ++i)
+            {
+                for (int j = 0; j < arregloTemporal.GetLength(1); ++j)
+                {
+                    arregloTemporal[i, j] = "0";
+                }
+            }
+        }
+
         private void cargarFacturas()
         {
             try
             {
-                var dt = new DataTable();
+                var dt = new System.Data.DataTable();
                 var rows = objFact.Consultar();
 
                 ddlFacturas.DataTextField = "NoFactura";
@@ -121,7 +132,82 @@ namespace joyeriaSYS
 
         protected void btnImprimir_Click(object sender, EventArgs e)
         {
+            //var rows = objDeF.Consultar();
+            var contadorDeFilas = 0;
+            var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
+            llenaArregloConCeros();
+            // Recorrer las filas.
+            foreach (DEF_DETALLE_FACTURA r in rows)
+            {
+                //// Crear una fila por cada unidad del producto.
+                var tempProducto = new PRO_PRODUCTO();
+                var tempCategoria = new CAT_CATEGORIA();
 
+                tempProducto.IdProducto = r.idProducto;
+                tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
+
+                tempCategoria.idCategoria = tempProducto.IdCategoria;
+                tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
+               
+                arregloTemporal[contadorDeFilas, 0] = tempCategoria.Nombre;
+                arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
+                arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
+                contadorDeFilas++;
+            }
+            contadorDeFilas = 0;
+            string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
+            //string sFile = "C:\\Excel facturas\\000Machote.xls";
+            //string sTemplate = "C:\\Template.xls";
+            object opc = Type.Missing;
+
+            var excelApp = new Excel.Application();
+            // Make the object visible.
+            //excelApp.Visible = true;
+
+            //var excelBook = new Excel.Workbook();
+            //var excelSheet = new Excel.Worksheet();
+            var excelBook = excelApp.Workbooks.Open(sFile, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc);
+            var excelSheet = (Excel.Worksheet)excelBook.Sheets.get_Item(1);
+            try
+            {
+                //Ponemos la fecha actual, el vendedor y el metal respectivamente.
+                excelSheet.Cells[3, 5] = DateTime.Now.Date;
+                excelSheet.Cells[5, 3] = "Bryan";
+                excelSheet.Cells[6, 3] = "Platino";
+                //Ponemos la descripci+on del producto.
+                for (int i = 8; i < 42; i++)
+                {
+                    excelSheet.Cells[i, 2] = arregloTemporal[contadorDeFilas, 0].ToString();
+                    excelSheet.Cells[i, 3] = arregloTemporal[contadorDeFilas, 1].ToString();
+                    excelSheet.Cells[i, 4] = arregloTemporal[contadorDeFilas, 2].ToString();
+                    contadorDeFilas++;
+                }
+
+                excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                excelBook.Close();
+                excelApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                MostrarMensaje("Excel creado");
+                excelBook = null;
+                excelSheet = null;
+                excelApp = null;
+                System.GC.Collect();
+            }catch (Exception ex)
+            {
+                Console.Error.Write(ex.Message);
+                excelBook.Close();
+                excelApp.Quit();
+            }
+            
+        }
+
+        public void MostrarMensaje(string Mensaje)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('" + Mensaje + "');", true);
         }
     }
 }

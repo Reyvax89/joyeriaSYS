@@ -13,10 +13,10 @@
                         <section>
                             <h3 class="major">Creación de factura por tabla</h3>
                     <div class="row uniform">
-                        <div class="6u 12u$(xsmall)">
+                        <%--<div class="6u 12u$(xsmall)">
                             <label for="demo-name">Código Tabla:</label>
                             <asp:TextBox ID="txtCodTabla" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
-                        </div>
+                        </div>--%>
                         <div class="6u 12u$(xsmall)">
                             <label for="demo-name">Número de Factura:</label>
                             <asp:TextBox ID="txtCodFactura" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
@@ -85,7 +85,7 @@
                             <Columns>
                                 <asp:BoundField DataField="idFactura" HeaderText="Id" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="NoFactura" HeaderText="No Factura" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CodTabla" HeaderText="Código de la Tabla" AccessibleHeaderText="CodTabla" InsertVisible="False"></asp:BoundField>
+                                <%--<asp:BoundField DataField="CodTabla" HeaderText="Código de la Tabla" AccessibleHeaderText="CodTabla" InsertVisible="False"></asp:BoundField>--%>
                                 <asp:BoundField DataField="montoFactura" HeaderText="montoFactura" AccessibleHeaderText="montoFactura" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="estado" HeaderText="estado" AccessibleHeaderText="estado" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="totalPiezas" HeaderText="totalPiezas" AccessibleHeaderText="totalPiezas" InsertVisible="False"></asp:BoundField>

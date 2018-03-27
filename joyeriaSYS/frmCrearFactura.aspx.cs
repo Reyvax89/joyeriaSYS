@@ -16,6 +16,7 @@ namespace joyeriaSYS
     public partial class frmCrearFactura : System.Web.UI.Page
     {
         private Producto objProd = new Producto();
+        private Categoria objCat = new Categoria();
         private Clientes objCli = new Clientes();
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
@@ -40,10 +41,19 @@ namespace joyeriaSYS
 
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var tempProducto = new PRO_PRODUCTO();
+            tempProducto.NombreProducto = gvwDetalleFactura.SelectedRow.Cells[2].Text;
+            tempProducto = objProd.ConsultarPorNombre(tempProducto).FirstOrDefault();
+
+            var tempCategoria = new CAT_CATEGORIA();
+            tempCategoria.Nombre = gvwDetalleFactura.SelectedRow.Cells[3].Text;
+            tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
+
             hdfIdDetalleFactura.Value = gvwDetalleFactura.SelectedRow.Cells[0].Text;
             int idFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
-            int idProducto = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[2].Text);
-            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[3].Text);
+            int idProducto = tempProducto.IdProducto;
+            int idCategoria = tempCategoria.idCategoria;
+            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[4].Text);
 
             ddlProducto.SelectedValue = idProducto.ToString();
 
@@ -52,6 +62,8 @@ namespace joyeriaSYS
             actualizarFacturaLuegoDeBorrado(idFactura, idProducto, Cantidad);
             actualizarCantidadProducto(idProducto, Cantidad, false);
             objDeF.Eliminar(detFac);
+            tempProducto.Inventario = tempProducto.Inventario - Cantidad;
+            objProd.Actualizar(tempProducto);
 
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             CargarTablaFacturas();
@@ -111,10 +123,14 @@ namespace joyeriaSYS
 
                 foreach (PRO_PRODUCTO r in rows)
                 {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    tempCategoria.idCategoria = r.IdCategoria;
+                    tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
+
                     DataRow fila = dt.NewRow();
 
                     fila["IdProducto"] = r.IdProducto;
-                    fila["NombreProducto"] = r.NombreProducto;
+                    fila["NombreProducto"] = r.NombreProducto + " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
                     dt.Rows.Add(fila);
                 }
                 ddlProducto.DataSource = dt;
@@ -141,17 +157,24 @@ namespace joyeriaSYS
                 dt.Columns.Add("idDetalleFactura", typeof(System.String));
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("idProducto", typeof(System.String));
+                dt.Columns.Add("idCategoria", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    var tempProducto = new PRO_PRODUCTO();
+                    tempProducto.IdProducto = r.idProducto;
+                    tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
+                    tempCategoria.idCategoria = tempProducto.IdCategoria;
                     DataRow fila = dt.NewRow();
 
                     fila["idDetalleFactura"] = r.idDetalleFactura;
                     fila["idFactura"] = r.idFactura;
-                    fila["idProducto"] = r.idProducto;
+                    fila["idProducto"] = tempProducto.NombreProducto;
+                    fila["idCategoria"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
                     fila["CantidadProducto"] = r.CantidadProducto;
                     dt.Rows.Add(fila);
                 }
@@ -295,25 +318,25 @@ namespace joyeriaSYS
             Response.Redirect("frmImprimirFacturas.aspx");
         }
 
-        private void ExportToExcel(string nameReport, GridView wControl)
-        {
-            HttpResponse response = Response;
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            System.Web.UI.Page pageToRender = new System.Web.UI.Page();
-            HtmlForm form = new HtmlForm();
-            form.Controls.Add(wControl);
-            pageToRender.Controls.Add(form);
-            response.Clear();
-            response.Buffer = true;
-            response.ContentType = "application/vnd.ms-excel";
-            response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport);
-            response.Charset = "UTF-8";
-            response.ContentEncoding = Encoding.Default;
-            pageToRender.RenderControl(htw);
-            response.Write(sw.ToString());
-            response.End();
-        }
+        //private void ExportToExcel(string nameReport, GridView wControl)
+        //{
+        //    HttpResponse response = Response;
+        //    StringWriter sw = new StringWriter();
+        //    HtmlTextWriter htw = new HtmlTextWriter(sw);
+        //    System.Web.UI.Page pageToRender = new System.Web.UI.Page();
+        //    HtmlForm form = new HtmlForm();
+        //    form.Controls.Add(wControl);
+        //    pageToRender.Controls.Add(form);
+        //    response.Clear();
+        //    response.Buffer = true;
+        //    response.ContentType = "application/vnd.ms-excel";
+        //    response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport);
+        //    response.Charset = "UTF-8";
+        //    response.ContentEncoding = Encoding.Default;
+        //    pageToRender.RenderControl(htw);
+        //    response.Write(sw.ToString());
+        //    response.End();
+        //}
 
     }//Fin de la clase
 }

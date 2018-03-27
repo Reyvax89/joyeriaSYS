@@ -106,7 +106,7 @@ namespace joyeriaSYS
         {
             txtCantidad.Text = "";
             txtCodNumerico.Text = "";
-            //txtNombreProducto.Text = "";
+            txtNombreProducto.Text = "";
             txtPrecio.Text = "";
             hdfId.Value = "-1";
             //QRImage.ImageUrl = "../images/pic01.jpg";
@@ -116,7 +116,7 @@ namespace joyeriaSYS
             guardarActualizar(Convert.ToInt32(hdfId.Value));
             btnInsertarActualizar.Text = "Guardar";
             txtPrecio.Text = "";
-            //txtNombreProducto.Text = "";
+            txtNombreProducto.Text = "";
             txtCodNumerico.Text = "";
             txtCantidad.Text = "";
             CargarTablaProductos();
@@ -173,18 +173,20 @@ namespace joyeriaSYS
 
                 dt.Columns.Add("IdProducto", typeof(System.String));
                 dt.Columns.Add("NombreProducto", typeof(System.String));
-                dt.Columns.Add("IdCategoria", typeof(System.String));
+                dt.Columns.Add("Metal", typeof(System.String));
                 dt.Columns.Add("CodigoNumerico", typeof(System.String));
                 dt.Columns.Add("Precio", typeof(System.String));
                 dt.Columns.Add("Inventario", typeof(System.String));
 
                 foreach (PRO_PRODUCTO r in rows)
                 {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    tempCategoria.idCategoria = r.IdCategoria;
                     DataRow fila = dt.NewRow();
 
                     fila["IdProducto"] = r.IdProducto;
                     fila["NombreProducto"] = r.NombreProducto;
-                    fila["IdCategoria"] = r.IdCategoria;
+                    fila["Metal"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
                     fila["CodigoNumerico"] = r.CodigoNumerico;
                     fila["Precio"] = r.Precio;
                     fila["Inventario"] = r.Inventario;
@@ -200,12 +202,16 @@ namespace joyeriaSYS
         }
         protected void gvwProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var tempCategoria = new CAT_CATEGORIA();
+            tempCategoria.Nombre = gvwProductos.SelectedRow.Cells[2].Text;
+            tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
+
             hdfId.Value = gvwProductos.SelectedRow.Cells[0].Text;
-            //txtNombreProducto.Text = gvwProductos.SelectedRow.Cells[1].Text;
-            ddlCategoria.SelectedValue = gvwProductos.SelectedRow.Cells[1].Text;
-            txtCodNumerico.Text = gvwProductos.SelectedRow.Cells[2].Text;
-            txtPrecio.Text = gvwProductos.SelectedRow.Cells[3].Text;
-            txtCantidad.Text = gvwProductos.SelectedRow.Cells[4].Text;
+            txtNombreProducto.Text = gvwProductos.SelectedRow.Cells[1].Text;
+            ddlCategoria.SelectedValue = tempCategoria.idCategoria.ToString();
+            txtCodNumerico.Text = gvwProductos.SelectedRow.Cells[3].Text;
+            txtPrecio.Text = gvwProductos.SelectedRow.Cells[4].Text;
+            txtCantidad.Text = gvwProductos.SelectedRow.Cells[5].Text;
             btnInsertarActualizar.Text = "Actualizar";
 
             //var temp = new CQR_CODIGO_QR();
