@@ -50,6 +50,7 @@
                                 <li><a runat="server" href="~/">Inicio</a></li>
 								<li><a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar categorias</a></li>
 								<li><a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a></li>
+								<li><a runat="server" href="~/QR.aspx">Administrar inventario</a></li>
 								<li><a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a></li>
 								<li><a runat="server" href="~/LeerQR.aspx">Revisar factura</a></li>
                                 <li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>
