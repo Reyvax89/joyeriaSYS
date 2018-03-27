@@ -17,10 +17,10 @@
                     <h3 class="major">Formulario ingreso de Producto</h3>
                     <asp:HiddenField ID="hdfId" Visible="true" Value="-1" runat="server" />
                     <div class="row uniform">
-                        <%--<div class="6u 12u$(xsmall)">
+                        <div class="6u 12u$(xsmall)">
                             <label for="demo-name">Nombre:</label>
                             <asp:TextBox ID="txtNombreProducto" runat="server"></asp:TextBox>
-                        </div>--%>
+                        </div>
                         <div class="6u 12u$(xsmall)">
                             <label for="demo-name">Código Númerico:</label>
                             <asp:TextBox ID="txtCodNumerico" placeholder="000" AutoPostBack="true" OnTextChanged="txtCodNumerico_TextChanged" style="color: black;"  runat="server"></asp:TextBox>
@@ -63,8 +63,8 @@
                     <asp:GridView runat="server" ID="gvwProductos" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
-                                <%--<asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>--%>
-                                <asp:BoundField DataField="IdCategoria" HeaderText="Categoría" AccessibleHeaderText="IdCategoria" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="Metal" HeaderText="Categoría" AccessibleHeaderText="Metal" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CodigoNumerico" HeaderText="Código" AccessibleHeaderText="CodigoNumerico" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Precio" HeaderText="Precio" AccessibleHeaderText="Precio" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Inventario" HeaderText="Cantidad" AccessibleHeaderText="Inventario" InsertVisible="False"></asp:BoundField>

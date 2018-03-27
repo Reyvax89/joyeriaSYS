@@ -78,11 +78,7 @@ namespace joyeriaSYS
                         fila["categoria"] = tempCategoria.Nombre;
                         fila["idProducto"] = tempProducto.CodigoNumerico;
                         fila["CantidadProducto"] = r.CantidadProducto;
-
-                    //arregloTemporal[contadorDeFilas, 0] = tempCategoria.Nombre;
-                    //arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
-                    //arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
-                    //contadorDeFilas++;
+                    
                     dt.Rows.Add(fila);
                 }
                 gvwDetalleFactura.DataSource = dt;
@@ -159,8 +155,8 @@ namespace joyeriaSYS
                 contadorDeFilas++;
             }
             contadorDeFilas = 0;
-            //string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
-            string sFile = "C:\\Excel facturas\\000Machote.xls";
+            string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
+            //string sFile = "C:\\Excel facturas\\000Machote.xls";
             //string sTemplate = "C:\\Template.xls";
             object opc = Type.Missing;
 
@@ -175,7 +171,7 @@ namespace joyeriaSYS
             try
             {
                 //Ponemos la fecha actual, el vendedor y el metal respectivamente.
-                excelSheet.Cells[3, 5] = "03/03/1989";
+                excelSheet.Cells[3, 5] = DateTime.Now.Date;
                 excelSheet.Cells[5, 3] = "Bryan";
                 excelSheet.Cells[6, 3] = "Platino";
                 //Ponemos la descripci+on del producto.
@@ -187,8 +183,8 @@ namespace joyeriaSYS
                     contadorDeFilas++;
                 }
 
-                //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
                 excelBook.Close();
                 excelApp.Quit();
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);

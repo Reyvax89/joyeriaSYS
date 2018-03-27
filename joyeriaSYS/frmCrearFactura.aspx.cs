@@ -16,6 +16,7 @@ namespace joyeriaSYS
     public partial class frmCrearFactura : System.Web.UI.Page
     {
         private Producto objProd = new Producto();
+        private Categoria objCat = new Categoria();
         private Clientes objCli = new Clientes();
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
@@ -141,17 +142,24 @@ namespace joyeriaSYS
                 dt.Columns.Add("idDetalleFactura", typeof(System.String));
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("idProducto", typeof(System.String));
+                dt.Columns.Add("idCategoria", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    var tempProducto = new PRO_PRODUCTO();
+                    tempProducto.IdProducto = r.idProducto;
+                    tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
+                    tempCategoria.idCategoria = tempProducto.IdCategoria;
                     DataRow fila = dt.NewRow();
 
                     fila["idDetalleFactura"] = r.idDetalleFactura;
                     fila["idFactura"] = r.idFactura;
-                    fila["idProducto"] = r.idProducto;
+                    fila["idProducto"] = tempProducto.NombreProducto;
+                    fila["idProducto"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
                     fila["CantidadProducto"] = r.CantidadProducto;
                     dt.Rows.Add(fila);
                 }
