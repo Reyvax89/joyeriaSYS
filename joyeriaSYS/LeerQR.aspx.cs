@@ -236,22 +236,37 @@ namespace joyeriaSYS
                 dt.Columns.Add("idProducto", typeof(System.String));
                 dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
-                dt.Columns.Add("Eliminar", typeof(System.String));
+                dt.Columns.Add("Regresado", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 // Recorrer las filas.
                 int posicionConsidencia = -1;
                 int contadorGeneral = 0;
+                int contadorRow = 0;
                 List<int> marcados = getListaMarcados();
+                List<int> cantidades = new List<int> { };
+                if (getListaCantidades().Count != 0)
+                {
+                    cantidades = getListaCantidades();
+                }
+
                 // Bandera para saber cuando encontro considencia.
                 bool bandera = false;
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
+                    //cantidades[0] = 1;
                     // Crear una fila por cada unidad del producto.
                     int cantidad = Convert.ToInt32(r.CantidadProducto);
+                    if (getListaCantidades().Count == 0)
+                    {
+                        cantidades.Add(cantidad);
+                    }
+                   
+                 
                     for (int i = 0; i < cantidad; i++)
                     {
+                       
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
                         fila["idFactura"] = r.idFactura;
@@ -271,27 +286,27 @@ namespace joyeriaSYS
                             {
                                 posicionConsidencia = contadorGeneral;
                                 marcados.Add(contadorGeneral);
+                                int last = cantidades[contadorRow];
+                                cantidades[contadorRow] = last-1;
                                 bandera = true;
+
                             }
                         }
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
-                        fila["Eliminar"] = "false";
                         // Ver si esta marcado.
-                        fila["Eliminar"] = (revisarNumeroEnListaMarcados(contadorGeneral)) ? "true" : "false";
+                        fila["Regresado"] = (revisarNumeroEnListaMarcados(contadorGeneral)) ? "true" : "false";
                         dt.Rows.Add(fila);
                         contadorGeneral++;
                     }
+                    contadorRow++;
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
                 setListaMarcados(marcados);
-                if (posicionConsidencia != -1)
-                {
-                    gvwDetalleFactura.SelectRow(posicionConsidencia);
-                }
+                setListaCantidades(cantidades);
                 string test = "";
-                foreach (int i in marcados)
+                foreach (int i in cantidades)
                 {
                     test += "-" + i;
                 }
