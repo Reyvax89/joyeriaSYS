@@ -157,12 +157,13 @@ namespace joyeriaSYS
                 contadorDeFilas++;
             }
             contadorDeFilas = 0;
-            //string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
-            string sFile = "C:\\Excel facturas\\000Machote.xls";
+            string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
+            //string sFile = "C:\\Excel facturas\\000Machote.xls";
             //string sTemplate = "C:\\Template.xls";
             object opc = Type.Missing;
 
             var excelApp = new Excel.Application();
+            excelApp.DisplayAlerts = false;
             // Make the object visible.
             //excelApp.Visible = true;
 
@@ -186,7 +187,9 @@ namespace joyeriaSYS
                 }
 
                 //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
                 excelBook.Close();
                 excelApp.Quit();
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);
