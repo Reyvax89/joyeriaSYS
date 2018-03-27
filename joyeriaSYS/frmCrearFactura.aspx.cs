@@ -314,7 +314,10 @@ namespace joyeriaSYS
         {
             hdfIdDetalleFactura.Value = "-1";
             hdfIdFactura.Value = "-1";
-            Session["Factura"] = txtCodFactura.Text;
+            if(txtCodFactura.Text != "")
+            {
+                Session["Factura"] = txtCodFactura.Text;
+            }
             Response.Redirect("frmImprimirFacturas.aspx");
         }
 

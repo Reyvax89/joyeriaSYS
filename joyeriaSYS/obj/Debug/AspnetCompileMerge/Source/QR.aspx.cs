@@ -129,7 +129,7 @@ namespace joyeriaSYS
             temp.CodigoNumerico = Convert.ToInt32(txtCodNumerico.Text);
             temp.IdCategoria = Convert.ToInt32(ddlCategoria.SelectedValue);
             temp.Inventario = Convert.ToInt32(txtCantidad.Text);
-            temp.NombreProducto = txtCodNumerico.Text;
+            temp.NombreProducto = txtNombreProducto.Text;
             temp.Precio = Convert.ToInt32(txtPrecio.Text);
 
             existe = objProd.ConsultarPorId(temp).Count();

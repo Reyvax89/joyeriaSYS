@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -37,7 +38,7 @@ namespace joyeriaSYS
                 }
                 else
                 {
-                    //Poner alert "Seleccione una factura a imprimir"
+                    CargarTablaDetalleFacturas(Convert.ToInt32(ddlFacturas.SelectedValue));
                 }
             }
 
@@ -75,7 +76,7 @@ namespace joyeriaSYS
                         tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
-                        fila["categoria"] = tempCategoria.Nombre;
+                        fila["categoria"] = tempProducto.NombreProducto + " " + tempCategoria.Nombre;
                         fila["idProducto"] = tempProducto.CodigoNumerico;
                         fila["CantidadProducto"] = r.CantidadProducto;
                     
@@ -136,6 +137,9 @@ namespace joyeriaSYS
             var metal = "";
             var contadorDeFilas = 0;
             var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
+            var datosDeLaFactura = new FAC_FACTURA();
+            datosDeLaFactura.idFactura = Convert.ToInt32(ddlFacturas.SelectedValue);
+            datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
             llenaArregloConCeros();
             // Recorrer las filas.
             foreach (DEF_DETALLE_FACTURA r in rows)
@@ -155,10 +159,11 @@ namespace joyeriaSYS
                 arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
                 metal = tempCategoria.Nombre;
                 contadorDeFilas++;
+
             }
             contadorDeFilas = 0;
-            string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
-            //string sFile = "C:\\Excel facturas\\000Machote.xls";
+            //string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
+            string sFile = "C:\\Excel facturas\\000Machote.xls";
             //string sTemplate = "C:\\Template.xls";
             object opc = Type.Missing;
 
@@ -178,7 +183,7 @@ namespace joyeriaSYS
                 excelSheet.Cells[5, 3] = "Bryan";
                 excelSheet.Cells[6, 3] = metal;
                 //Ponemos la descripci+on del producto.
-                for (int i = 8; i < 42; i++)
+                for (int i = 8; i < 43; i++)
                 {
                     excelSheet.Cells[i, 2] = arregloTemporal[contadorDeFilas, 0].ToString();
                     excelSheet.Cells[i, 3] = arregloTemporal[contadorDeFilas, 1].ToString();
@@ -186,10 +191,19 @@ namespace joyeriaSYS
                     contadorDeFilas++;
                 }
 
+                excelSheet.Cells[46, 2] = datosDeLaFactura.montoFactura;
+                excelSheet.Cells[47, 3] = datosDeLaFactura.totalPiezas;
+                excelSheet.Cells[48, 3] = DateTime.Now.Date.AddDays(50);
+
                 //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
                 //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
-                excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                //excelApp.Visible = true;
+                excelSheet.PrintOut(
+        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+        Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                Marshal.FinalReleaseComObject(excelSheet);
                 excelBook.Close();
                 excelApp.Quit();
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);
@@ -213,6 +227,11 @@ namespace joyeriaSYS
         public void MostrarMensaje(string Mensaje)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('" + Mensaje + "');", true);
+        }
+
+        protected void ddlFacturas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarTablaDetalleFacturas(Convert.ToInt32(ddlFacturas.SelectedValue));
         }
     }
 }
