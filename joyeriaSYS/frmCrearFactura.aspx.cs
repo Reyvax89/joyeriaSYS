@@ -41,10 +41,19 @@ namespace joyeriaSYS
 
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var tempProducto = new PRO_PRODUCTO();
+            tempProducto.NombreProducto = gvwDetalleFactura.SelectedRow.Cells[2].Text;
+            tempProducto = objProd.ConsultarPorNombre(tempProducto).FirstOrDefault();
+
+            var tempCategoria = new CAT_CATEGORIA();
+            tempCategoria.Nombre = gvwDetalleFactura.SelectedRow.Cells[3].Text;
+            tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
+
             hdfIdDetalleFactura.Value = gvwDetalleFactura.SelectedRow.Cells[0].Text;
             int idFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
-            int idProducto = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[2].Text);
-            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[3].Text);
+            int idProducto = tempProducto.IdProducto;
+            int idCategoria = tempCategoria.idCategoria;
+            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[4].Text);
 
             ddlProducto.SelectedValue = idProducto.ToString();
 
@@ -53,6 +62,8 @@ namespace joyeriaSYS
             actualizarFacturaLuegoDeBorrado(idFactura, idProducto, Cantidad);
             actualizarCantidadProducto(idProducto, Cantidad, false);
             objDeF.Eliminar(detFac);
+            tempProducto.Inventario = tempProducto.Inventario - Cantidad;
+            objProd.Actualizar(tempProducto);
 
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             CargarTablaFacturas();
@@ -112,10 +123,14 @@ namespace joyeriaSYS
 
                 foreach (PRO_PRODUCTO r in rows)
                 {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    tempCategoria.idCategoria = r.IdCategoria;
+                    tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
+
                     DataRow fila = dt.NewRow();
 
                     fila["IdProducto"] = r.IdProducto;
-                    fila["NombreProducto"] = r.NombreProducto;
+                    fila["NombreProducto"] = r.NombreProducto + " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
                     dt.Rows.Add(fila);
                 }
                 ddlProducto.DataSource = dt;
@@ -159,7 +174,7 @@ namespace joyeriaSYS
                     fila["idDetalleFactura"] = r.idDetalleFactura;
                     fila["idFactura"] = r.idFactura;
                     fila["idProducto"] = tempProducto.NombreProducto;
-                    fila["idProducto"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
+                    fila["idCategoria"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
                     fila["CantidadProducto"] = r.CantidadProducto;
                     dt.Rows.Add(fila);
                 }
