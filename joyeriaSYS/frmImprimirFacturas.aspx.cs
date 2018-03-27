@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
@@ -162,8 +163,8 @@ namespace joyeriaSYS
 
             }
             contadorDeFilas = 0;
-            //string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
-            string sFile = "C:\\Excel facturas\\000Machote.xls";
+            string sFile = "C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\000Machote.xls";
+            //string sFile = "C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\000Machote.xls";
             //string sTemplate = "C:\\Template.xls";
             object opc = Type.Missing;
 
@@ -180,7 +181,7 @@ namespace joyeriaSYS
             {
                 //Ponemos la fecha actual, el vendedor y el metal respectivamente.
                 excelSheet.Cells[3, 5] = DateTime.Now.Date;
-                excelSheet.Cells[5, 3] = "Bryan";
+                excelSheet.Cells[5, 3] = txtNombreVendedor.Text;
                 excelSheet.Cells[6, 3] = metal;
                 //Ponemos la descripci+on del producto.
                 for (int i = 8; i < 43; i++)
@@ -195,14 +196,13 @@ namespace joyeriaSYS
                 excelSheet.Cells[47, 3] = datosDeLaFactura.totalPiezas;
                 excelSheet.Cells[48, 3] = DateTime.Now.Date.AddDays(50);
 
-                //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
-                //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                //excelSheet.SaveAs("C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\"+ datosDeLaFactura.NoFactura +".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                excelSheet.SaveAs("C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\" + datosDeLaFactura.NoFactura +".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, opc, opc, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, opc, opc);
                 //excelApp.Visible = true;
-                excelSheet.PrintOut(
-        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-        Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                //        excelSheet.PrintOut(
+                //Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                //Type.Missing, Type.Missing, Type.Missing, Type.Missing); 198.38.93.222/ExcelFacturas/Bryan.xls
+
                 Marshal.FinalReleaseComObject(excelSheet);
                 excelBook.Close();
                 excelApp.Quit();
@@ -210,7 +210,11 @@ namespace joyeriaSYS
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
 
-                MostrarMensaje("Excel creado");
+                string _open = "window.open('/ExcelFacturas/" + datosDeLaFactura.NoFactura + ".xls', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                //btnImprimir.PostBackUrl = "198.38.93.222/ExcelFacturas/"+ datosDeLaFactura.NoFactura +".xls";
+                //MostrarMensaje("Excel creado");
                 excelBook = null;
                 excelSheet = null;
                 excelApp = null;

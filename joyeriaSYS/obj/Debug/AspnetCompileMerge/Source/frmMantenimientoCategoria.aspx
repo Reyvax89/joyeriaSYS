@@ -21,9 +21,6 @@
 									</div>
 								</div>
 								<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-						
-									</div>
 									<div class="col-sm-7 col-md-9">
 										<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
 										<input type="reset" value="Reset" class="btn btn-default">
@@ -43,7 +40,7 @@
 								<Columns>
 									<asp:BoundField DataField="idCategoria" HeaderText="Id" AccessibleHeaderText="idCategoria" InsertVisible="False"></asp:BoundField>
 									<asp:BoundField DataField="Nombre" HeaderText="Nombre" AccessibleHeaderText="Nombre" InsertVisible="False"></asp:BoundField>
-									<asp:BoundField DataField="Codigo" HeaderText="Codigo" AccessibleHeaderText="Codigo" InsertVisible="False"></asp:BoundField>
+									<%--<asp:BoundField DataField="Codigo" HeaderText="Codigo" AccessibleHeaderText="Codigo" InsertVisible="False"></asp:BoundField>--%>
 									<asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
 								</Columns>
 								<FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
