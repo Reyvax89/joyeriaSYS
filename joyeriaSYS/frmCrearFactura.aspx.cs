@@ -46,14 +46,14 @@ namespace joyeriaSYS
             tempProducto = objProd.ConsultarPorNombre(tempProducto).FirstOrDefault();
 
             var tempCategoria = new CAT_CATEGORIA();
-            tempCategoria.Nombre = gvwDetalleFactura.SelectedRow.Cells[3].Text;
+            tempCategoria.Nombre = gvwDetalleFactura.SelectedRow.Cells[4].Text;
             tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
 
             hdfIdDetalleFactura.Value = gvwDetalleFactura.SelectedRow.Cells[0].Text;
             int idFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
             int idProducto = tempProducto.IdProducto;
             int idCategoria = tempCategoria.idCategoria;
-            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[4].Text);
+            int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[5].Text);
 
             ddlProducto.SelectedValue = idProducto.ToString();
 
@@ -62,8 +62,6 @@ namespace joyeriaSYS
             actualizarFacturaLuegoDeBorrado(idFactura, idProducto, Cantidad);
             actualizarCantidadProducto(idProducto, Cantidad, false);
             objDeF.Eliminar(detFac);
-            tempProducto.Inventario = tempProducto.Inventario - Cantidad;
-            objProd.Actualizar(tempProducto);
 
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             CargarTablaFacturas();
@@ -157,6 +155,7 @@ namespace joyeriaSYS
                 dt.Columns.Add("idDetalleFactura", typeof(System.String));
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("idProducto", typeof(System.String));
+                dt.Columns.Add("CodProducto", typeof(System.String));
                 dt.Columns.Add("idCategoria", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
@@ -174,6 +173,7 @@ namespace joyeriaSYS
                     fila["idDetalleFactura"] = r.idDetalleFactura;
                     fila["idFactura"] = r.idFactura;
                     fila["idProducto"] = tempProducto.NombreProducto;
+                    fila["CodProducto"] = tempProducto.CodigoNumerico;
                     fila["idCategoria"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
                     fila["CantidadProducto"] = r.CantidadProducto;
                     dt.Rows.Add(fila);

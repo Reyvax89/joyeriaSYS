@@ -32,7 +32,7 @@ namespace joyeriaSYS
                     var tempFactura = new FAC_FACTURA();
                     tempFactura.NoFactura = Convert.ToInt32(Session["Factura"].ToString());
                     tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
-                    ddlFacturas.SelectedIndex = tempFactura.idFactura;
+                    ddlFacturas.SelectedValue = tempFactura.idFactura.ToString();
                     CargarTablaDetalleFacturas(tempFactura.idFactura);
                 }
                 else
@@ -78,11 +78,7 @@ namespace joyeriaSYS
                         fila["categoria"] = tempCategoria.Nombre;
                         fila["idProducto"] = tempProducto.CodigoNumerico;
                         fila["CantidadProducto"] = r.CantidadProducto;
-
-                    //arregloTemporal[contadorDeFilas, 0] = tempCategoria.Nombre;
-                    //arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
-                    //arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
-                    //contadorDeFilas++;
+                    
                     dt.Rows.Add(fila);
                 }
                 gvwDetalleFactura.DataSource = dt;
@@ -137,6 +133,7 @@ namespace joyeriaSYS
         protected void btnImprimir_Click(object sender, EventArgs e)
         {
             //var rows = objDeF.Consultar();
+            var metal = "";
             var contadorDeFilas = 0;
             var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
             llenaArregloConCeros();
@@ -153,9 +150,10 @@ namespace joyeriaSYS
                 tempCategoria.idCategoria = tempProducto.IdCategoria;
                 tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
                
-                arregloTemporal[contadorDeFilas, 0] = tempCategoria.Nombre;
+                arregloTemporal[contadorDeFilas, 0] = tempProducto.NombreProducto;
                 arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
                 arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
+                metal = tempCategoria.Nombre;
                 contadorDeFilas++;
             }
             contadorDeFilas = 0;
@@ -175,9 +173,9 @@ namespace joyeriaSYS
             try
             {
                 //Ponemos la fecha actual, el vendedor y el metal respectivamente.
-                excelSheet.Cells[3, 5] = "03/03/1989";
+                excelSheet.Cells[3, 5] = DateTime.Now.Date;
                 excelSheet.Cells[5, 3] = "Bryan";
-                excelSheet.Cells[6, 3] = "Platino";
+                excelSheet.Cells[6, 3] = metal;
                 //Ponemos la descripci+on del producto.
                 for (int i = 8; i < 42; i++)
                 {

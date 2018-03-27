@@ -11,7 +11,7 @@
                     <div class="content">
                         <section>
                             <div class="row uniform">
-                                <div class="" id="reader" style="width: 300px; height: 250px">
+                                <div class="" id="reader">
                                     <label class="label">Facturas:</label>
                                     <asp:DropDownList ID="ddlFacturas" runat="server"></asp:DropDownList>
                                 </div>
@@ -27,9 +27,9 @@
                                     <div class="content">
 										<asp:GridView runat="server" ID="gvwDetalleFactura" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False">
                             <Columns>
-                                <asp:BoundField DataField="categoria" HeaderText="Id" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="idProducto" HeaderText="No Factura" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CantidadProducto" HeaderText="Código de la Tabla" AccessibleHeaderText="CodTabla" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="categoria" HeaderText="Producto" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idProducto" HeaderText="Código" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CodTabla" InsertVisible="False"></asp:BoundField>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>

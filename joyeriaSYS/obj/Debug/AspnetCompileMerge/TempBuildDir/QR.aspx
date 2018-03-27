@@ -12,43 +12,62 @@
             <a href="#" class="image">
                     <asp:Image runat="server" ID="QRImage" />
             </a>
-            <div class="content">
+            <div class="content container">
                 <section>
                     <h3 class="major">Formulario ingreso de Producto</h3>
                     <asp:HiddenField ID="hdfId" Visible="true" Value="-1" runat="server" />
-                    <div class="row uniform">
-                        <%--<div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Nombre:</label>
-                            <asp:TextBox ID="txtNombreProducto" runat="server"></asp:TextBox>
-                        </div>--%>
-                        <div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Código Númerico:</label>
-                            <asp:TextBox ID="txtCodNumerico" placeholder="000" AutoPostBack="true" OnTextChanged="txtCodNumerico_TextChanged" style="color: black;"  runat="server"></asp:TextBox>
+                    <div class="uniform">
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Nombre:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtNombreProducto" runat="server"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Precio:</label>
-                            <asp:TextBox ID="txtPrecio" placeholder="¢000" Enabled="false" style="color: black;" runat="server"></asp:TextBox>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Código Númerico:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtCodNumerico" placeholder="000" AutoPostBack="true" OnTextChanged="txtCodNumerico_TextChanged" style="color: black;"  runat="server"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="6u 12u$(xsmall)">
-                            <label for="demo-name">Cantidad:</label>
-                            <asp:TextBox ID="txtCantidad" placeholder="000" style="color: black;"  runat="server"></asp:TextBox>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Precio:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtPrecio" placeholder="¢000" Enabled="false" style="color: black;" runat="server"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="12u$">
-                            <label for="demo-category">Categoría</label>
-                            <div class="select-wrapper">
-                                <asp:DropDownList ID="ddlCategoria" runat="server">
-                                </asp:DropDownList>
-                            </div>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Cantidad:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtCantidad" placeholder="000" style="color: black;"  runat="server"></asp:TextBox>
+							</div>
                         </div>
-                        <div class="12u$">
-                            <ul class="actions">
-                                <li>
-                                    <asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="special" />
-                                </li>
-                                <li>
-                                    <asp:Button ID="btnLimpiar" runat="server" Text="Nuevo" OnClick="btnLimpiar_Click" CssClass="special" />
-                                </li>
-                            </ul>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-category">Categoría</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlCategoria" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
+                        </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
+								<asp:Button ID="btnLimpiar" runat="server" Text="Nuevo" OnClick="btnLimpiar_Click" CssClass="btn btn-default special" />
+							</div>
                         </div>
                     </div>
                 </section>
@@ -63,8 +82,8 @@
                     <asp:GridView runat="server" ID="gvwProductos" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
-                                <%--<asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>--%>
-                                <asp:BoundField DataField="IdCategoria" HeaderText="Categoría" AccessibleHeaderText="IdCategoria" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="Metal" HeaderText="Categoría" AccessibleHeaderText="Metal" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CodigoNumerico" HeaderText="Código" AccessibleHeaderText="CodigoNumerico" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Precio" HeaderText="Precio" AccessibleHeaderText="Precio" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Inventario" HeaderText="Cantidad" AccessibleHeaderText="Inventario" InsertVisible="False"></asp:BoundField>
