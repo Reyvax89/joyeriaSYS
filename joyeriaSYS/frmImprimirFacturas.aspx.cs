@@ -32,7 +32,7 @@ namespace joyeriaSYS
                     var tempFactura = new FAC_FACTURA();
                     tempFactura.NoFactura = Convert.ToInt32(Session["Factura"].ToString());
                     tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
-                    ddlFacturas.SelectedIndex = tempFactura.idFactura;
+                    ddlFacturas.SelectedValue = tempFactura.idFactura.ToString();
                     CargarTablaDetalleFacturas(tempFactura.idFactura);
                 }
                 else
@@ -133,6 +133,7 @@ namespace joyeriaSYS
         protected void btnImprimir_Click(object sender, EventArgs e)
         {
             //var rows = objDeF.Consultar();
+            var metal = "";
             var contadorDeFilas = 0;
             var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
             llenaArregloConCeros();
@@ -149,14 +150,15 @@ namespace joyeriaSYS
                 tempCategoria.idCategoria = tempProducto.IdCategoria;
                 tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
                
-                arregloTemporal[contadorDeFilas, 0] = tempCategoria.Nombre;
+                arregloTemporal[contadorDeFilas, 0] = tempProducto.NombreProducto;
                 arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
                 arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
+                metal = tempCategoria.Nombre;
                 contadorDeFilas++;
             }
             contadorDeFilas = 0;
-            string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
-            //string sFile = "C:\\Excel facturas\\000Machote.xls";
+            //string sFile = "C:\\Users\\cerva\\Desktop\\000Machote.xls";
+            string sFile = "C:\\Excel facturas\\000Machote.xls";
             //string sTemplate = "C:\\Template.xls";
             object opc = Type.Missing;
 
@@ -173,7 +175,7 @@ namespace joyeriaSYS
                 //Ponemos la fecha actual, el vendedor y el metal respectivamente.
                 excelSheet.Cells[3, 5] = DateTime.Now.Date;
                 excelSheet.Cells[5, 3] = "Bryan";
-                excelSheet.Cells[6, 3] = "Platino";
+                excelSheet.Cells[6, 3] = metal;
                 //Ponemos la descripci+on del producto.
                 for (int i = 8; i < 42; i++)
                 {
@@ -183,8 +185,8 @@ namespace joyeriaSYS
                     contadorDeFilas++;
                 }
 
-                excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
-                //excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                //excelSheet.SaveAs("C:\\Users\\cerva\\Desktop\\BRYANExcel.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
+                excelSheet.SaveAs("C:\\Excel facturas\\Bryan.xls", opc, opc, opc, opc, opc, opc, opc, opc, opc);
                 excelBook.Close();
                 excelApp.Quit();
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);

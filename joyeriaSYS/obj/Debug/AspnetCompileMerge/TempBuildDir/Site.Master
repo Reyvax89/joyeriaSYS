@@ -6,25 +6,27 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - SYS</title>
+    <title><%: Page.Title %> - My ASP.NET Application</title>
 
     <asp:PlaceHolder runat="server">
         <%--<%: Scripts.Render("~/bundles/modernizr") %>--%>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
+	<link rel="stylesheet" type="text/css" href="Content/Site.css">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <%--<script src="Scripts/jquery-1.10.2.min.js" ></script>--%>
     <script src="Scripts/jquery-1.10.2.min.js"></script>
-                <script src="Scripts/bootstrap.js" ></script>
-                <script src="Scripts/respond.js" ></script>
-                <script src="Scripts/WebForms/WebForms.js"></script>
-                <script src="Scripts/WebForms/WebUIValidation.js" ></script>
-                <script src="Scripts/WebForms/MenuStandards.js" ></script>
-                <script src="Scripts/WebForms/GridView.js" ></script>
-                <script src="Scripts/WebForms/DetailsView.js" ></script>
-                <script src="Scripts/WebForms/TreeView.js" ></script>
-                <script src="Scripts/WebForms/WebParts.js" ></script>
-                <script src="Scripts/WebForms/Focus.js" ></script>
+    <script src="Scripts/bootstrap.js" ></script>
+    <script src="Scripts/respond.js" ></script>
+    <script src="Scripts/WebForms/WebForms.js"></script>
+    <script src="Scripts/WebForms/WebUIValidation.js" ></script>
+    <script src="Scripts/WebForms/MenuStandards.js" ></script>
+    <script src="Scripts/WebForms/GridView.js" ></script>
+    <script src="Scripts/WebForms/DetailsView.js" ></script>
+    <script src="Scripts/WebForms/TreeView.js" ></script>
+    <script src="Scripts/WebForms/WebParts.js" ></script>
+    <script src="Scripts/WebForms/Focus.js" ></script>
+	<%--<script src="Scripts/leerQR.js" ></script>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
 </head>
@@ -46,6 +48,11 @@
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav">
                                 <li><a runat="server" href="~/">Inicio</a></li>
+								<li><a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar categorias</a></li>
+								<li><a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a></li>
+								<li><a runat="server" href="~/QR.aspx">Administrar inventario</a></li>
+								<li><a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a></li>
+								<li><a runat="server" href="~/LeerQR.aspx">Revisar factura</a></li>
                                 <li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
@@ -67,13 +74,13 @@
             </div>
         </div>
         <div class="container body-content">
-            <asp:ScriptManager runat="server" ValidateRequestMode="Enabled" EnablePageMethods="true" >
+            <asp:ScriptManager runat="server" EnablePageMethods="true" >
         </asp:ScriptManager>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - SYS</p>
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </footer>
         </div>
     </form>
