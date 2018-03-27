@@ -58,8 +58,10 @@ namespace joyeriaSYS
                 objDeF.Actualizar(r);
                 contador++;
             }
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Los datos de la factura fueron procesados.')", true);
-
+            // Mensage de confirmacion.
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Los datos de la factura fueron procesados.')", true);
+            // Recrgar la pagina.
+            Response.Redirect("LeerQR.aspx");
         }
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
@@ -324,12 +326,6 @@ namespace joyeriaSYS
                 gvwDetalleFactura.DataBind();
                 setListaMarcados(marcados);
                 setListaCantidades(cantidades);
-                string test = "";
-                foreach (int i in cantidades)
-                {
-                    test += "-" + i;
-                }
-                txtCodTabla.Text = test;
             }
             catch (Exception ex)
             {
