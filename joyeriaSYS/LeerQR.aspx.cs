@@ -23,6 +23,8 @@ namespace joyeriaSYS
             if (!IsPostBack)
             {
                 cargarFacturas();
+                Session["marcados"] = new List<int> { };
+                Session["catidadesActuales"] = new List<int> { };
             }
         }
 
@@ -234,12 +236,16 @@ namespace joyeriaSYS
                 dt.Columns.Add("idProducto", typeof(System.String));
                 dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
+                dt.Columns.Add("Eliminar", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 // Recorrer las filas.
                 int posicionConsidencia = -1;
                 int contadorGeneral = 0;
+                List<int> marcados = getListaMarcados();
+                // Bandera para saber cuando encontro considencia.
+                bool bandera = false;
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
                     // Crear una fila por cada unidad del producto.
@@ -261,28 +267,71 @@ namespace joyeriaSYS
                             fila["codProducto"] = producto.CodigoNumerico;
                             // Ver si hay considencias con el codigo que se busca.
                             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-                            if (codProducto == producto.CodigoNumerico)
+                            if (codProducto == producto.CodigoNumerico && !bandera && !revisarNumeroEnListaMarcados(contadorGeneral))
                             {
                                 posicionConsidencia = contadorGeneral;
+                                marcados.Add(contadorGeneral);
+                                bandera = true;
                             }
                         }
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
+                        fila["Eliminar"] = "false";
+                        // Ver si esta marcado.
+                        fila["Eliminar"] = (revisarNumeroEnListaMarcados(contadorGeneral)) ? "true" : "false";
                         dt.Rows.Add(fila);
                         contadorGeneral++;
                     }
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
+                setListaMarcados(marcados);
                 if (posicionConsidencia != -1)
                 {
                     gvwDetalleFactura.SelectRow(posicionConsidencia);
                 }
+                string test = "";
+                foreach (int i in marcados)
+                {
+                    test += "-" + i;
+                }
+                txtCodTabla.Text = test;
             }
             catch (Exception ex)
             {
                 var err = ex.Message;
             }
+        }
+
+        public List<int> getListaMarcados ()
+        {
+            return Session["marcados"] as List<int>;
+        }
+
+        public void setListaMarcados(List<int> marcados)
+        {
+            Session["marcados"] = marcados;
+        }
+        public bool revisarNumeroEnListaMarcados(int numero)
+        {
+            List<int> marcados = Session["marcados"] as List<int>;
+            foreach (int i in marcados)
+            {
+                if (i == numero)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public List<int> getListaCantidades()
+        {
+            return Session["catidadesActuales"] as List<int>;
+        }
+
+        public void setListaCantidades(List<int> cantidades)
+        {
+            Session["catidadesActuales"] = cantidades;
         }
     }
 }
