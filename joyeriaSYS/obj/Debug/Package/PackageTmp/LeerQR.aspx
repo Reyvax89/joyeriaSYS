@@ -92,10 +92,10 @@
                                 <asp:BoundField DataField="idProducto" HeaderText="Id Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="codProducto" HeaderText="Código Producto" AccessibleHeaderText="codProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
-								<asp:templatefield HeaderText="Eliminar">
+								<asp:templatefield HeaderText="Regresado">
 									<itemtemplate>
 										<asp:checkbox ID="cbSelect"
-										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Eliminar"))%>'></asp:checkbox>
+										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Regresado"))%>' Enabled="false"></asp:checkbox>
 									</itemtemplate>
 								</asp:templatefield>
                             </Columns>

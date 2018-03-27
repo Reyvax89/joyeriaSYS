@@ -156,9 +156,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Imagenes\Logo.png" />
     <Content Include="Models\factura.edmx.diagram">
       <DependentUpon>factura.edmx</DependentUpon>
     </Content>
+    <Content Include="ExcelFacturas\000Machote.xls" />
+    <Content Include="ExcelFacturas\Bryan.xls" />
     <None Include="Properties\PublishProfiles\JQR.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\factura.Context.tt">
