@@ -1,3 +1,8 @@
+C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\joyeriaSYS\joyeriaSYS\bin\roslyn\VBCSCompiler.exe
 C:\joyeriaSYS\joyeriaSYS\bin\joyeriaSYS.dll.config
 C:\joyeriaSYS\joyeriaSYS\bin\joyeriaSYS.dll
 C:\joyeriaSYS\joyeriaSYS\bin\joyeriaSYS.pdb
@@ -7,13 +12,9 @@ C:\joyeriaSYS\joyeriaSYS\bin\roslyn\csc.rsp
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\csi.exe
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\csi.rsp
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\System.AppContext.dll
@@ -25,7 +26,6 @@ C:\joyeriaSYS\joyeriaSYS\bin\roslyn\System.Reflection.Metadata.dll
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.exe
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.exe.config
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.rsp
-C:\joyeriaSYS\joyeriaSYS\bin\roslyn\VBCSCompiler.exe
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\VBCSCompiler.exe.config
 C:\joyeriaSYS\joyeriaSYS\bin\Antlr3.Runtime.dll
 C:\joyeriaSYS\joyeriaSYS\bin\AspNet.ScriptManager.bootstrap.dll
@@ -59,3 +59,4 @@ C:\joyeriaSYS\joyeriaSYS\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\joyeriaSYS\joyeriaSYS\bin\System.Web.Providers.xml
 C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.dll
 C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.pdb
+C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.csprojResolveAssemblyReference.cache

@@ -26,8 +26,11 @@ namespace joyeriaSYS
         protected void Page_Load(object sender, EventArgs e)
         {
             //QRImage.ImageUrl = "../images/pic01.jpg";
-            cargarCategoria();
-            CargarTablaProductos();
+            if (!IsPostBack)
+            {
+                cargarCategoria();
+                CargarTablaProductos();
+            }
         }
         public void MostrarMensaje(string Mensaje) {
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('" + Mensaje + "');", true);

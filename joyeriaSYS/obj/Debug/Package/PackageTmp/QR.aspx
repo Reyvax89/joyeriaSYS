@@ -55,7 +55,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlCategoria" runat="server">
+									<asp:DropDownList ID="ddlCategoria" AutoPostBack="false" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>

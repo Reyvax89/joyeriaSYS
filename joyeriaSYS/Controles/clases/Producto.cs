@@ -30,7 +30,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.PRO_PRODUCTO.ToList();
+                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(cat => cat.IdProducto);
             }
         }
 

@@ -39,7 +39,7 @@ namespace joyeriaSYS.Controles.clases
             var resultado = false;
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                if(contexto.PRO_PRODUCTO.Where(pro => pro.CodigoNumerico == objeto.CodigoNumerico && pro.IdCategoria == objeto.IdCategoria).Count() > 0){
+                if(contexto.PRO_PRODUCTO.Where(pro => pro.CodigoNumerico == objeto.CodigoNumerico && pro.IdCategoria == objeto.IdCategoria && pro.NombreProducto == objeto.NombreProducto).Count() > 0){
                     resultado = true;
                 }
             }
