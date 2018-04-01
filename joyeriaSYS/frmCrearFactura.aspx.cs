@@ -294,7 +294,7 @@ namespace joyeriaSYS
         public int guardarFactura()
         {
             var nuevaFactura = new FAC_FACTURA();
-            //nuevaFactura.CodTabla = txtCodTabla.Text;
+            nuevaFactura.CodTabla = txtCodFactura.Text;
             nuevaFactura.estado = false;
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));

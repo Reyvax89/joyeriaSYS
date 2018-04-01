@@ -156,6 +156,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Imagenes\Logo.png" />
     <Content Include="Models\factura.edmx.diagram">
       <DependentUpon>factura.edmx</DependentUpon>
     </Content>

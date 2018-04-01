@@ -23,6 +23,8 @@ namespace joyeriaSYS
             if (!IsPostBack)
             {
                 cargarFacturas();
+                Session["marcados"] = new List<int> { };
+                Session["catidadesActuales"] = new List<int> { };
             }
         }
 
@@ -38,7 +40,28 @@ namespace joyeriaSYS
 
         protected void btnCalcular_Click(object sender, EventArgs e)
         {
-
+            var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
+            var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
+            var facturaActual = new FAC_FACTURA();
+            var productoActual = new PRO_PRODUCTO();
+            productoActual.CodigoNumerico = codProducto;
+            productoActual = objProd.ConsultarPorCodigoProducto(productoActual);
+            facturaActual.NoFactura = codFactura;
+            facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
+            var rows = objDeF.Consultar();
+            rows = objDeF.ConsultarPorIdFactura(facturaActual.idFactura);
+            List<int> cantidades = getListaCantidades();
+            int contador = 0;
+            foreach (DEF_DETALLE_FACTURA r in rows)
+            {
+                r.CantidadProducto = cantidades[contador];
+                objDeF.Actualizar(r);
+                contador++;
+            }
+            // Mensage de confirmacion.
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Los datos de la factura fueron procesados.')", true);
+            // Recrgar la pagina.
+            Response.Redirect("LeerQR.aspx");
         }
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
@@ -234,18 +257,37 @@ namespace joyeriaSYS
                 dt.Columns.Add("idProducto", typeof(System.String));
                 dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
+                dt.Columns.Add("Regresado", typeof(System.String));
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 // Recorrer las filas.
                 int posicionConsidencia = -1;
                 int contadorGeneral = 0;
+                int contadorRow = 0;
+                List<int> marcados = getListaMarcados();
+                List<int> cantidades = new List<int> { };
+                if (getListaCantidades().Count != 0)
+                {
+                    cantidades = getListaCantidades();
+                }
+
+                // Bandera para saber cuando encontro considencia.
+                bool bandera = false;
                 foreach (DEF_DETALLE_FACTURA r in rows)
                 {
+                    //cantidades[0] = 1;
                     // Crear una fila por cada unidad del producto.
                     int cantidad = Convert.ToInt32(r.CantidadProducto);
+                    if (getListaCantidades().Count == 0)
+                    {
+                        cantidades.Add(cantidad);
+                    }
+                   
+                 
                     for (int i = 0; i < cantidad; i++)
                     {
+                       
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
                         fila["idFactura"] = r.idFactura;
@@ -261,28 +303,65 @@ namespace joyeriaSYS
                             fila["codProducto"] = producto.CodigoNumerico;
                             // Ver si hay considencias con el codigo que se busca.
                             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-                            if (codProducto == producto.CodigoNumerico)
+                            if (codProducto == producto.CodigoNumerico && !bandera && !revisarNumeroEnListaMarcados(contadorGeneral))
                             {
                                 posicionConsidencia = contadorGeneral;
+                                marcados.Add(contadorGeneral);
+                                int last = cantidades[contadorRow];
+                                cantidades[contadorRow] = last-1;
+                                bandera = true;
+
                             }
                         }
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
+                        // Ver si esta marcado.
+                        fila["Regresado"] = (revisarNumeroEnListaMarcados(contadorGeneral)) ? "true" : "false";
                         dt.Rows.Add(fila);
                         contadorGeneral++;
                     }
+                    contadorRow++;
                 }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
-                if (posicionConsidencia != -1)
-                {
-                    gvwDetalleFactura.SelectRow(posicionConsidencia);
-                }
+                setListaMarcados(marcados);
+                setListaCantidades(cantidades);
             }
             catch (Exception ex)
             {
                 var err = ex.Message;
             }
+        }
+
+        public List<int> getListaMarcados ()
+        {
+            return Session["marcados"] as List<int>;
+        }
+
+        public void setListaMarcados(List<int> marcados)
+        {
+            Session["marcados"] = marcados;
+        }
+        public bool revisarNumeroEnListaMarcados(int numero)
+        {
+            List<int> marcados = Session["marcados"] as List<int>;
+            foreach (int i in marcados)
+            {
+                if (i == numero)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public List<int> getListaCantidades()
+        {
+            return Session["catidadesActuales"] as List<int>;
+        }
+
+        public void setListaCantidades(List<int> cantidades)
+        {
+            Session["catidadesActuales"] = cantidades;
         }
     }
 }

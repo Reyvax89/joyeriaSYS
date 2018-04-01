@@ -73,7 +73,7 @@ namespace joyeriaSYS.Controles.clases
                 {
                     contexto.FAC_FACTURA.Add(objeto);
                     contexto.SaveChanges();
-                    insertado = contexto.FAC_FACTURA.Where(cat => cat.NoFactura == objeto.NoFactura).FirstOrDefault();
+                    insertado = contexto.FAC_FACTURA.Where(cat => cat.idFactura == objeto.idFactura).FirstOrDefault();
                 }
             }catch (Exception ex)
             {
