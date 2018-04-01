@@ -14,6 +14,7 @@
             </a>
             <div class="content container">
                 <section>
+                    <br />
                     <h3 class="major">Formulario ingreso de Producto</h3>
                     <asp:HiddenField ID="hdfId" Visible="true" Value="-1" runat="server" />
                     <div class="uniform">
@@ -79,31 +80,33 @@
         <section id="two" class="wrapper alt spotlight style2">
             <div class="inner">
                 <div class="content">
-                    <asp:GridView runat="server" ID="gvwProductos" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged">
-                            <Columns>
-                                <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="Metal" HeaderText="Categoría" AccessibleHeaderText="Metal" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CodigoNumerico" HeaderText="Código" AccessibleHeaderText="CodigoNumerico" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="Precio" HeaderText="Precio" AccessibleHeaderText="Precio" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="Inventario" HeaderText="Cantidad" AccessibleHeaderText="Inventario" InsertVisible="False"></asp:BoundField>
-                                <asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
-                            </Columns>
-                            <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
-                            <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                            <PagerStyle HorizontalAlign="Right" BackColor="White" ForeColor="Black"></PagerStyle>
-                            <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White"></SelectedRowStyle>
-                            <SortedAscendingCellStyle BackColor="#F7F7F7"></SortedAscendingCellStyle>
-                            <SortedAscendingHeaderStyle BackColor="#4B4B4B"></SortedAscendingHeaderStyle>
-                            <SortedDescendingCellStyle BackColor="#E5E5E5"></SortedDescendingCellStyle>
-                            <SortedDescendingHeaderStyle BackColor="#242121"></SortedDescendingHeaderStyle>
-                        </asp:GridView>
+                    <asp:GridView runat="server" AllowPaging="true" ID="gvwProductos" OnPageIndexChanging="gvwProductos_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged" PagerSettings-Mode="NextPrevious" PageSize="15">
+        <Columns>
+            <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
+            <asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>
+            <asp:BoundField DataField="Metal" HeaderText="Categoría" AccessibleHeaderText="Metal" InsertVisible="False"></asp:BoundField>
+            <asp:BoundField DataField="CodigoNumerico" HeaderText="Código" AccessibleHeaderText="CodigoNumerico" InsertVisible="False"></asp:BoundField>
+            <asp:BoundField DataField="Precio" HeaderText="Precio" AccessibleHeaderText="Precio" InsertVisible="False"></asp:BoundField>
+            <asp:BoundField DataField="Inventario" HeaderText="Cantidad" AccessibleHeaderText="Inventario" InsertVisible="False"></asp:BoundField>
+            <asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
+        </Columns>
+        <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
+        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>
+        <PagerStyle HorizontalAlign="Right" BackColor="White" ForeColor="Black"></PagerStyle>
+        <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White"></SelectedRowStyle>
+        <SortedAscendingCellStyle BackColor="#F7F7F7"></SortedAscendingCellStyle>
+        <SortedAscendingHeaderStyle BackColor="#4B4B4B"></SortedAscendingHeaderStyle>
+        <SortedDescendingCellStyle BackColor="#E5E5E5"></SortedDescendingCellStyle>
+        <SortedDescendingHeaderStyle BackColor="#242121"></SortedDescendingHeaderStyle>
+    </asp:GridView>
                 </div>
             </div>
         </section>
     </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="gvwProductos" EventName="PageIndexChanging" />
+            <asp:AsyncPostBackTrigger ControlID="gvwProductos" EventName="PageIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="btnLimpiar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="txtCodNumerico" EventName="TextChanged" />
         </Triggers>

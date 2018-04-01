@@ -12,6 +12,7 @@
                     <div class="content">
                         <section>                        
                     <div class="container uniform">
+                        <br />
 						<h1 class="major">Creación de factura por tabla</h1>
                         <%--<div class="6u 12u$(xsmall)">
                             <label for="demo-name">Código Tabla:</label>
@@ -62,6 +63,7 @@
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="btn btn-primary special" />
 								<asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="btn btn-info" />
+                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva" CssClass="btn btn-default" />
 							</div>
                         </div>
 						</div>
@@ -73,14 +75,14 @@
             <section id="two" class="wrapper alt spotlight style2">
                 <div class="inner">
                     <div class="container">
-                        <asp:GridView runat="server" ID="gvwDetalleFactura" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwDetalleFactura_SelectedIndexChanged">
+                        <asp:GridView runat="server" ID="gvwDetalleFactura" AllowPaging="true" OnPageIndexChanging="gvwDetalleFactura_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwDetalleFactura_SelectedIndexChanged">
                             <Columns>
-                                <asp:BoundField DataField="idDetalleFactura" HeaderText="idDetalleFactura" AccessibleHeaderText="idDetalleFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="idFactura" HeaderText="idFactura" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="idProducto" HeaderText="idProducto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idDetalleFactura" HeaderText="Índice" AccessibleHeaderText="idDetalleFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idFactura" HeaderText="Factura" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idProducto" HeaderText="Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CodProducto" HeaderText="Código" AccessibleHeaderText="CodProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="idCategoria" HeaderText="Metal" AccessibleHeaderText="idCategoria" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CantidadProducto" HeaderText="CantidadProducto" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
@@ -99,15 +101,15 @@
 							<section id="three" class="container spotlight style3">
 								<div class="inner">
 									<div class="content">
-										<asp:GridView runat="server" ID="gvwFacturas" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwFacturas_SelectedIndexChanged">
+										<asp:GridView runat="server" ID="gvwFacturas" OnPageIndexChanging="gvwFacturas_PageIndexChanging" AllowPaging="true" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwFacturas_SelectedIndexChanged" PageSize="5">
                             <Columns>
-                                <asp:BoundField DataField="idFactura" HeaderText="Id" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="NoFactura" HeaderText="No Factura" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idFactura" HeaderText="Índice" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="NoFactura" HeaderText="N° Factura" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
                                 <%--<asp:BoundField DataField="CodTabla" HeaderText="Código de la Tabla" AccessibleHeaderText="CodTabla" InsertVisible="False"></asp:BoundField>--%>
-                                <asp:BoundField DataField="montoFactura" HeaderText="montoFactura" AccessibleHeaderText="montoFactura" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="estado" HeaderText="estado" AccessibleHeaderText="estado" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="totalPiezas" HeaderText="totalPiezas" AccessibleHeaderText="totalPiezas" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="idCliente" HeaderText="idCliente" AccessibleHeaderText="idCliente" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="montoFactura" HeaderText="Total ₡" AccessibleHeaderText="montoFactura" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="estado" HeaderText="Estado" AccessibleHeaderText="estado" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="totalPiezas" HeaderText="# Piezas" AccessibleHeaderText="totalPiezas" InsertVisible="False"></asp:BoundField>
+                                <asp:BoundField DataField="idCliente" HeaderText="Cliente" AccessibleHeaderText="idCliente" InsertVisible="False"></asp:BoundField>
                                 <%--<asp:BoundField DataField="fechaCreacion" HeaderText="fechaCreacion" AccessibleHeaderText="fechaCreacion" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="fechaLiquidacion" HeaderText="fechaLiquidacion" AccessibleHeaderText="fechaLiquidacion" InsertVisible="False"></asp:BoundField>--%>
                                 <asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
@@ -128,6 +130,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnNuevaFactura" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="gvwFacturas" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>

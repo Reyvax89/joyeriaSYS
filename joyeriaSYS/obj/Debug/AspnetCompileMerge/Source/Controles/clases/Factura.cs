@@ -34,7 +34,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.FAC_FACTURA.ToList();
+                return contexto.FAC_FACTURA.ToList().OrderByDescending(fac => fac.idFactura);
             }
         }
 

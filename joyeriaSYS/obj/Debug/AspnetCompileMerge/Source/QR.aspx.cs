@@ -229,5 +229,17 @@ namespace joyeriaSYS
         {
             txtPrecio.Text = txtCodNumerico.Text + "00";
         }
+        
+        //OnPageIndexChanged="gvwProductos_PageIndexChanged"
+        protected void gvwProductos_PageIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvwProductos_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
+        {
+            gvwProductos.PageIndex = e.NewPageIndex;
+            CargarTablaProductos();
+        }
     }
 }
