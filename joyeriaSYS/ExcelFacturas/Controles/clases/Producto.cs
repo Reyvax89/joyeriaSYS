@@ -30,7 +30,14 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(cat => cat.IdProducto);
+                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+            }
+        }
+        public IEnumerable<PRO_PRODUCTO> ConsultarPorCategoria(int idCategoria)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.ToList().Where(pro => pro.IdCategoria == idCategoria).OrderByDescending(pro => pro.IdProducto);
             }
         }
 

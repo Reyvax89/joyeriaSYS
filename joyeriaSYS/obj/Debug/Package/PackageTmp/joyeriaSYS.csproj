@@ -259,15 +259,15 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controles\clases\Roles.cs" />
-    <Compile Include="Controles\clases\Usuarios.cs" />
-    <Compile Include="Controles\clases\Categoria.cs" />
-    <Compile Include="Controles\clases\Clientes.cs" />
-    <Compile Include="Controles\clases\DetalleFactura.cs" />
-    <Compile Include="Controles\clases\Factura.cs" />
-    <Compile Include="Controles\clases\IdQR.cs" />
-    <Compile Include="Controles\clases\Producto.cs" />
-    <Compile Include="Controles\interfaz\InterfaceFactura.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Roles.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Usuarios.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Categoria.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Clientes.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\DetalleFactura.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Factura.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\IdQR.cs" />
+    <Compile Include="ExcelFacturas\Controles\clases\Producto.cs" />
+    <Compile Include="ExcelFacturas\Controles\interfaz\InterfaceFactura.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

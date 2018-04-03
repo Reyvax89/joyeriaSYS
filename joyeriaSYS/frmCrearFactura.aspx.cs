@@ -26,10 +26,12 @@ namespace joyeriaSYS
             {
                 Session["Factura"] = "-1";
                 cargarClientes();
+                cargarMetales();
                 cargarProductos();
                 CargarTablaFacturas();
             }
         }
+        #region Eventos
         protected void gvwFacturas_SelectedIndexChanged(object sender, EventArgs e)
         {
             hdfIdFactura.Value = gvwFacturas.SelectedRow.Cells[0].Text;
@@ -41,7 +43,6 @@ namespace joyeriaSYS
             ddlCliente.SelectedValue = tempCliente.idCliente.ToString();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
-
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
             var tempProducto = new PRO_PRODUCTO();
@@ -69,6 +70,65 @@ namespace joyeriaSYS
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             CargarTablaFacturas();
         }
+        protected void btnInsertarActualizar_Click(object sender, EventArgs e)
+        {
+            var idFactura = 0;
+            if (Convert.ToInt32(hdfIdFactura.Value) == -1)
+            {
+                idFactura = guardarFactura();
+                hdfIdFactura.Value = "" + idFactura;
+            }
+            else
+            {
+                idFactura = Convert.ToInt32(hdfIdFactura.Value);
+                actualizarFacturaYaInsertada(Convert.ToInt32(hdfIdFactura.Value), Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(ddlProducto.SelectedValue));
+            }
+            var nuevoDetalle = new DEF_DETALLE_FACTURA();
+            nuevoDetalle.CantidadProducto = Convert.ToInt32(txtCantidad.Text);
+            nuevoDetalle.idFactura = idFactura;
+            nuevoDetalle.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+            actualizarCantidadProducto(nuevoDetalle.idProducto, nuevoDetalle.CantidadProducto, true);
+            objDeF.Insertar(nuevoDetalle);
+            txtCantidad.Text = "";
+            CargarTablaDetalleFacturas(idFactura);
+            CargarTablaFacturas();
+        }
+        protected void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            hdfIdDetalleFactura.Value = "-1";
+            hdfIdFactura.Value = "-1";
+            if (txtCodFactura.Text != "")
+            {
+                Session["Factura"] = txtCodFactura.Text;
+            }
+            Response.Redirect("frmImprimirFacturas.aspx");
+        }
+        protected void gvwDetalleFactura_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvwDetalleFactura.PageIndex = e.NewPageIndex;
+            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+        }
+        protected void gvwFacturas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvwFacturas.PageIndex = e.NewPageIndex;
+            CargarTablaFacturas();
+        }
+        protected void btnNuevaFactura_Click(object sender, EventArgs e)
+        {
+            txtCodFactura.Text = "";
+            txtCantidad.Text = "";
+            hdfIdDetalleFactura.Value = "-1";
+            hdfIdFactura.Value = "-1";
+            Session["Factura"] = "-1";
+
+            cargarClientes();
+            cargarMetales();
+            cargarProductos();
+            CargarTablaFacturas();
+            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+        }
+        #endregion
+        #region Metodos Privados
 
         private void actualizarFacturaLuegoDeBorrado(int noFactura, int idProducto, int cantidad)
         {
@@ -110,13 +170,42 @@ namespace joyeriaSYS
             }
         }
 
+        private void cargarMetales()
+        {
+            try
+            {
+                var dt = new DataTable();
+                var rows = objCat.Consultar();
+
+                ddlMetal.DataTextField = "Nombre";
+                ddlMetal.DataValueField = "idCategoria";
+                dt.Columns.Add("idCategoria", typeof(System.String));
+                dt.Columns.Add("Nombre", typeof(System.String));
+
+                foreach (CAT_CATEGORIA r in rows)
+                {
+                    DataRow fila = dt.NewRow();
+
+                    fila["idCategoria"] = r.idCategoria;
+                    fila["Nombre"] = r.Nombre;
+                    dt.Rows.Add(fila);
+                }
+                ddlMetal.DataSource = dt;
+                ddlMetal.DataBind();
+            }
+            catch (Exception ex)
+            {
+                var err = ex.Message;
+            }
+        }
         private void cargarProductos()
         {
             try
             {
                 var dt = new DataTable();
-                var rows = objProd.Consultar();
+                var rows = objProd.ConsultarPorCategoria(Convert.ToInt32(ddlMetal.SelectedValue));
 
+                ddlProducto.Items.Clear();
                 ddlProducto.DataTextField = "NombreProducto";
                 ddlProducto.DataValueField = "IdProducto";
                 dt.Columns.Add("IdProducto", typeof(System.String));
@@ -131,7 +220,7 @@ namespace joyeriaSYS
                     DataRow fila = dt.NewRow();
 
                     fila["IdProducto"] = r.IdProducto;
-                    fila["NombreProducto"] = r.NombreProducto + " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
+                    fila["NombreProducto"] = r.NombreProducto+ " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
                     dt.Rows.Add(fila);
                 }
                 ddlProducto.DataSource = dt;
@@ -250,29 +339,6 @@ namespace joyeriaSYS
                 var err = ex.Message;
             }
         }
-        protected void btnInsertarActualizar_Click(object sender, EventArgs e)
-        {
-            var idFactura = 0;
-            if(Convert.ToInt32(hdfIdFactura.Value) == -1)
-            {
-                idFactura = guardarFactura();
-                hdfIdFactura.Value = "" + idFactura;
-            }
-            else
-            {
-                idFactura = Convert.ToInt32(hdfIdFactura.Value);
-                actualizarFacturaYaInsertada(Convert.ToInt32(hdfIdFactura.Value), Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(ddlProducto.SelectedValue));
-            }
-            var nuevoDetalle = new DEF_DETALLE_FACTURA();
-            nuevoDetalle.CantidadProducto = Convert.ToInt32(txtCantidad.Text);
-            nuevoDetalle.idFactura = idFactura;
-            nuevoDetalle.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
-            actualizarCantidadProducto(nuevoDetalle.idProducto, nuevoDetalle.CantidadProducto, true);
-            objDeF.Insertar(nuevoDetalle);
-            txtCantidad.Text = "";
-            CargarTablaDetalleFacturas(idFactura);
-            CargarTablaFacturas();
-        }
 
         private void actualizarFacturaYaInsertada(int idFactura, int cantidad, int idProducto)
         {
@@ -313,7 +379,8 @@ namespace joyeriaSYS
 
             return tempProd.Precio * cantidad;
         }
-
+        #endregion
+        #region Metodos Publicos
         public int guardarFactura()
         {
             var nuevaFactura = new FAC_FACTURA();
@@ -333,42 +400,12 @@ namespace joyeriaSYS
             return nuevaFactura.idFactura;
         }
 
-        protected void btnFinalizar_Click(object sender, EventArgs e)
+        protected void ddlMetal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            hdfIdDetalleFactura.Value = "-1";
-            hdfIdFactura.Value = "-1";
-            if(txtCodFactura.Text != "")
-            {
-                Session["Factura"] = txtCodFactura.Text;
-            }
-            Response.Redirect("frmImprimirFacturas.aspx");
-        }
-
-        protected void gvwDetalleFactura_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvwDetalleFactura.PageIndex = e.NewPageIndex;
-            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
-        }
-
-        protected void gvwFacturas_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvwFacturas.PageIndex = e.NewPageIndex;
-            CargarTablaFacturas();
-        }
-
-        protected void btnNuevaFactura_Click(object sender, EventArgs e)
-        {
-            txtCodFactura.Text = "";
-            txtCantidad.Text = "";
-            hdfIdDetalleFactura.Value = "-1";
-            hdfIdFactura.Value = "-1";
-            Session["Factura"] = "-1";
-
-            cargarClientes();
             cargarProductos();
-            CargarTablaFacturas();
-            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
+        #endregion
+
 
         //private void ExportToExcel(string nameReport, GridView wControl)
         //{

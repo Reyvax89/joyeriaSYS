@@ -32,7 +32,18 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlCliente" name="demo-cliente" runat="server">
+									<asp:DropDownList ID="ddlCliente" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
+                        </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-cliente">Metal</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlMetal" AutoPostBack="true" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -43,7 +54,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlProducto" name="demo-cliente" runat="server">
+									<asp:DropDownList ID="ddlProducto" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -53,7 +64,7 @@
 								<label for="demo-name">Cantidad:</label>
 							</div>
 							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtCantidad" AutoPostBack="false" name="demo-name" runat="server"></asp:TextBox>
+								<asp:TextBox ID="txtCantidad" AutoPostBack="false" runat="server"></asp:TextBox>
 							</div>
                         </div>
                         <div class="row margin-b 12u$">
@@ -131,6 +142,7 @@
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnNuevaFactura" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="ddlMetal" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwFacturas" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>

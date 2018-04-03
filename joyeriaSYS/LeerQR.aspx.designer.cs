@@ -40,15 +40,6 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.HiddenField hdfIdDetalleFactura;
         
         /// <summary>
-        /// txtCodigo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
-
-        /// <summary>
         /// ddlFactura control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlFactura;
+        
+        /// <summary>
+        /// txtCodigo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
         
         /// <summary>
         /// ddlProducto control.
@@ -67,13 +67,13 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.DropDownList ddlProducto;
         
         /// <summary>
-        /// txtCodTabla control.
+        /// txtSaldoActual control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodTabla;
+        protected global::System.Web.UI.WebControls.TextBox txtSaldoActual;
         
         /// <summary>
         /// ddlCliente control.
@@ -85,6 +85,15 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
         
         /// <summary>
+        /// btnCalcularSaldo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCalcularSaldo;
+        
+        /// <summary>
         /// btnCalcular control.
         /// </summary>
         /// <remarks>
@@ -92,15 +101,6 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCalcular;
-        
-        /// <summary>
-        /// btnValidar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnValidar;
         
         /// <summary>
         /// gvwDetalleFactura control.
