@@ -18,6 +18,7 @@ namespace joyeriaSYS
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarTablaCategoria();
+            this.Title = "Administrar Metales";
         }
 
         public int guardarActualizar(int id)

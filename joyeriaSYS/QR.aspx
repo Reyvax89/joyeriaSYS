@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Ingresar Producto" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QR.aspx.cs" Inherits="joyeriaSYS.QR" %>
+﻿<%@ Page Title="Administrar inventario" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QR.aspx.cs" Inherits="joyeriaSYS.QR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
