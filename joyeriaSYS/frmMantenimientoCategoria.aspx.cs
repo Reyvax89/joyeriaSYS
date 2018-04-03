@@ -21,6 +21,11 @@ namespace joyeriaSYS
             this.Title = "Administrar Metales";
         }
 
+        protected void Reset_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = "";
+        }
+
         public int guardarActualizar(int id)
         {
             CAT_CATEGORIA temp = new CAT_CATEGORIA();
