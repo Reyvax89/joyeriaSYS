@@ -68,7 +68,7 @@ namespace joyeriaSYS
         {
             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
             var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
-            if (codFactura != 0 && codFactura != 0)
+            if (codFactura != 0 && codProducto != 0)
             {
                 gestionarCargaDatos(codProducto, codFactura);
             }
@@ -78,7 +78,7 @@ namespace joyeriaSYS
         {
             var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
             var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
-            if (codFactura != 0 && codFactura != 0)
+            if (codFactura != 0 && codProducto != 0)
             {
                 gestionarCargaDatos(codProducto, codFactura);
             }

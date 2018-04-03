@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LeerQR.aspx.cs" Inherits="joyeriaSYS.LeerQR" %>
+﻿<%@ Page Title="Liquidar factura" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LeerQR.aspx.cs" Inherits="joyeriaSYS.LeerQR" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<div class="container">
 		<div class="row">
