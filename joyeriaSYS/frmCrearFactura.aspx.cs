@@ -35,7 +35,10 @@ namespace joyeriaSYS
             hdfIdFactura.Value = gvwFacturas.SelectedRow.Cells[0].Text;
             //txtCodTabla.Text = gvwFacturas.SelectedRow.Cells[2].Text;
             txtCodFactura.Text = gvwFacturas.SelectedRow.Cells[1].Text;
-            ddlCliente.SelectedValue = gvwFacturas.SelectedRow.Cells[5].Text;
+            var tempCliente = new CLI_CLIENTES();
+            tempCliente.NombreEncargado = gvwFacturas.SelectedRow.Cells[5].Text;
+            tempCliente = objCli.ConsultarPorNombre(tempCliente).FirstOrDefault();
+            ddlCliente.SelectedValue = tempCliente.idCliente.ToString();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
 
@@ -50,7 +53,7 @@ namespace joyeriaSYS
             tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
 
             hdfIdDetalleFactura.Value = gvwDetalleFactura.SelectedRow.Cells[0].Text;
-            int idFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
+            int noFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
             int idProducto = tempProducto.IdProducto;
             int idCategoria = tempCategoria.idCategoria;
             int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[5].Text);
@@ -59,7 +62,7 @@ namespace joyeriaSYS
 
             var detFac = new DEF_DETALLE_FACTURA();
             detFac.idDetalleFactura = Convert.ToInt32(hdfIdDetalleFactura.Value);
-            actualizarFacturaLuegoDeBorrado(idFactura, idProducto, Cantidad);
+            actualizarFacturaLuegoDeBorrado(noFactura, idProducto, Cantidad);
             actualizarCantidadProducto(idProducto, Cantidad, false);
             objDeF.Eliminar(detFac);
 
@@ -67,11 +70,11 @@ namespace joyeriaSYS
             CargarTablaFacturas();
         }
 
-        private void actualizarFacturaLuegoDeBorrado(int idFactura, int idProducto, int cantidad)
+        private void actualizarFacturaLuegoDeBorrado(int noFactura, int idProducto, int cantidad)
         {
             var tempFactura = new FAC_FACTURA();
-            tempFactura.idFactura = idFactura;
-            tempFactura = objFact.ConsultarPorId(tempFactura).FirstOrDefault();
+            tempFactura.NoFactura = noFactura;
+            tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
             tempFactura.montoFactura = tempFactura.montoFactura - calcularMonto(idProducto, cantidad);
             tempFactura.totalPiezas = tempFactura.totalPiezas - cantidad;
             tempFactura.saldo = tempFactura.saldo - calcularMonto(idProducto, cantidad);
@@ -148,9 +151,6 @@ namespace joyeriaSYS
                 var rows = objDeF.Consultar();
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
-                if (idFactura != -1){
-                    rows = objDeF.ConsultarPorIdFactura(idFactura);
-                }
 
                 dt.Columns.Add("idDetalleFactura", typeof(System.String));
                 dt.Columns.Add("idFactura", typeof(System.String));
@@ -161,23 +161,43 @@ namespace joyeriaSYS
                 //dt.Columns.Add("Precio", typeof(System.String));
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
-                foreach (DEF_DETALLE_FACTURA r in rows)
+                if (idFactura != -1){
+                    rows = objDeF.ConsultarPorIdFactura(idFactura);
+
+                    foreach (DEF_DETALLE_FACTURA r in rows)
+                    {
+                        var tempCategoria = new CAT_CATEGORIA();
+                        var tempProducto = new PRO_PRODUCTO();
+                        var tempFactura = new FAC_FACTURA();
+
+                        tempFactura.idFactura = r.idFactura;
+                        tempFactura = objFact.ConsultarPorId(tempFactura).FirstOrDefault();
+                        tempProducto.IdProducto = r.idProducto;
+                        tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
+                        tempCategoria.idCategoria = tempProducto.IdCategoria;
+                        DataRow fila = dt.NewRow();
+
+                        fila["idDetalleFactura"] = r.idDetalleFactura;
+                        fila["idFactura"] = tempFactura.NoFactura;
+                        fila["idProducto"] = tempProducto.NombreProducto;
+                        fila["CodProducto"] = tempProducto.CodigoNumerico;
+                        fila["idCategoria"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
+                        fila["CantidadProducto"] = r.CantidadProducto;
+                        dt.Rows.Add(fila);
+                    }
+                }else
                 {
-                    var tempCategoria = new CAT_CATEGORIA();
-                    var tempProducto = new PRO_PRODUCTO();
-                    tempProducto.IdProducto = r.idProducto;
-                    tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
-                    tempCategoria.idCategoria = tempProducto.IdCategoria;
                     DataRow fila = dt.NewRow();
 
-                    fila["idDetalleFactura"] = r.idDetalleFactura;
-                    fila["idFactura"] = r.idFactura;
-                    fila["idProducto"] = tempProducto.NombreProducto;
-                    fila["CodProducto"] = tempProducto.CodigoNumerico;
-                    fila["idCategoria"] = objCat.ConsultarPorId(tempCategoria).FirstOrDefault().Nombre;
-                    fila["CantidadProducto"] = r.CantidadProducto;
+                    fila["idDetalleFactura"] = "---";
+                    fila["idFactura"] = "---";
+                    fila["idProducto"] = "---";
+                    fila["CodProducto"] = "---";
+                    fila["idCategoria"] = "---";
+                    fila["CantidadProducto"] = "---";
                     dt.Rows.Add(fila);
                 }
+                
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
             }
@@ -206,6 +226,9 @@ namespace joyeriaSYS
 
                 foreach (FAC_FACTURA r in rows)
                 {
+                    var tempCliente = new CLI_CLIENTES();
+                    tempCliente.idCliente = r.idCliente;
+                    tempCliente = objCli.ConsultarPorId(tempCliente).FirstOrDefault();
                     DataRow fila = dt.NewRow();
 
                     fila["idFactura"] = r.idFactura;
@@ -214,7 +237,7 @@ namespace joyeriaSYS
                     fila["montoFactura"] = r.montoFactura;
                     fila["estado"] = r.estado;
                     fila["totalPiezas"] = r.totalPiezas;
-                    fila["idCliente"] = r.idCliente;
+                    fila["idCliente"] = tempCliente.NombreEncargado;
                     //fila["fechaCreacion"] = r.fechaCreacion;
                     //fila["fechaLiquidacion"] = r.fechaLiquidacion;
                     dt.Rows.Add(fila);
@@ -319,6 +342,32 @@ namespace joyeriaSYS
                 Session["Factura"] = txtCodFactura.Text;
             }
             Response.Redirect("frmImprimirFacturas.aspx");
+        }
+
+        protected void gvwDetalleFactura_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvwDetalleFactura.PageIndex = e.NewPageIndex;
+            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+        }
+
+        protected void gvwFacturas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvwFacturas.PageIndex = e.NewPageIndex;
+            CargarTablaFacturas();
+        }
+
+        protected void btnNuevaFactura_Click(object sender, EventArgs e)
+        {
+            txtCodFactura.Text = "";
+            txtCantidad.Text = "";
+            hdfIdDetalleFactura.Value = "-1";
+            hdfIdFactura.Value = "-1";
+            Session["Factura"] = "-1";
+
+            cargarClientes();
+            cargarProductos();
+            CargarTablaFacturas();
+            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
 
         //private void ExportToExcel(string nameReport, GridView wControl)

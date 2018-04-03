@@ -44,6 +44,14 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public IEnumerable<CLI_CLIENTES> ConsultarPorNombre(CLI_CLIENTES objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.CLI_CLIENTES.Where(cat => cat.NombreEncargado == objeto.NombreEncargado).ToList();
+            }
+        }
+
         public CLI_CLIENTES Eliminar(CLI_CLIENTES objeto)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())

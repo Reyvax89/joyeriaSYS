@@ -28,7 +28,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.ToList();
+                return contexto.DEF_DETALLE_FACTURA.ToList().OrderByDescending(det => det.idDetalleFactura);
             }
         }
         
@@ -36,7 +36,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idDetalleFactura == objeto.idDetalleFactura).ToList();
+                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
             }
         }
 
@@ -44,7 +44,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idFactura == idFactura).ToList();
+                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idFactura == idFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
             }
         }
 

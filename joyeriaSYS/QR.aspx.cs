@@ -26,8 +26,11 @@ namespace joyeriaSYS
         protected void Page_Load(object sender, EventArgs e)
         {
             //QRImage.ImageUrl = "../images/pic01.jpg";
-            cargarCategoria();
-            CargarTablaProductos();
+            if (!IsPostBack)
+            {
+                cargarCategoria();
+                CargarTablaProductos();
+            }
         }
         public void MostrarMensaje(string Mensaje) {
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('" + Mensaje + "');", true);
@@ -225,6 +228,18 @@ namespace joyeriaSYS
         protected void txtCodNumerico_TextChanged(object sender, EventArgs e)
         {
             txtPrecio.Text = txtCodNumerico.Text + "00";
+        }
+        
+        //OnPageIndexChanged="gvwProductos_PageIndexChanged"
+        protected void gvwProductos_PageIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvwProductos_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
+        {
+            gvwProductos.PageIndex = e.NewPageIndex;
+            CargarTablaProductos();
         }
     }
 }

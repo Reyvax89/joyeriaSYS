@@ -15,7 +15,7 @@
 						<h1 class="major">Mantenimiento Clientes</h1>
                         <div class="row margin-b 6u 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
-									<label for="demo-name">Nombre Encargado:</label>
+									<label for="demo-name">Vendedor:</label>
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:TextBox ID="txtNombreEncargado" runat="server" ></asp:TextBox>
