@@ -358,16 +358,15 @@ namespace joyeriaSYS
 
         protected void btnNuevaFactura_Click(object sender, EventArgs e)
         {
+            //cargarClientes();
+            //cargarProductos();
+            //CargarTablaFacturas();
+            //CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             txtCodFactura.Text = "";
             txtCantidad.Text = "";
             hdfIdDetalleFactura.Value = "-1";
             hdfIdFactura.Value = "-1";
             Session["Factura"] = "-1";
-
-            cargarClientes();
-            cargarProductos();
-            CargarTablaFacturas();
-            CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
         }
 
         //private void ExportToExcel(string nameReport, GridView wControl)

@@ -19,6 +19,17 @@ namespace joyeriaSYS
             CargarTablaCategoria();
         }
 
+        protected void Reset_Click(object sender, EventArgs e)
+        {
+            txtNombreEncargado.Text = "";
+            txtNombreJoyeria.Text = "";
+            txtCelular.Text = "";
+            txtTelefono.Text = "";
+            txtDirección.Text = "";
+            txtProvincia.Text = "";
+            txtCanton.Text = "";
+        }
+
         public int guardarActualizar(int id)
         {
             CLI_CLIENTES temp = new CLI_CLIENTES();

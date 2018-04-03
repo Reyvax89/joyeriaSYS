@@ -63,7 +63,7 @@
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="btn btn-primary special" />
 								<asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="btn btn-info" />
-                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva" CssClass="btn btn-default" />
+                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Limpiar" CssClass="btn btn-default" />
 							</div>
                         </div>
 						</div>

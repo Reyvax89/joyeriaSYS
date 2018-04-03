@@ -67,7 +67,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
-								<asp:Button ID="btnLimpiar" runat="server" Text="Nuevo" OnClick="btnLimpiar_Click" CssClass="btn btn-default special" />
+								<asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" CssClass="btn btn-default special" />
 							</div>
                         </div>
                     </div>
