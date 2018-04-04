@@ -37,29 +37,38 @@ namespace joyeriaSYS
             hdfIdFactura.Value = gvwFacturas.SelectedRow.Cells[0].Text;
             //txtCodTabla.Text = gvwFacturas.SelectedRow.Cells[2].Text;
             txtCodFactura.Text = gvwFacturas.SelectedRow.Cells[1].Text;
+            var tempFactura = new FAC_FACTURA();
+            tempFactura.NoFactura = Convert.ToInt32(gvwFacturas.SelectedRow.Cells[1].Text);
+            tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
+            txtFechaFactura.Text = tempFactura.fechaCreacion.ToShortDateString();
+            ddlMetal.SelectedValue = tempFactura.idCategoriaMetal.ToString();
+
             var tempCliente = new CLI_CLIENTES();
             tempCliente.NombreEncargado = gvwFacturas.SelectedRow.Cells[5].Text;
             tempCliente = objCli.ConsultarPorNombre(tempCliente).FirstOrDefault();
             ddlCliente.SelectedValue = tempCliente.idCliente.ToString();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+            cargarProductosPorIdCategoria(tempFactura.idCategoriaMetal);
         }
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var tempProducto = new PRO_PRODUCTO();
-            tempProducto.NombreProducto = gvwDetalleFactura.SelectedRow.Cells[2].Text;
-            tempProducto = objProd.ConsultarPorNombre(tempProducto).FirstOrDefault();
-
             var tempCategoria = new CAT_CATEGORIA();
             tempCategoria.Nombre = gvwDetalleFactura.SelectedRow.Cells[4].Text;
             tempCategoria = objCat.ConsultarPorNombre(tempCategoria).FirstOrDefault();
 
+            var tempProducto = new PRO_PRODUCTO();
+            tempProducto.NombreProducto = gvwDetalleFactura.SelectedRow.Cells[2].Text;
+            tempProducto.CodigoNumerico = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[3].Text);
+            tempProducto.IdCategoria = tempCategoria.idCategoria;
+            tempProducto = objProd.ConsultarPorNombreCodigoCategoria(tempProducto).FirstOrDefault();
+            
             hdfIdDetalleFactura.Value = gvwDetalleFactura.SelectedRow.Cells[0].Text;
             int noFactura = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[1].Text);
             int idProducto = tempProducto.IdProducto;
             int idCategoria = tempCategoria.idCategoria;
             int Cantidad = Convert.ToInt32(gvwDetalleFactura.SelectedRow.Cells[5].Text);
-
-            ddlProducto.SelectedValue = idProducto.ToString();
+            
+            ddlProducto.SelectedValue = tempProducto.IdProducto.ToString();
 
             var detFac = new DEF_DETALLE_FACTURA();
             detFac.idDetalleFactura = Convert.ToInt32(hdfIdDetalleFactura.Value);
@@ -126,6 +135,10 @@ namespace joyeriaSYS
             cargarProductos();
             CargarTablaFacturas();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+        }
+        protected void ddlMetal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarProductos();
         }
         #endregion
         #region Metodos Privados
@@ -221,6 +234,39 @@ namespace joyeriaSYS
 
                     fila["IdProducto"] = r.IdProducto;
                     fila["NombreProducto"] = r.NombreProducto+ " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
+                    dt.Rows.Add(fila);
+                }
+                ddlProducto.DataSource = dt;
+                ddlProducto.DataBind();
+            }
+            catch (Exception ex)
+            {
+                var err = ex.Message;
+            }
+        }
+        private void cargarProductosPorIdCategoria(int IdCategoria)
+        {
+            try
+            {
+                var dt = new DataTable();
+                var rows = objProd.ConsultarPorCategoria(IdCategoria);
+
+                ddlProducto.Items.Clear();
+                ddlProducto.DataTextField = "NombreProducto";
+                ddlProducto.DataValueField = "IdProducto";
+                dt.Columns.Add("IdProducto", typeof(System.String));
+                dt.Columns.Add("NombreProducto", typeof(System.String));
+
+                foreach (PRO_PRODUCTO r in rows)
+                {
+                    var tempCategoria = new CAT_CATEGORIA();
+                    tempCategoria.idCategoria = r.IdCategoria;
+                    tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
+
+                    DataRow fila = dt.NewRow();
+
+                    fila["IdProducto"] = r.IdProducto;
+                    fila["NombreProducto"] = r.NombreProducto + " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
                     dt.Rows.Add(fila);
                 }
                 ddlProducto.DataSource = dt;
@@ -389,43 +435,19 @@ namespace joyeriaSYS
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
             nuevaFactura.NoFactura = Convert.ToInt32(txtCodFactura.Text);
-            nuevaFactura.fechaCreacion = DateTime.Now;
-            nuevaFactura.fechaLiquidacion = DateTime.Now;
+            nuevaFactura.fechaCreacion = Convert.ToDateTime(txtFechaFactura.Text).Date;
+            nuevaFactura.fechaLiquidacion = Convert.ToDateTime(txtFechaFactura.Text).Date.AddDays(50);
             nuevaFactura.saldo = nuevaFactura.montoFactura;
             nuevaFactura.totalDevuelto = 0;
             nuevaFactura.totalPiezas = Convert.ToInt32(txtCantidad.Text);
+            nuevaFactura.idCategoriaMetal = Convert.ToInt32(ddlMetal.SelectedValue);
 
             nuevaFactura = objFact.Insertar(nuevaFactura);
 
             return nuevaFactura.idFactura;
         }
-
-        protected void ddlMetal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cargarProductos();
-        }
+        
         #endregion
-
-
-        //private void ExportToExcel(string nameReport, GridView wControl)
-        //{
-        //    HttpResponse response = Response;
-        //    StringWriter sw = new StringWriter();
-        //    HtmlTextWriter htw = new HtmlTextWriter(sw);
-        //    System.Web.UI.Page pageToRender = new System.Web.UI.Page();
-        //    HtmlForm form = new HtmlForm();
-        //    form.Controls.Add(wControl);
-        //    pageToRender.Controls.Add(form);
-        //    response.Clear();
-        //    response.Buffer = true;
-        //    response.ContentType = "application/vnd.ms-excel";
-        //    response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport);
-        //    response.Charset = "UTF-8";
-        //    response.ContentEncoding = Encoding.Default;
-        //    pageToRender.RenderControl(htw);
-        //    response.Write(sw.ToString());
-        //    response.End();
-        //}
 
     }//Fin de la clase
 }

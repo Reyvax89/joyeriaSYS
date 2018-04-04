@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmCrearFactura.aspx.cs" Inherits="joyeriaSYS.frmCrearFactura" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -67,6 +69,15 @@
 								<asp:TextBox ID="txtCantidad" AutoPostBack="false" runat="server"></asp:TextBox>
 							</div>
                         </div>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Fecha:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtFechaFactura" runat="server"></asp:TextBox>
+                                <ajaxToolkit:CalendarExtender ID="Calendar1" runat="server" TargetControlID="txtFechaFactura" Format="dd/MM/yyyy" />
+							</div>
+                        </div>
                         <div class="row margin-b 12u$">
 							<div class="col-sm-5 col-md-3">
 								
@@ -93,8 +104,8 @@
                                 <asp:BoundField DataField="idProducto" HeaderText="Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CodProducto" HeaderText="Código" AccessibleHeaderText="CodProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="idCategoria" HeaderText="Metal" AccessibleHeaderText="idCategoria" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
-                                <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
+                                <asp:BoundField DataField="CantidadProducto"  HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:CommandField ShowSelectButton="true" SelectImageUrl="~/Imagenes/x-button.png" HeaderText="Eliminar" ButtonType="Image"></asp:CommandField>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>
@@ -147,4 +158,22 @@
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>
                 </asp:UpdatePanel>
+    <script type="text/javascript">
+ 
+        function Confirmacion() {
+ 
+            var seleccion = confirm("acepta el mensaje ?");
+ 
+            if (seleccion)
+                alert("se acepto el mensaje");
+            else
+                alert("NO se acepto el mensaje");
+ 
+            //usado para que no haga postback el boton de asp.net cuando 
+            //no se acepte el confirm
+            return seleccion;
+         
+        }
+     
+    </script>
 </asp:Content>

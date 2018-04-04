@@ -25,9 +25,9 @@ namespace joyeriaSYS
             CAT_CATEGORIA temp = new CAT_CATEGORIA();
             temp.idCategoria = id;
             temp.Nombre = txtNombre.Text;
-            //temp.Codigo = txtCodigo.Text;
+            temp.Codigo = "---";
 
-            if(objCat.ConsultarPorId(temp).Count() > 0)
+            if (objCat.ConsultarPorId(temp).Count() > 0)
             {
                 objCat.Actualizar(temp);
             }

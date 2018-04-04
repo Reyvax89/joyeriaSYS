@@ -39,6 +39,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Account/Web.config">
       <publishTime>02/24/2018 09:09:26</publishTime>
     </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>01/09/2018 15:56:26</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
@@ -46,13 +49,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>04/02/2018 19:44:06</publishTime>
+      <publishTime>04/03/2018 18:34:03</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>04/02/2018 19:44:06</publishTime>
+      <publishTime>04/03/2018 18:34:03</publishTime>
     </File>
     <File Include="bin/App_global.asax.pdb">
-      <publishTime>04/02/2018 19:44:06</publishTime>
+      <publishTime>04/03/2018 18:34:03</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.bootstrap.dll">
       <publishTime>08/22/2013 22:09:14</publishTime>
@@ -76,13 +79,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/13/2016 14:36:04</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.dll">
-      <publishTime>04/02/2018 19:43:37</publishTime>
+      <publishTime>04/03/2018 18:33:32</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.dll.config">
-      <publishTime>03/26/2018 21:20:24</publishTime>
+      <publishTime>04/02/2018 21:06:02</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.pdb">
-      <publishTime>04/02/2018 19:43:37</publishTime>
+      <publishTime>04/03/2018 18:33:32</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>07/30/2013 16:57:30</publishTime>
@@ -340,7 +343,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/24/2018 09:09:19</publishTime>
     </File>
     <File Include="frmCrearFactura.aspx">
-      <publishTime>04/01/2018 09:23:53</publishTime>
+      <publishTime>04/03/2018 00:15:20</publishTime>
     </File>
     <File Include="frmCrearFactura.aspx.cs">
       <publishTime>03/26/2018 08:40:04</publishTime>
@@ -382,13 +385,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2018 18:37:24</publishTime>
     </File>
     <File Include="Imagenes/Logo.png">
-      <publishTime>03/31/2018 18:16:59</publishTime>
+      <publishTime>04/02/2018 21:47:03</publishTime>
+    </File>
+    <File Include="Imagenes/x-button.png">
+      <publishTime>04/02/2018 23:10:37</publishTime>
     </File>
     <File Include="joyeriaSYS.csproj">
-      <publishTime>04/01/2018 11:49:19</publishTime>
+      <publishTime>04/02/2018 23:11:44</publishTime>
     </File>
     <File Include="joyeriaSYS.csproj.user">
-      <publishTime>04/01/2018 11:49:19</publishTime>
+      <publishTime>04/02/2018 23:11:44</publishTime>
     </File>
     <File Include="LeerQR.aspx">
       <publishTime>04/01/2018 12:22:18</publishTime>
@@ -430,10 +436,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2018 21:25:23</publishTime>
     </File>
     <File Include="Models/factura.edmx">
-      <publishTime>03/06/2018 21:25:08</publishTime>
+      <publishTime>04/02/2018 22:04:04</publishTime>
     </File>
     <File Include="Models/factura.edmx.diagram">
-      <publishTime>03/06/2018 21:25:08</publishTime>
+      <publishTime>04/02/2018 22:04:04</publishTime>
     </File>
     <File Include="Models/factura.tt">
       <publishTime>03/06/2018 21:22:58</publishTime>
@@ -445,10 +451,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2018 21:23:15</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/26/2018 21:20:24</publishTime>
+      <publishTime>04/02/2018 21:06:01</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>04/02/2018 19:43:53</publishTime>
+      <publishTime>04/03/2018 18:33:51</publishTime>
     </File>
     <File Include="Project_Readme.html">
       <publishTime>02/24/2018 09:09:04</publishTime>
@@ -460,7 +466,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2018 21:20:24</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/JQR.pubxml.user">
-      <publishTime>04/01/2018 09:23:53</publishTime>
+      <publishTime>04/03/2018 00:31:09</publishTime>
     </File>
     <File Include="QR.aspx">
       <publishTime>04/01/2018 09:23:53</publishTime>
@@ -604,7 +610,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/24/2018 09:09:24</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/02/2018 19:43:50</publishTime>
+      <publishTime>04/03/2018 18:33:46</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>02/24/2018 09:09:06</publishTime>

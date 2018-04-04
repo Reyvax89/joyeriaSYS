@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gma.QrCodeNet.0.4.1.2\lib\net40\Gma.QrCodeNet.Encoding.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +161,7 @@
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Imagenes\Logo.png" />
+    <Content Include="Imagenes\x-button.png" />
     <Content Include="Models\factura.edmx.diagram">
       <DependentUpon>factura.edmx</DependentUpon>
     </Content>
@@ -259,15 +264,15 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ExcelFacturas\Controles\clases\Roles.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\Usuarios.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\Categoria.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\Clientes.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\DetalleFactura.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\Factura.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\IdQR.cs" />
-    <Compile Include="ExcelFacturas\Controles\clases\Producto.cs" />
-    <Compile Include="ExcelFacturas\Controles\interfaz\InterfaceFactura.cs" />
+    <Compile Include="Controles\clases\Roles.cs" />
+    <Compile Include="Controles\clases\Usuarios.cs" />
+    <Compile Include="Controles\clases\Categoria.cs" />
+    <Compile Include="Controles\clases\Clientes.cs" />
+    <Compile Include="Controles\clases\DetalleFactura.cs" />
+    <Compile Include="Controles\clases\Factura.cs" />
+    <Compile Include="Controles\clases\IdQR.cs" />
+    <Compile Include="Controles\clases\Producto.cs" />
+    <Compile Include="Controles\interfaz\InterfaceFactura.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
