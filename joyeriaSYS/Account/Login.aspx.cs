@@ -30,7 +30,9 @@ namespace joyeriaSYS.Account
 
                 if(result != null)
                 {
-                        Response.Redirect(Request.QueryString["ReturnUrl"]);
+                    // Set the session.
+                    Session["username"] = result.UserName;
+                    Response.Redirect("/");
                 }
                 else
                 {
