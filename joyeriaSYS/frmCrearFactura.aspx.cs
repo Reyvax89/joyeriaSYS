@@ -441,6 +441,7 @@ namespace joyeriaSYS
             nuevaFactura.totalDevuelto = 0;
             nuevaFactura.totalPiezas = Convert.ToInt32(txtCantidad.Text);
             nuevaFactura.idCategoriaMetal = Convert.ToInt32(ddlMetal.SelectedValue);
+            nuevaFactura.idUsuario = 4;
 
             nuevaFactura = objFact.Insertar(nuevaFactura);
 

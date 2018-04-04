@@ -60,3 +60,4 @@ C:\joyeriaSYS\joyeriaSYS\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\joyeriaSYS\joyeriaSYS\bin\System.Web.Providers.xml
 C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.dll
 C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.pdb
+C:\joyeriaSYS\joyeriaSYS\obj\Debug\joyeriaSYS.csprojResolveAssemblyReference.cache
