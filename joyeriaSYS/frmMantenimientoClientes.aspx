@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmMantenimientoClientes.aspx.cs" Inherits="joyeriaSYS.frmMantenimientoClientes" %>
+﻿<%@ Page Title="Administrar clientes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmMantenimientoClientes.aspx.cs" Inherits="joyeriaSYS.frmMantenimientoClientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -75,7 +75,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
-								<input type="reset" value="Reset" class="btn btn-default">
+								<asp:Button ID="Reset" runat="server" Text="Limpiar" align="center" onclick="Reset_Click" CssClass="btn btn-default" />
 							</div>
                         </div>
                         </section>

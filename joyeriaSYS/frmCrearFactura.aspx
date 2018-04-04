@@ -85,7 +85,7 @@
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="btn btn-primary special" />
 								<asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="btn btn-info" />
-                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva" CssClass="btn btn-default" />
+                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Limpiar" CssClass="btn btn-default" />
 							</div>
                         </div>
 						</div>
@@ -158,22 +158,4 @@
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>
                 </asp:UpdatePanel>
-    <script type="text/javascript">
- 
-        function Confirmacion() {
- 
-            var seleccion = confirm("acepta el mensaje ?");
- 
-            if (seleccion)
-                alert("se acepto el mensaje");
-            else
-                alert("NO se acepto el mensaje");
- 
-            //usado para que no haga postback el boton de asp.net cuando 
-            //no se acepte el confirm
-            return seleccion;
-         
-        }
-     
-    </script>
 </asp:Content>
