@@ -30,7 +30,21 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(cat => cat.IdProducto);
+                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+            }
+        }
+        public IEnumerable<PRO_PRODUCTO> ConsultarPorCategoria(int idCategoria)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                if(idCategoria == 4)
+                {
+                    return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+                }
+                else
+                {
+                    return contexto.PRO_PRODUCTO.ToList().Where(pro => pro.IdCategoria == idCategoria).OrderByDescending(pro => pro.IdProducto);
+                }
             }
         }
 
@@ -59,6 +73,13 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.PRO_PRODUCTO.Where(cat => cat.NombreProducto == objeto.NombreProducto).ToList();
+            }
+        }
+        public IEnumerable<PRO_PRODUCTO> ConsultarPorNombreCodigoCategoria(PRO_PRODUCTO objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.Where(pro => pro.NombreProducto == objeto.NombreProducto && pro.IdCategoria == objeto.IdCategoria && pro.CodigoNumerico == objeto.CodigoNumerico).ToList();
             }
         }
 

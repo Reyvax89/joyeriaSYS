@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gma.QrCodeNet.0.4.1.2\lib\net40\Gma.QrCodeNet.Encoding.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +161,7 @@
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Imagenes\Logo.png" />
+    <Content Include="Imagenes\x-button.png" />
     <Content Include="Models\factura.edmx.diagram">
       <DependentUpon>factura.edmx</DependentUpon>
     </Content>

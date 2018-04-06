@@ -25,6 +25,7 @@ namespace joyeriaSYS.Controles.clases
                 actualizado.totalDevuelto = objeto.totalDevuelto;
                 actualizado.totalPiezas = objeto.totalPiezas;
                 actualizado.idCliente = objeto.idCliente;
+                actualizado.idCategoriaMetal = objeto.idCategoriaMetal;
                 contexto.SaveChanges();
             }
             return actualizado;

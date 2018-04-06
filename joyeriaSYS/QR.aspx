@@ -80,7 +80,7 @@
         <section id="two" class="wrapper alt spotlight style2">
             <div class="inner">
                 <div class="content">
-                    <asp:GridView runat="server" AllowPaging="true" ID="gvwProductos" OnPageIndexChanging="gvwProductos_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged" PagerSettings-Mode="NextPrevious" PageSize="15">
+                    <asp:GridView runat="server" AllowPaging="true" ID="gvwProductos" OnPageIndexChanging="gvwProductos_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged" PagerSettings-Mode="Numeric" PageSize="15">
         <Columns>
             <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
             <asp:BoundField DataField="NombreProducto" HeaderText="Nombre" AccessibleHeaderText="NombreProducto" InsertVisible="False"></asp:BoundField>

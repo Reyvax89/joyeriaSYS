@@ -1,4 +1,6 @@
-﻿<%@ Page Title="Crear factura" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmCrearFactura.aspx.cs" Inherits="joyeriaSYS.frmCrearFactura" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmCrearFactura.aspx.cs" Inherits="joyeriaSYS.frmCrearFactura" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -32,7 +34,18 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlCliente" name="demo-cliente" runat="server">
+									<asp:DropDownList ID="ddlCliente" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
+                        </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-cliente">Metal</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlMetal" AutoPostBack="true" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -43,7 +56,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlProducto" name="demo-cliente" runat="server">
+									<asp:DropDownList ID="ddlProducto" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -53,7 +66,16 @@
 								<label for="demo-name">Cantidad:</label>
 							</div>
 							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtCantidad" AutoPostBack="false" name="demo-name" runat="server"></asp:TextBox>
+								<asp:TextBox ID="txtCantidad" AutoPostBack="false" runat="server"></asp:TextBox>
+							</div>
+                        </div>
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Fecha:</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:TextBox ID="txtFechaFactura" runat="server"></asp:TextBox>
+                                <ajaxToolkit:CalendarExtender ID="Calendar1" runat="server" TargetControlID="txtFechaFactura" Format="dd/MM/yyyy" />
 							</div>
                         </div>
                         <div class="row margin-b 12u$">
@@ -82,8 +104,8 @@
                                 <asp:BoundField DataField="idProducto" HeaderText="Producto" AccessibleHeaderText="idProducto" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="CodProducto" HeaderText="Código" AccessibleHeaderText="CodProducto" InsertVisible="False"></asp:BoundField>
 								<asp:BoundField DataField="idCategoria" HeaderText="Metal" AccessibleHeaderText="idCategoria" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="CantidadProducto" HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
-                                <asp:CommandField ShowSelectButton="True" HeaderText="Eliminar"></asp:CommandField>
+                                <asp:BoundField DataField="CantidadProducto"  HeaderText="Cantidad" AccessibleHeaderText="CantidadProducto" InsertVisible="False"></asp:BoundField>
+                                <asp:CommandField ShowSelectButton="true" SelectImageUrl="~/Imagenes/x-button.png" HeaderText="Eliminar" ButtonType="Image"></asp:CommandField>
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White"></HeaderStyle>
@@ -131,6 +153,7 @@
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnNuevaFactura" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="ddlMetal" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwFacturas" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>

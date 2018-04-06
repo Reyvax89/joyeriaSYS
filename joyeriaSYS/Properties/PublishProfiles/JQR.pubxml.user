@@ -39,6 +39,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Account/Web.config">
       <publishTime>02/24/2018 09:09:26</publishTime>
     </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>01/09/2018 15:56:26</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
@@ -46,19 +49,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>03/31/2018 20:50:07</publishTime>
+      <publishTime>04/03/2018 18:43:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>03/31/2018 20:50:07</publishTime>
+      <publishTime>04/03/2018 18:43:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.pdb">
-      <publishTime>03/31/2018 20:50:07</publishTime>
+      <publishTime>04/03/2018 18:43:58</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.bootstrap.dll">
-      <publishTime>08/22/2013 23:09:14</publishTime>
+      <publishTime>08/22/2013 22:09:14</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
-      <publishTime>07/16/2013 21:06:22</publishTime>
+      <publishTime>07/16/2013 20:06:22</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -73,22 +76,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/Gma.QrCodeNet.Encoding.dll">
-      <publishTime>05/13/2016 15:36:04</publishTime>
+      <publishTime>05/13/2016 14:36:04</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.dll">
-      <publishTime>03/31/2018 20:49:33</publishTime>
+      <publishTime>04/03/2018 18:43:18</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.dll.config">
-      <publishTime>03/26/2018 21:20:24</publishTime>
+      <publishTime>04/02/2018 21:06:02</publishTime>
     </File>
     <File Include="bin/joyeriaSYS.pdb">
-      <publishTime>03/31/2018 20:49:33</publishTime>
+      <publishTime>04/03/2018 18:43:18</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
-      <publishTime>07/30/2013 17:57:30</publishTime>
+      <publishTime>07/30/2013 16:57:30</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.xml">
-      <publishTime>07/30/2013 17:57:30</publishTime>
+      <publishTime>07/30/2013 16:57:30</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>04/03/2015 17:07:22</publishTime>
@@ -112,10 +115,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>10/16/2017 14:14:32</publishTime>
+      <publishTime>10/16/2017 13:14:32</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml">
-      <publishTime>10/16/2017 14:08:30</publishTime>
+      <publishTime>10/16/2017 13:08:30</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -145,100 +148,100 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/Microsoft.ScriptManager.MSAjax.dll">
-      <publishTime>09/06/2013 12:20:12</publishTime>
+      <publishTime>09/06/2013 11:20:12</publishTime>
     </File>
     <File Include="bin/Microsoft.ScriptManager.WebForms.dll">
-      <publishTime>09/06/2013 12:20:22</publishTime>
+      <publishTime>09/06/2013 11:20:22</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>01/05/2012 11:08:46</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>08/03/2014 21:33:56</publishTime>
+      <publishTime>08/03/2014 20:33:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.xml">
-      <publishTime>08/03/2014 21:33:56</publishTime>
+      <publishTime>08/03/2014 20:33:56</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>06/27/2016 14:50:24</publishTime>
+      <publishTime>06/27/2016 13:50:24</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>02/11/2014 15:26:04</publishTime>
@@ -253,7 +256,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/22/2013 10:21:56</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>09/10/2013 18:28:38</publishTime>
+      <publishTime>09/10/2013 17:28:38</publishTime>
     </File>
     <File Include="Bundle.config">
       <publishTime>02/24/2018 09:09:04</publishTime>
@@ -340,7 +343,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/24/2018 09:09:19</publishTime>
     </File>
     <File Include="frmCrearFactura.aspx">
-      <publishTime>03/31/2018 20:36:31</publishTime>
+      <publishTime>04/03/2018 00:15:20</publishTime>
     </File>
     <File Include="frmCrearFactura.aspx.cs">
       <publishTime>03/26/2018 08:40:04</publishTime>
@@ -367,7 +370,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/12/2018 19:19:44</publishTime>
     </File>
     <File Include="frmMantenimientoClientes.aspx">
-      <publishTime>03/31/2018 20:15:29</publishTime>
+      <publishTime>04/01/2018 09:23:53</publishTime>
     </File>
     <File Include="frmMantenimientoClientes.aspx.cs">
       <publishTime>03/12/2018 21:06:13</publishTime>
@@ -382,16 +385,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2018 18:37:24</publishTime>
     </File>
     <File Include="Imagenes/Logo.png">
-      <publishTime>03/31/2018 18:16:59</publishTime>
+      <publishTime>04/02/2018 21:47:03</publishTime>
+    </File>
+    <File Include="Imagenes/x-button.png">
+      <publishTime>04/02/2018 23:10:37</publishTime>
     </File>
     <File Include="joyeriaSYS.csproj">
-      <publishTime>03/31/2018 20:09:34</publishTime>
+      <publishTime>04/02/2018 23:11:44</publishTime>
     </File>
     <File Include="joyeriaSYS.csproj.user">
-      <publishTime>03/31/2018 20:09:34</publishTime>
+      <publishTime>04/03/2018 18:39:45</publishTime>
     </File>
     <File Include="LeerQR.aspx">
-      <publishTime>03/27/2018 12:06:51</publishTime>
+      <publishTime>04/01/2018 12:22:18</publishTime>
     </File>
     <File Include="LeerQR.aspx.cs">
       <publishTime>03/26/2018 09:40:23</publishTime>
@@ -430,10 +436,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2018 21:25:23</publishTime>
     </File>
     <File Include="Models/factura.edmx">
-      <publishTime>03/06/2018 21:25:08</publishTime>
+      <publishTime>04/02/2018 22:04:04</publishTime>
     </File>
     <File Include="Models/factura.edmx.diagram">
-      <publishTime>03/06/2018 21:25:08</publishTime>
+      <publishTime>04/02/2018 22:04:04</publishTime>
     </File>
     <File Include="Models/factura.tt">
       <publishTime>03/06/2018 21:22:58</publishTime>
@@ -445,10 +451,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2018 21:23:15</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/26/2018 21:20:24</publishTime>
+      <publishTime>04/02/2018 21:06:01</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/31/2018 20:49:55</publishTime>
+      <publishTime>04/03/2018 18:43:47</publishTime>
     </File>
     <File Include="Project_Readme.html">
       <publishTime>02/24/2018 09:09:04</publishTime>
@@ -460,10 +466,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2018 21:20:24</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/JQR.pubxml.user">
-      <publishTime>03/31/2018 18:21:55</publishTime>
+      <publishTime>04/03/2018 18:34:18</publishTime>
     </File>
     <File Include="QR.aspx">
-      <publishTime>03/31/2018 18:57:58</publishTime>
+      <publishTime>04/03/2018 18:39:25</publishTime>
     </File>
     <File Include="QR.aspx.cs">
       <publishTime>03/12/2018 19:59:08</publishTime>
@@ -604,7 +610,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/24/2018 09:09:24</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/31/2018 20:49:52</publishTime>
+      <publishTime>04/03/2018 18:43:44</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>02/24/2018 09:09:06</publishTime>

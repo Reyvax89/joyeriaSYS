@@ -139,26 +139,28 @@ namespace joyeriaSYS
             var contadorDeFilas = 0;
             var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
             var datosDeLaFactura = new FAC_FACTURA();
+            var tempCategoria = new CAT_CATEGORIA();
+            
             datosDeLaFactura.idFactura = Convert.ToInt32(ddlFacturas.SelectedValue);
             datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
+
+            tempCategoria.idCategoria = datosDeLaFactura.idCategoriaMetal;
+            tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
+            metal = tempCategoria.Nombre;
             llenaArregloConCeros();
             // Recorrer las filas.
             foreach (DEF_DETALLE_FACTURA r in rows)
             {
                 //// Crear una fila por cada unidad del producto.
                 var tempProducto = new PRO_PRODUCTO();
-                var tempCategoria = new CAT_CATEGORIA();
-
+                
                 tempProducto.IdProducto = r.idProducto;
                 tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
-
-                tempCategoria.idCategoria = tempProducto.IdCategoria;
-                tempCategoria = objCateg.ConsultarPorId(tempCategoria).FirstOrDefault();
-               
+                
                 arregloTemporal[contadorDeFilas, 0] = tempProducto.NombreProducto;
                 arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
                 arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
-                metal = tempCategoria.Nombre;
+                
                 contadorDeFilas++;
 
             }

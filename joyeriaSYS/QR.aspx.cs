@@ -139,7 +139,7 @@ namespace joyeriaSYS
             temp.NombreProducto = txtNombreProducto.Text;
             temp.Precio = Convert.ToInt32(txtPrecio.Text);
 
-            existe = objProd.ConsultarPorId(temp).Count();
+            existe = objProd.ConsultarPorNombreCodigoCategoria(temp).Count();
 
             CQR_CODIGO_QR tempQR = new CQR_CODIGO_QR();
             

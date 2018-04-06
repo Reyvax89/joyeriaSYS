@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<div class="container">
 		<div class="row">
+            <br />
 			<div class="col-sm12 col-md-12">
 				<h1>Leer códigos QRs.</h1>
 			</div>
@@ -19,23 +20,24 @@
                     <div class="content">
                         <section>
 							<div class="container">
-								<div class="row margin-b">
+                                <br />
+                                <div class="row margin-b">
 									<div class="col-sm-5 col-md-3">
-										<label for="demo-cliente">Leer los productos de la factura:</label>
-									</div>
-									<div class="col-sm-7 col-md-9">
-										<asp:TextBox ID="txtCodigo"  AutoPostBack="true" OnTextChanged="txtCodigo_TextChanged" placeholder="Aqui se muestra el idproducto" runat="server"></asp:TextBox>
-									</div>
-								</div>
-								<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-										<label for="demo-facturas">Seleccione el numero de factura:</label>
+										<label for="demo-facturas">Seleccione el número de factura:</label>
 									</div>
 									<div class="col-sm-7 col-md-9">
 										<div class="select-wrapper">
 											<asp:DropDownList ID="ddlFactura" AutoPostBack="true" OnTextChanged="ddlFactura_DropDownChanged" Enabled="true" name="ddlFactura" runat="server">
 											</asp:DropDownList>
 										</div>
+									</div>
+								</div>
+								<div class="row margin-b">
+									<div class="col-sm-5 col-md-3">
+										<label for="demo-cliente">Leer los productos de la factura:</label>
+									</div>
+									<div class="col-sm-7 col-md-9">
+										<asp:TextBox ID="txtCodigo"  AutoPostBack="true" OnTextChanged="txtCodigo_TextChanged" placeholder="Código del Producto" runat="server"></asp:TextBox>
 									</div>
 								</div>
 								<div class="row margin-b">
@@ -51,10 +53,10 @@
 								</div>
 								<div class="row margin-b">
 									<div class="col-sm-5 col-md-3">
-										<label for="demo-name">Código Tabla:</label>
+										<label for="demo-name">Saldo Actual:</label>
 									</div>
 									<div class="col-sm-7 col-md-9">
-										<asp:TextBox ID="txtCodTabla" Enabled="false" AutoPostBack="false" runat="server" ></asp:TextBox>
+										<asp:TextBox ID="txtSaldoActual" Enabled="false" AutoPostBack="false" runat="server" ></asp:TextBox>
 									</div>
 								</div>
 								<div class="row margin-b">
@@ -73,8 +75,8 @@
 												
 									</div>
 									<div class="col-sm-7 col-md-9">
+                                        <asp:Button ID="btnCalcularSaldo" runat="server" OnClick="btnCalcularSaldo_Click" Text="Calcular saldo hasta el momento" CssClass="btn btn-info" />
 										<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Text="Finalizar Factura" CssClass="btn btn-primary special" />
-										<asp:Button ID="btnValidar" style="display:none;" runat="server" Text="Finalizar Factura" CssClass="special" />
 									</div>
 								</div>
 							</div>
@@ -144,7 +146,8 @@
             <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />--%>
             <asp:AsyncPostBackTrigger ControlID="gvwFacturas" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
-            <asp:AsyncPostBackTrigger ControlID="btnValidar" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnCalcular" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnCalcularSaldo" EventName="Click" />
         </Triggers>
                 </asp:UpdatePanel>
     <%--<script src="Scripts/jquery-1.9.1.min.js"></script>--%>

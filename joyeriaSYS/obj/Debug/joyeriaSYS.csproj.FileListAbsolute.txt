@@ -27,6 +27,7 @@ C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.exe
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.exe.config
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\vbc.rsp
 C:\joyeriaSYS\joyeriaSYS\bin\roslyn\VBCSCompiler.exe.config
+C:\joyeriaSYS\joyeriaSYS\bin\AjaxControlToolkit.dll
 C:\joyeriaSYS\joyeriaSYS\bin\Antlr3.Runtime.dll
 C:\joyeriaSYS\joyeriaSYS\bin\AspNet.ScriptManager.bootstrap.dll
 C:\joyeriaSYS\joyeriaSYS\bin\AspNet.ScriptManager.jQuery.dll
