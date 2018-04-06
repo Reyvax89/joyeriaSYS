@@ -13,6 +13,10 @@ namespace joyeriaSYS.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+            if ((string)Session["username"] != "" && Session["username"] != null)
+            {
+                Session["username"] = null;
+            }
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -27,8 +31,7 @@ namespace joyeriaSYS.Account
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 var result = objUsu.ConsultarPorNombrePassword(manager);
-
-                if(result != null)
+                if (result != null)
                 {
                     // Set the session.
                     Session["username"] = result.UserName;

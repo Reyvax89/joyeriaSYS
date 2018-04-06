@@ -16,6 +16,10 @@ namespace joyeriaSYS
         private Clientes objCat = new Clientes();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((string)Session["username"] == "" || Session["username"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
             CargarTablaCategoria();
         }
 

@@ -69,7 +69,11 @@ namespace joyeriaSYS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if ((string)Session["username"] != "" && Session["username"] != null)
+            {
+                lblUserName.Text = "Bienvenido " + (string)Session["username"];
+                btnSession.Text = "Cerrar sesión";
+            }
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

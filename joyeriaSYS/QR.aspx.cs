@@ -25,6 +25,10 @@ namespace joyeriaSYS
         public BitMatrix Matrix;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((string)Session["username"] == "" || Session["username"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
             //QRImage.ImageUrl = "../images/pic01.jpg";
             if (!IsPostBack)
             {
