@@ -7,6 +7,7 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+	margin-top: 25px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -62,6 +63,7 @@ h3 {
 	color: #ffffff;
 	display: block;
 	font-weight: bold;
+    min-height: 14px;
 }
 
 a {
@@ -73,7 +75,7 @@ a:hover {
 }
 
 .navbar-nav {
-	margin-top: 30px;
+	margin-top: 11px;
 }
 
 #loginForm .form-horizontal {
