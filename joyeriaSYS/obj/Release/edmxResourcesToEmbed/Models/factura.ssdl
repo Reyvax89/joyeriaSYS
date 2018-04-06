@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="JoyeriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
@@ -26,7 +24,11 @@ warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a pr
     <Property Name="PhoneNumber" Type="nvarchar(max)" />
     <Property Name="LockoutEndDateUtc" Type="datetime" />
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="256" />
+    <Property Name="Apellido1" Type="varchar" MaxLength="256" />
+    <Property Name="Apellido2" Type="varchar" MaxLength="256" />
+    <Property Name="Celular" Type="nchar" MaxLength="8" />
   </EntityType>
   <EntityType Name="CAT_CATEGORIA">
     <Key>
@@ -81,6 +83,8 @@ warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a pr
     <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="fechaLiquidacion" Type="datetime" Nullable="false" />
     <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="idCategoriaMetal" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PRO_PRODUCTO">
     <Key>
@@ -157,6 +161,18 @@ warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FAC_FACTURA_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAC_FACTURA">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
     <End Role="CLI_CLIENTES" Type="Self.CLI_CLIENTES" Multiplicity="1" />
     <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="*" />
@@ -210,6 +226,10 @@ warning 6002: The table/view 'Joyeria.dbo.__MigrationHistory' does not have a pr
     <AssociationSet Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" Association="Self.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
       <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
       <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAC_FACTURA_AspNetUsers" Association="Self.FK_FAC_FACTURA_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
     </AssociationSet>
     <AssociationSet Name="FK_FAC_FACTURA_CLI_CLIENTES" Association="Self.FK_FAC_FACTURA_CLI_CLIENTES">
       <End Role="CLI_CLIENTES" EntitySet="CLI_CLIENTES" />
