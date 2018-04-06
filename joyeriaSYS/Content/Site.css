@@ -84,6 +84,15 @@ a:hover {
 #loginForm .form-horizontal h4 {
 	text-align: center;
 }
+#loginForm .form-horizontal .control-label {
+	text-align: unset;
+}
+
+
+#loginForm input[type="text"], 
+#loginForm input[type="password"] {
+    min-width: 220px;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {

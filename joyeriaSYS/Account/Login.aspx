@@ -15,16 +15,16 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-md-2 control-label">UserName</asp:Label>
-                        <div class="col-md-10">
+                        <asp:Label runat="server" CssClass="col-md-5 control-label">Nombre de usuario</asp:Label>
+                        <div class="col-md-7">
                             <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName"
                                 CssClass="text-danger" ErrorMessage="Este campo es obligatorio." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-md-2 control-label">Password</asp:Label>
-                        <div class="col-md-10">
+                        <asp:Label runat="server" CssClass="col-md-5 control-label">Contraseña</asp:Label>
+                        <div class="col-md-7">
                             <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="El campo de contraseña es obligatorio." />
                         </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="btn btn-default" />
+                            <asp:Button runat="server" OnClick="LogIn" Text="Iniciar sesión" CssClass="btn btn-default" />
                         </div>
                     </div>
                 </div>
