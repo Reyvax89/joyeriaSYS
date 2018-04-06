@@ -44,42 +44,29 @@
                         <asp:Image ID="imgLogo" ImageUrl="~/Imagenes/Logo.png" runat="server" /></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul class="nav navbar-nav">
-								<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
-									<a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar Metales</a>
-								</li>
-								<li class="<%:Page.Title=="Administrar clientes"?"active":""%>">
-									<a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a>
-								</li>
-								<li class="<%:Page.Title=="Administrar inventario"?"active":""%>">
-									<a runat="server" href="~/QR.aspx">Administrar inventario</a>
-								</li>
-								<li class="<%:Page.Title=="Crear factura"?"active":""%>">
-									<a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a>
-								</li>
-								<li class="<%:Page.Title=="Liquidar factura"?"active":""%>">
-									<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
-								</li>
-                                <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <ul class="nav navbar-nav">
-                                <li><a runat="server" href="~/">Inicio</a></li>
-                                <li><a runat="server" href="~/About">About</a></li>
-                                <li><a runat="server" href="~/Contact">Contact</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <label>Aqui va cuando el nombre del usuario cuando esta logueado</label>
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
+                    <ul class="nav navbar-nav">
+						<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
+							<a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar Metales</a>
+						</li>
+						<li class="<%:Page.Title=="Administrar clientes"?"active":""%>">
+							<a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a>
+						</li>
+						<li class="<%:Page.Title=="Administrar inventario"?"active":""%>">
+							<a runat="server" href="~/QR.aspx">Administrar inventario</a>
+						</li>
+						<li class="<%:Page.Title=="Crear factura"?"active":""%>">
+							<a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a>
+						</li>
+						<li class="<%:Page.Title=="Liquidar factura"?"active":""%>">
+							<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
+						</li>
+                        <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+						<asp:Label ID="lblUserName" runat="server" Text="" CssClass="lbl username"></asp:Label>
+					    <asp:HyperLink id="btnSession" NavigateUrl="~/Account/Login.aspx" Text="Iniciar sesión" runat="server"/> 
+                    </ul>
+
                 </div>
             </div>
         </div>

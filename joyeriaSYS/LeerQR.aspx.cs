@@ -21,6 +21,10 @@ namespace joyeriaSYS
         private DetalleFactura objDeF = new DetalleFactura();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((string)Session["username"] == "" || Session["username"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
             if (!IsPostBack)
             {
                 cargarFacturas();

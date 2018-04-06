@@ -17,6 +17,10 @@ namespace joyeriaSYS
         private Categoria objCat = new Categoria();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((string)Session["username"] == "" || Session["username"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
             CargarTablaCategoria();
             this.Title = "Administrar Metales";
         }
