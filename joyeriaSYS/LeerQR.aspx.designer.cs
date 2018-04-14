@@ -49,24 +49,6 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.DropDownList ddlFactura;
         
         /// <summary>
-        /// txtCodigo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
-        
-        /// <summary>
-        /// ddlProducto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProducto;
-        
-        /// <summary>
         /// txtSaldoActual control.
         /// </summary>
         /// <remarks>
@@ -74,15 +56,6 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSaldoActual;
-        
-        /// <summary>
-        /// ddlCliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
         
         /// <summary>
         /// btnCalcularSaldo control.
@@ -103,15 +76,6 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.Button btnCalcular;
         
         /// <summary>
-        /// gvwDetalleFactura control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwDetalleFactura;
-        
-        /// <summary>
         /// gvwFacturas control.
         /// </summary>
         /// <remarks>
@@ -119,5 +83,14 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvwFacturas;
+        
+        /// <summary>
+        /// gvwDetalleFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwDetalleFactura;
     }
 }

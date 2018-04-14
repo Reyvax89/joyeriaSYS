@@ -23,7 +23,7 @@
 								<div class="row margin-b">
 									<div class="col-sm-7 col-md-9">
 										<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
-										<input type="reset" value="Reset" class="btn btn-default">
+										<asp:Button ID="Reset" runat="server" Text="Limpiar" align="center" onclick="Reset_Click" CssClass="btn btn-default" />
 									</div>
 								</div>
 							</div>

@@ -18,6 +18,7 @@ namespace joyeriaSYS.Controles.clases
                 actualizado = contexto.FAC_FACTURA.Where(cat => cat.idFactura == objeto.idFactura).FirstOrDefault();
                 actualizado.CodTabla = objeto.CodTabla;
                 actualizado.estado = objeto.estado;
+                actualizado.fechaCreacion = objeto.fechaCreacion;
                 actualizado.fechaLiquidacion = objeto.fechaLiquidacion;
                 actualizado.montoFactura = objeto.montoFactura;
                 actualizado.NoFactura = objeto.NoFactura;

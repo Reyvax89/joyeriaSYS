@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace joyeriaSYS
 {
@@ -20,6 +21,7 @@ namespace joyeriaSYS
         private Clientes objCli = new Clientes();
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
+        private string[,] arregloTemporal = new string[35, 3];
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -49,6 +51,8 @@ namespace joyeriaSYS
             ddlCliente.SelectedValue = tempCliente.idCliente.ToString();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
             cargarProductosPorIdCategoria(tempFactura.idCategoriaMetal);
+            DynamicHyperLink1.Visible = false;
+            DynamicHyperLink1.NavigateUrl = "~/ExcelFacturas/000Machote.xls";
         }
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -135,6 +139,8 @@ namespace joyeriaSYS
             cargarProductos();
             CargarTablaFacturas();
             CargarTablaDetalleFacturas(Convert.ToInt32(hdfIdFactura.Value));
+            DynamicHyperLink1.Visible = false;
+            DynamicHyperLink1.NavigateUrl = "~/ExcelFacturas/000Machote.xls";
         }
         protected void ddlMetal_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -391,13 +397,26 @@ namespace joyeriaSYS
             var tempFactura = new FAC_FACTURA();
             tempFactura.idFactura = idFactura;
             tempFactura = objFact.ConsultarPorId(tempFactura).FirstOrDefault();
-
+            var fechaCrea = CreacionDeFechaDesdeElTxtFecha();
             tempFactura.montoFactura = tempFactura.montoFactura + calcularMonto(idProducto, cantidad);
             tempFactura.saldo = tempFactura.montoFactura;
+            tempFactura.fechaCreacion = fechaCrea;
+            tempFactura.fechaLiquidacion = fechaCrea.AddDays(50);
             tempFactura.totalDevuelto = 0;
             tempFactura.totalPiezas = tempFactura.totalPiezas + cantidad;
 
             tempFactura = objFact.Actualizar(tempFactura);
+        }
+
+        private DateTime CreacionDeFechaDesdeElTxtFecha()
+        {
+            var ArregloFecha = txtFechaFactura.Text.Split('/');
+            var dia = Convert.ToInt32(ArregloFecha[0]);
+            var mes = Convert.ToInt32(ArregloFecha[1]);
+            var año = Convert.ToInt32(ArregloFecha[2]);
+
+            DateTime fechaCrea = new DateTime(año, mes, dia);
+            return fechaCrea;
         }
 
         private void actualizarCantidadProducto(int idProducto, int cantidadProducto, Boolean resta)
@@ -430,24 +449,147 @@ namespace joyeriaSYS
         public int guardarFactura()
         {
             var nuevaFactura = new FAC_FACTURA();
+            var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
             nuevaFactura.CodTabla = txtCodFactura.Text;
             nuevaFactura.estado = false;
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
             nuevaFactura.NoFactura = Convert.ToInt32(txtCodFactura.Text);
-            nuevaFactura.fechaCreacion = Convert.ToDateTime(txtFechaFactura.Text).Date;
-            nuevaFactura.fechaLiquidacion = Convert.ToDateTime(txtFechaFactura.Text).Date.AddDays(50);
+            nuevaFactura.fechaCreacion = fechaCreacion;
+            nuevaFactura.fechaLiquidacion = fechaCreacion.AddDays(50);
             nuevaFactura.saldo = nuevaFactura.montoFactura;
             nuevaFactura.totalDevuelto = 0;
             nuevaFactura.totalPiezas = Convert.ToInt32(txtCantidad.Text);
             nuevaFactura.idCategoriaMetal = Convert.ToInt32(ddlMetal.SelectedValue);
+            nuevaFactura.idUsuario = 4;
 
             nuevaFactura = objFact.Insertar(nuevaFactura);
 
             return nuevaFactura.idFactura;
         }
-        
-        #endregion
 
+        #endregion
+        #region Imprimir
+        protected void btnImprimir_Click(object sender, EventArgs e)
+        {
+            //var rows = objDeF.Consultar();
+            if(hdfIdFactura.Value == "-1")
+            {
+                //No imprime nada
+                DynamicHyperLink1.Visible = false;
+            }
+            else { 
+            var metal = "";
+            var contadorDeFilas = 0;
+            var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(hdfIdFactura.Value));
+            var datosDeLaFactura = new FAC_FACTURA();
+            var tempCategoria = new CAT_CATEGORIA();
+            var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
+
+            datosDeLaFactura.idFactura = Convert.ToInt32(hdfIdFactura.Value);
+            datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
+
+            tempCategoria.idCategoria = datosDeLaFactura.idCategoriaMetal;
+            tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
+            metal = tempCategoria.Nombre;
+            llenaArregloConCeros();
+            // Recorrer las filas.
+            foreach (DEF_DETALLE_FACTURA r in rows)
+            {
+                //// Crear una fila por cada unidad del producto.
+                var tempProducto = new PRO_PRODUCTO();
+
+                tempProducto.IdProducto = r.idProducto;
+                tempProducto = objProd.ConsultarPorId(tempProducto).FirstOrDefault();
+
+                arregloTemporal[contadorDeFilas, 0] = tempProducto.NombreProducto;
+                arregloTemporal[contadorDeFilas, 1] = tempProducto.CodigoNumerico.ToString();
+                arregloTemporal[contadorDeFilas, 2] = r.CantidadProducto.ToString();
+
+                contadorDeFilas++;
+
+            }
+            contadorDeFilas = 0;
+                //string sFile = "C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\000Machote.xls";
+                string sFile = "C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\000Machote.xls";
+                //string sTemplate = "C:\\Template.xls";
+                object opc = Type.Missing;
+
+            var excelApp = new Excel.Application();
+            excelApp.DisplayAlerts = false;
+            // Make the object visible.
+            //excelApp.Visible = true;
+
+            //var excelBook = new Excel.Workbook();
+            //var excelSheet = new Excel.Worksheet();
+            var excelBook = excelApp.Workbooks.Open(sFile, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc, opc);
+            var excelSheet = (Excel.Worksheet)excelBook.Sheets.get_Item(1);
+            try
+            {
+                var tempCliente = new CLI_CLIENTES();
+                tempCliente.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
+                tempCliente = objCli.ConsultarPorIdCliente(tempCliente);
+                //Ponemos la fecha actual, el vendedor y el metal respectivamente.
+                excelSheet.Cells[3, 5] = fechaCreacion;
+                excelSheet.Cells[5, 3] = tempCliente.NombreEncargado;
+                excelSheet.Cells[6, 3] = metal;
+                //Ponemos la descripci+on del producto.
+                for (int i = 8; i < 43; i++)
+                {
+                    excelSheet.Cells[i, 2] = arregloTemporal[contadorDeFilas, 0].ToString();
+                    excelSheet.Cells[i, 3] = arregloTemporal[contadorDeFilas, 1].ToString();
+                    excelSheet.Cells[i, 4] = arregloTemporal[contadorDeFilas, 2].ToString();
+                    contadorDeFilas++;
+                }
+
+                excelSheet.Cells[46, 2] = datosDeLaFactura.montoFactura;
+                excelSheet.Cells[47, 3] = datosDeLaFactura.totalPiezas;
+                excelSheet.Cells[48, 3] = fechaCreacion.AddDays(50);
+
+                    excelSheet.SaveAs("C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\" + datosDeLaFactura.NoFactura + ".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                    //excelSheet.SaveAs("C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\" + datosDeLaFactura.NoFactura + ".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, opc, opc, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, opc, opc);
+                    //excelApp.Visible = true;
+
+                    //excelSheet.PrintOut();
+
+                    //Marshal.FinalReleaseComObject(excelSheet);
+                    excelBook.Close();
+                excelApp.Quit();
+                //System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook);
+                //System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
+                //System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                    DynamicHyperLink1.NavigateUrl = "~/ExcelFacturas/" + datosDeLaFactura.NoFactura + ".xls";
+                    DynamicHyperLink1.Visible = true;
+                //string _open = "window.open('/ExcelFacturas/" + datosDeLaFactura.NoFactura + ".xls', '_newtab');";
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                //btnImprimir.PostBackUrl = "198.38.93.222/ExcelFacturas/"+ datosDeLaFactura.NoFactura +".xls";
+                //MostrarMensaje("Excel creado");
+                excelBook = null;
+                excelSheet = null;
+                excelApp = null;
+                //System.GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                //Console.Error.Write(ex.Message);
+                excelBook.Close();
+                excelApp.Quit();
+            }
+            }//Fin else
+        }
+
+        private void llenaArregloConCeros()
+        {
+            for (int i = 0; i < arregloTemporal.GetLength(0); ++i)
+            {
+                for (int j = 0; j < arregloTemporal.GetLength(1); ++j)
+                {
+                    arregloTemporal[i, j] = "0";
+                }
+            }
+        }
+        #endregion
     }//Fin de la clase
 }

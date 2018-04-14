@@ -25,7 +25,7 @@
 								<label for="demo-name">Número de Factura:</label>
 							</div>
 							<div class="col-sm-7 col-md-9">
-								<asp:TextBox ID="txtCodFactura" AutoPostBack="false" runat="server" name="demo-name"></asp:TextBox>
+								<asp:TextBox ID="txtCodFactura" AutoPostBack="false" runat="server"></asp:TextBox>
 							</div>
                         </div>
                         <div class="row margin-b 12u$">
@@ -78,14 +78,20 @@
                                 <ajaxToolkit:CalendarExtender ID="Calendar1" runat="server" TargetControlID="txtFechaFactura" Format="dd/MM/yyyy" />
 							</div>
                         </div>
-                        <div class="row margin-b 12u$">
+                        <div class="row margin-b 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
-								
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Añadir a factura" CssClass="btn btn-primary special" />
-								<asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" Text="Finalizar Factura" CssClass="btn btn-info" />
-                                <asp:Button ID="btnNuevaFactura" runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva" CssClass="btn btn-default" />
+                                <asp:Button ID="btnImprimir" runat="server" OnClick="btnImprimir_Click" Text="Finalizar Factura" CssClass="btn btn-primary" />
+                            </div>
+                        </div>
+                        <div class="row margin-b 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<asp:Button ID="btnNuevaFactura"  runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva Factura" CssClass="btn btn-default" />
+                                <asp:DynamicHyperLink Visible="false" ID="DynamicHyperLink1" ImageUrl="~/Imagenes/icon.png" NavigateUrl="~/ExcelFacturas/000Machote.xls" runat="server"></asp:DynamicHyperLink>
 							</div>
                         </div>
 						</div>
@@ -151,29 +157,11 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnImprimir" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnNuevaFactura" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="ddlMetal" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwFacturas" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
         </Triggers>
                 </asp:UpdatePanel>
-    <script type="text/javascript">
- 
-        function Confirmacion() {
- 
-            var seleccion = confirm("acepta el mensaje ?");
- 
-            if (seleccion)
-                alert("se acepto el mensaje");
-            else
-                alert("NO se acepto el mensaje");
- 
-            //usado para que no haga postback el boton de asp.net cuando 
-            //no se acepte el confirm
-            return seleccion;
-         
-        }
-     
-    </script>
 </asp:Content>

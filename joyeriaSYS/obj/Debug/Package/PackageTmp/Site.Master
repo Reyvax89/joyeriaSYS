@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title>SYS</title>
 
     <asp:PlaceHolder runat="server">
         <%--<%: Scripts.Render("~/bundles/modernizr") %>--%>
@@ -48,11 +48,21 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav">
-								<li><a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar Metales</a></li>
-								<li><a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a></li>
-								<li><a runat="server" href="~/QR.aspx">Administrar inventario</a></li>
-								<li><a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a></li>
-								<li><a runat="server" href="~/LeerQR.aspx">Liquidar factura</a></li>
+								<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
+									<a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar Metales</a>
+								</li>
+								<li class="<%:Page.Title=="Administrar clientes"?"active":""%>">
+									<a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a>
+								</li>
+								<li class="<%:Page.Title=="Administrar inventario"?"active":""%>">
+									<a runat="server" href="~/QR.aspx">Administrar inventario</a>
+								</li>
+								<li class="<%:Page.Title=="Crear factura"?"active":""%>">
+									<a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a>
+								</li>
+								<li class="<%:Page.Title=="Liquidar factura"?"active":""%>">
+									<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
+								</li>
                                 <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
@@ -80,7 +90,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - SYS Application</p>
             </footer>
         </div>
     </form>

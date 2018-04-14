@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
 
@@ -26,11 +27,12 @@ namespace joyeriaSYS.Controles.clases
             return actualizado;
         }
 
-        public IEnumerable<PRO_PRODUCTO> Consultar()
+        //public IEnumerable<PRO_PRODUCTO> Consultar(string nombre, int categoria, string codigo)
+        public IEnumerable<PRO_PRODUCTO> Consultar(string criterio)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+                return contexto.PRO_PRODUCTO.Where(pro => pro.NombreProducto.Contains(criterio) || SqlFunctions.StringConvert((double)pro.IdCategoria).Contains(criterio) || SqlFunctions.StringConvert((double)pro.CodigoNumerico).Contains(criterio)).ToList().OrderByDescending(pro => pro.IdProducto);
             }
         }
         public IEnumerable<PRO_PRODUCTO> ConsultarPorCategoria(int idCategoria)
@@ -65,6 +67,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.PRO_PRODUCTO.Where(cat => cat.IdProducto == objeto.IdProducto).ToList();
+            }
+        }
+
+        public PRO_PRODUCTO ConsultarPorIdCategoria(PRO_PRODUCTO objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.Where(cat => cat.IdProducto == objeto.IdProducto).FirstOrDefault();
             }
         }
 
@@ -114,6 +124,13 @@ namespace joyeriaSYS.Controles.clases
             }
             return insertado;
         }
-        
+
+        public IEnumerable<PRO_PRODUCTO> Consultar()
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+            }
+        }
     }
 }
