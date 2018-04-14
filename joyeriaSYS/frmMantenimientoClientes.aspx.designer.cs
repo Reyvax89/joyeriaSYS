@@ -40,15 +40,6 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.TextBox txtNombreEncargado;
         
         /// <summary>
-        /// txtNombreJoyeria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreJoyeria;
-        
-        /// <summary>
         /// txtCelular control.
         /// </summary>
         /// <remarks>
@@ -101,6 +92,15 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInsertarActualizar;
+        
+        /// <summary>
+        /// Reset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Reset;
         
         /// <summary>
         /// gvwClientes control.

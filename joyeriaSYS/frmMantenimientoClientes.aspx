@@ -21,14 +21,14 @@
 								<asp:TextBox ID="txtNombreEncargado" runat="server" ></asp:TextBox>
 							</div>
                         </div>
-                        <div class="row margin-b 6u 12u$(xsmall)">
+                        <%--<div class="row margin-b 6u 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
 								<label for="demo-name">Nombre Joyería:</label>
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:TextBox ID="txtNombreJoyeria"  runat="server"></asp:TextBox>
 							</div>
-                        </div>
+                        </div>--%>
                         <div class="row margin-b 6u 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
 								<label for="demo-name">Célular:</label>
@@ -86,11 +86,11 @@
             <section id="two" class="wrapper alt spotlight style2">
                 <div class="inner">
                     <div class="content">
-                        <asp:GridView runat="server" ID="gvwClientes" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwCategoria_SelectedIndexChanged">
+                        <asp:GridView runat="server" ID="gvwClientes" AllowPaging="true" OnPageIndexChanging="gvwClientes_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwCategoria_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="idCliente" HeaderText="Id" AccessibleHeaderText="idCliente" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="NombreEncargado" HeaderText="Nombre Encargado" AccessibleHeaderText="NombreEncargado" InsertVisible="False"></asp:BoundField>
-                                <asp:BoundField DataField="NombreJoyeria" HeaderText="Joyería" AccessibleHeaderText="NombreJoyeria" InsertVisible="False"></asp:BoundField>
+                                <%--<asp:BoundField DataField="NombreJoyeria" HeaderText="Joyería" AccessibleHeaderText="NombreJoyeria" InsertVisible="False"></asp:BoundField>--%>
                                 <asp:BoundField DataField="Celular" HeaderText="Célular" AccessibleHeaderText="Celular" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Telefono" HeaderText="Teléfono" AccessibleHeaderText="Telefono" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="Direccion" HeaderText="Dirección" AccessibleHeaderText="Direccion" InsertVisible="False"></asp:BoundField>

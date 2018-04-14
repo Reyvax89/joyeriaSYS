@@ -155,11 +155,11 @@
     <Content Include="Account\Web.config" />
     <Content Include="frmCrearFactura.aspx" />
     <Content Include="frmImprimirFacturas.aspx" />
-    <Content Include="Global.asax" />
     <EntityDeploy Include="Models\factura.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Imagenes\icon.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\x-button.png" />
     <Content Include="Models\factura.edmx.diagram">
@@ -293,9 +293,6 @@
     </Compile>
     <Compile Include="frmImprimirFacturas.aspx.designer.cs">
       <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>factura.tt</DependentUpon>

@@ -1,7 +1,6 @@
-﻿<%@ Page Title="Ingresar Producto" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QR.aspx.cs" Inherits="joyeriaSYS.QR" %>
+﻿<%@ Page Title="Administrar inventario" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QR.aspx.cs" Inherits="joyeriaSYS.QR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="udpGenerarQR" UpdateMode="Conditional" runat="server">
@@ -67,7 +66,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnInsertarActualizar" runat="server" OnClick="btnInsertarActualizar_Click" Text="Guardar" CssClass="btn btn-primary special" />
-								<asp:Button ID="btnLimpiar" runat="server" Text="Nuevo" OnClick="btnLimpiar_Click" CssClass="btn btn-default special" />
+								<asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" CssClass="btn btn-default special" />
 							</div>
                         </div>
                     </div>
@@ -80,6 +79,16 @@
         <section id="two" class="wrapper alt spotlight style2">
             <div class="inner">
                 <div class="content">
+                        <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Búsqueda:</label>
+							</div>
+							<div class="col-sm-7 col-md-3">
+								<asp:TextBox ID="txtCriterioPorNombre" AutoPostBack="true" OnTextChanged="txtCriterioBusqueda_TextChanged" runat="server"></asp:TextBox>
+                                <%--Por Categoría<asp:TextBox ID="txtCriterioPorCategoria" AutoPostBack="true" OnTextChanged="txtCriterioBusqueda_TextChanged" runat="server"></asp:TextBox>
+                                Por Código<asp:TextBox ID="txtCriterioPorCodigo" AutoPostBack="true" OnTextChanged="txtCriterioBusqueda_TextChanged" runat="server"></asp:TextBox>--%>
+							</div>
+                        </div>
                     <asp:GridView runat="server" AllowPaging="true" ID="gvwProductos" OnPageIndexChanging="gvwProductos_PageIndexChanging" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" OnSelectedIndexChanged="gvwProductos_SelectedIndexChanged" PagerSettings-Mode="Numeric" PageSize="15">
         <Columns>
             <asp:BoundField DataField="IdProducto" HeaderText="Id" AccessibleHeaderText="IdProducto" InsertVisible="False"></asp:BoundField>
@@ -102,6 +111,7 @@
                 </div>
             </div>
         </section>
+            
     </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
@@ -109,12 +119,16 @@
             <asp:AsyncPostBackTrigger ControlID="gvwProductos" EventName="PageIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="btnLimpiar" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="txtCodNumerico" EventName="TextChanged" />
+            <asp:AsyncPostBackTrigger ControlID="txtCriterioPorNombre" EventName="TextChanged" />
+            <%--<asp:AsyncPostBackTrigger ControlID="txtCriterioPorCategoria" EventName="TextChanged" />
+            <asp:AsyncPostBackTrigger ControlID="txtCriterioPorCodigo" EventName="TextChanged" />--%>
         </Triggers>
         </asp:UpdatePanel>
+    
     <%--<script src="Scripts/jquery-1.9.1.min.js"></script>
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>--%>
     <%--<script src="Scripts/html5-qrcode.min.js"></script>--%>
     <%--<script src="Scripts/leerQR.js"></script>--%>
-    
+     
 </asp:Content>
 

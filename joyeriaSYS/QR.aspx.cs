@@ -29,7 +29,7 @@ namespace joyeriaSYS
             if (!IsPostBack)
             {
                 cargarCategoria();
-                CargarTablaProductos();
+                CargarTablaProductos(txtCriterioPorNombre.Text);
             }
         }
         public void MostrarMensaje(string Mensaje) {
@@ -112,6 +112,9 @@ namespace joyeriaSYS
             txtNombreProducto.Text = "";
             txtPrecio.Text = "";
             hdfId.Value = "-1";
+            //txtCriterioPorCategoria.Text = "";
+            //txtCriterioPorCodigo.Text = "";
+            txtCriterioPorNombre.Text = "";
             //QRImage.ImageUrl = "../images/pic01.jpg";
         }
         protected void btnInsertarActualizar_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace joyeriaSYS
             txtNombreProducto.Text = "";
             txtCodNumerico.Text = "";
             txtCantidad.Text = "";
-            CargarTablaProductos();
+            CargarTablaProductos(txtCriterioPorNombre.Text);
         }
         public int guardarActualizar(int id)
         {
@@ -139,7 +142,7 @@ namespace joyeriaSYS
 
             CQR_CODIGO_QR tempQR = new CQR_CODIGO_QR();
             
-            if (existe > 0)
+            if (existe > 0 && id != -1)
             {
                 //tempQR.idProducto = temp.IdProducto;
                 //tempQR.idQR = Convert.ToInt32(temp.IdProducto+""+ temp.CodigoNumerico);
@@ -167,12 +170,24 @@ namespace joyeriaSYS
             return 1;
         }
 
-        public void CargarTablaProductos()
+        //public void CargarTablaProductos(string nombre, string categoria, string codigo)
+        public void CargarTablaProductos(string criterio)
         {
             try
             {
+                //var idCategoria = 0;
+                var tempCriterioCategoria = new CAT_CATEGORIA();
+                tempCriterioCategoria.Nombre = criterio;
+                tempCriterioCategoria = objCat.ConsultarPorNombre(tempCriterioCategoria).FirstOrDefault();
+
+                if (tempCriterioCategoria != null)
+                {
+                    criterio = tempCriterioCategoria.idCategoria.ToString();
+                }
+
                 var dt = new DataTable();
-                var rows = objProd.Consultar();
+                //var rows = objProd.Consultar(nombre, idCategoria, codigo);
+                var rows = objProd.Consultar(criterio);
 
                 dt.Columns.Add("IdProducto", typeof(System.String));
                 dt.Columns.Add("NombreProducto", typeof(System.String));
@@ -230,16 +245,16 @@ namespace joyeriaSYS
             txtPrecio.Text = txtCodNumerico.Text + "00";
         }
         
-        //OnPageIndexChanged="gvwProductos_PageIndexChanged"
-        protected void gvwProductos_PageIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void gvwProductos_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
         {
             gvwProductos.PageIndex = e.NewPageIndex;
-            CargarTablaProductos();
+            //CargarTablaProductos(txtCriterioPorNombre.Text, txtCriterioPorCategoria.Text, txtCriterioPorCodigo.Text);
+            CargarTablaProductos(txtCriterioPorNombre.Text);
+        }
+
+        protected void txtCriterioBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            CargarTablaProductos(txtCriterioPorNombre.Text);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.CLI_CLIENTES.ToList();
+                return contexto.CLI_CLIENTES.ToList().OrderByDescending(cli => cli.idCliente);
             }
         }
 
@@ -41,6 +41,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.CLI_CLIENTES.Where(cat => cat.idCliente == objeto.idCliente).ToList();
+            }
+        }
+
+        public CLI_CLIENTES ConsultarPorIdCliente(CLI_CLIENTES objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.CLI_CLIENTES.Where(cat => cat.idCliente == objeto.idCliente).FirstOrDefault();
             }
         }
 
