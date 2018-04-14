@@ -24,7 +24,7 @@ namespace joyeriaSYS
         {
             if ((string)Session["username"] == "" || Session["username"] == null)
             {
-                Response.Redirect("~/Account/Login.aspx");
+                Response.Redirect("~/Default.aspx");
             }
             if (!IsPostBack)
             {

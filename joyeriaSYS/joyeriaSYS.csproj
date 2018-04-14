@@ -159,6 +159,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Imagenes\fondo_negro.png" />
     <Content Include="Imagenes\icon.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\x-button.png" />
