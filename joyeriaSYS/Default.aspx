@@ -3,7 +3,9 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <asp:Image ID="imgFondo" ImageAlign="Middle" ImageUrl="~/Imagenes/fondo_negro.png" runat="server" />
+        <center>
+            <asp:Image ID="imgFondo" Align="Center" ImageUrl="~/Imagenes/fondo_negro.png" runat="server" />
+        </center>
     </div>
 
 </asp:Content>
