@@ -295,6 +295,7 @@
     <Compile Include="frmImprimirFacturas.aspx.designer.cs">
       <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>factura.tt</DependentUpon>
     </Compile>
