@@ -34,9 +34,9 @@ namespace joyeriaSYS.Models
         public int idUsuario { get; set; }
         public int idCategoriaMetal { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CLI_CLIENTES CLI_CLIENTES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DEF_DETALLE_FACTURA> DEF_DETALLE_FACTURA { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

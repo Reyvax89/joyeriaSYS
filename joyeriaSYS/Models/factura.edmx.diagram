@@ -13,12 +13,12 @@
         <AssociationConnector Association="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA" ManuallyRouted="false" />
         <AssociationConnector Association="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO" ManuallyRouted="false" />
         <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="JoyeriaModel.AspNetUsers" Width="1.5" PointX="8" PointY="6.875" />
         <EntityTypeShape EntityType="JoyeriaModel.CLI_CLIENTES" Width="1.5" PointX="8" PointY="3.125" />
         <EntityTypeShape EntityType="JoyeriaModel.FAC_FACTURA" Width="1.5" PointX="10.25" PointY="6.5" />
-        <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" />
         <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" />
         <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" />
+        <EntityTypeShape EntityType="JoyeriaModel.AspNetUsers" Width="1.5" PointX="8" PointY="6.75" />
+        <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" />
         <AssociationConnector Association="JoyeriaModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
