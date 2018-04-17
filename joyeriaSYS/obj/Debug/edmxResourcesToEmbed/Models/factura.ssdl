@@ -78,7 +78,7 @@
     <Property Name="montoFactura" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="saldo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="totalDevuelto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="estado" Type="tinyint" Nullable="false" />
     <Property Name="totalPiezas" Type="int" Nullable="false" />
     <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="fechaLiquidacion" Type="datetime" Nullable="false" />

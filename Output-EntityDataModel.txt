@@ -1,0 +1,6 @@
+﻿Generated model file: factura.edmx.
+Loading metadata from the database took 00:00:02.2246888.
+Generating the model took 00:00:05.0173380.
+Generated model file: factura.edmx.
+Loading metadata from the database took 00:00:01.8676988.
+Generating the model took 00:00:03.6254610.
