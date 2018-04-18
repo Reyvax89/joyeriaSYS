@@ -254,186 +254,48 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUsers" Relationship="JoyeriaModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="CAT_CATEGORIA">
-          <Key>
-            <PropertyRef Name="idCategoria" />
-          </Key>
-          <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PRO_PRODUCTO" Relationship="Self.FK_PRO_PRODUCTO_CAT_CATEGORIA" FromRole="CAT_CATEGORIA" ToRole="PRO_PRODUCTO" />
-        </EntityType>
-        <EntityType Name="CQR_CODIGO_QR">
-          <Key>
-            <PropertyRef Name="idQR" />
-          </Key>
-          <Property Name="idQR" Type="Int32" Nullable="false" />
-          <Property Name="urlImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idProducto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRO_PRODUCTO" Relationship="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="CQR_CODIGO_QR" ToRole="PRO_PRODUCTO" />
-        </EntityType>
-        <EntityType Name="DEF_DETALLE_FACTURA">
-          <Key>
-            <PropertyRef Name="idDetalleFactura" />
-          </Key>
-          <Property Name="idDetalleFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idFactura" Type="Int32" Nullable="false" />
-          <Property Name="idProducto" Type="Int32" Nullable="false" />
-          <Property Name="CantidadProducto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRO_PRODUCTO" Relationship="Self.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="DEF_DETALLE_FACTURA" ToRole="PRO_PRODUCTO" />
-          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="DEF_DETALLE_FACTURA" ToRole="FAC_FACTURA" />
-        </EntityType>
-        <EntityType Name="PRO_PRODUCTO">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
-          <Property Name="CodigoNumerico" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Inventario" Type="Int32" />
-          <NavigationProperty Name="CAT_CATEGORIA" Relationship="Self.FK_PRO_PRODUCTO_CAT_CATEGORIA" FromRole="PRO_PRODUCTO" ToRole="CAT_CATEGORIA" />
-          <NavigationProperty Name="CQR_CODIGO_QR" Relationship="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="CQR_CODIGO_QR" />
-          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="Self.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="DEF_DETALLE_FACTURA" />
-        </EntityType>
-        <Association Name="FK_PRO_PRODUCTO_CAT_CATEGORIA">
-          <End Role="CAT_CATEGORIA" Type="Self.CAT_CATEGORIA" Multiplicity="1" />
-          <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAT_CATEGORIA">
-              <PropertyRef Name="idCategoria" />
-            </Principal>
-            <Dependent Role="PRO_PRODUCTO">
-              <PropertyRef Name="IdCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
-          <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
-          <End Role="CQR_CODIGO_QR" Type="Self.CQR_CODIGO_QR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRO_PRODUCTO">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="CQR_CODIGO_QR">
-              <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
-          <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
-          <End Role="DEF_DETALLE_FACTURA" Type="Self.DEF_DETALLE_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRO_PRODUCTO">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="DEF_DETALLE_FACTURA">
-              <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="JoyeriaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="CAT_CATEGORIA" EntityType="Self.CAT_CATEGORIA" />
-          <EntitySet Name="CQR_CODIGO_QR" EntityType="Self.CQR_CODIGO_QR" />
-          <EntitySet Name="DEF_DETALLE_FACTURA" EntityType="Self.DEF_DETALLE_FACTURA" />
-          <EntitySet Name="PRO_PRODUCTO" EntityType="Self.PRO_PRODUCTO" />
-          <AssociationSet Name="FK_PRO_PRODUCTO_CAT_CATEGORIA" Association="Self.FK_PRO_PRODUCTO_CAT_CATEGORIA">
+          <EntitySet Name="AspNetUsers" EntityType="JoyeriaModel.AspNetUsers" />
+          <EntitySet Name="CAT_CATEGORIA" EntityType="JoyeriaModel.CAT_CATEGORIA" />
+          <EntitySet Name="CLI_CLIENTES" EntityType="JoyeriaModel.CLI_CLIENTES" />
+          <EntitySet Name="CQR_CODIGO_QR" EntityType="JoyeriaModel.CQR_CODIGO_QR" />
+          <EntitySet Name="DEF_DETALLE_FACTURA" EntityType="JoyeriaModel.DEF_DETALLE_FACTURA" />
+          <EntitySet Name="FAC_FACTURA" EntityType="JoyeriaModel.FAC_FACTURA" />
+          <EntitySet Name="PRO_PRODUCTO" EntityType="JoyeriaModel.PRO_PRODUCTO" />
+          <AssociationSet Name="FK_FAC_FACTURA_AspNetUsers" Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRO_PRODUCTO_CAT_CATEGORIA" Association="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA">
             <End Role="CAT_CATEGORIA" EntitySet="CAT_CATEGORIA" />
             <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
-            <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
-            <End Role="CQR_CODIGO_QR" EntitySet="CQR_CODIGO_QR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" Association="Self.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
-            <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
-            <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
-          </AssociationSet>
-          <EntitySet Name="CLI_CLIENTES" EntityType="JoyeriaModel.CLI_CLIENTES" />
-          <EntitySet Name="FAC_FACTURA" EntityType="JoyeriaModel.FAC_FACTURA" />
           <AssociationSet Name="FK_FAC_FACTURA_CLI_CLIENTES" Association="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES">
             <End Role="CLI_CLIENTES" EntitySet="CLI_CLIENTES" />
             <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
+            <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
+            <End Role="CQR_CODIGO_QR" EntitySet="CQR_CODIGO_QR" />
           </AssociationSet>
           <AssociationSet Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA" Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
             <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
             <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
           </AssociationSet>
-          <EntitySet Name="AspNetUsers" EntityType="JoyeriaModel.AspNetUsers" />
-          <AssociationSet Name="FK_FAC_FACTURA_AspNetUsers" Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+          <AssociationSet Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
+            <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
+            <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="JoyeriaModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="CLI_CLIENTES">
-          <Key>
-            <PropertyRef Name="idCliente" />
-          </Key>
-          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreEncargado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreJoyeria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Canton" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="CLI_CLIENTES" ToRole="FAC_FACTURA" />
-        </EntityType>
-        <EntityType Name="FAC_FACTURA">
-          <Key>
-            <PropertyRef Name="idFactura" />
-          </Key>
-          <Property Name="idFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NoFactura" Type="Int32" Nullable="false" />
-          <Property Name="CodTabla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="montoFactura" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="saldo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="totalDevuelto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="totalPiezas" Type="Int32" Nullable="false" />
-          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaLiquidacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="idCategoriaMetal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CLI_CLIENTES" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="FAC_FACTURA" ToRole="CLI_CLIENTES" />
-          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="FAC_FACTURA" ToRole="DEF_DETALLE_FACTURA" />
-          <NavigationProperty Name="AspNetUsers" Relationship="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" FromRole="FAC_FACTURA" ToRole="AspNetUsers" />
-        </EntityType>
-        <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
-          <End Type="JoyeriaModel.CLI_CLIENTES" Role="CLI_CLIENTES" Multiplicity="1" />
-          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLI_CLIENTES">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="FAC_FACTURA">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
-          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="1" />
-          <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FAC_FACTURA">
-              <PropertyRef Name="idFactura" />
-            </Principal>
-            <Dependent Role="DEF_DETALLE_FACTURA">
-              <PropertyRef Name="idFactura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          </EntityContainer>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -452,6 +314,84 @@
           <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" FromRole="AspNetUsers" ToRole="FAC_FACTURA" />
           <NavigationProperty Name="AspNetRoles" Relationship="JoyeriaModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="CAT_CATEGORIA">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRO_PRODUCTO" Relationship="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA" FromRole="CAT_CATEGORIA" ToRole="PRO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="CLI_CLIENTES">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEncargado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreJoyeria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Canton" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="CLI_CLIENTES" ToRole="FAC_FACTURA" />
+        </EntityType>
+        <EntityType Name="CQR_CODIGO_QR">
+          <Key>
+            <PropertyRef Name="idQR" />
+          </Key>
+          <Property Name="idQR" Type="Int32" Nullable="false" />
+          <Property Name="urlImagen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRO_PRODUCTO" Relationship="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="CQR_CODIGO_QR" ToRole="PRO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DEF_DETALLE_FACTURA">
+          <Key>
+            <PropertyRef Name="idDetalleFactura" />
+          </Key>
+          <Property Name="idDetalleFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFactura" Type="Int32" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="CantidadProducto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="DEF_DETALLE_FACTURA" ToRole="FAC_FACTURA" />
+          <NavigationProperty Name="PRO_PRODUCTO" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="DEF_DETALLE_FACTURA" ToRole="PRO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="FAC_FACTURA">
+          <Key>
+            <PropertyRef Name="idFactura" />
+          </Key>
+          <Property Name="idFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoFactura" Type="Int32" Nullable="false" />
+          <Property Name="CodTabla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="montoFactura" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="saldo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="totalDevuelto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="estado" Type="Byte" Nullable="false" />
+          <Property Name="totalPiezas" Type="Int32" Nullable="false" />
+          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaLiquidacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCategoriaMetal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" FromRole="FAC_FACTURA" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CLI_CLIENTES" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="FAC_FACTURA" ToRole="CLI_CLIENTES" />
+          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="FAC_FACTURA" ToRole="DEF_DETALLE_FACTURA" />
+        </EntityType>
+        <EntityType Name="PRO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="CodigoNumerico" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Inventario" Type="Int32" />
+          <NavigationProperty Name="CAT_CATEGORIA" Relationship="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA" FromRole="PRO_PRODUCTO" ToRole="CAT_CATEGORIA" />
+          <NavigationProperty Name="CQR_CODIGO_QR" Relationship="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="CQR_CODIGO_QR" />
+          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="DEF_DETALLE_FACTURA" />
+        </EntityType>
         <Association Name="FK_FAC_FACTURA_AspNetUsers">
           <End Type="JoyeriaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="*" />
@@ -464,11 +404,71 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRO_PRODUCTO_CAT_CATEGORIA">
+          <End Type="JoyeriaModel.CAT_CATEGORIA" Role="CAT_CATEGORIA" Multiplicity="1" />
+          <End Type="JoyeriaModel.PRO_PRODUCTO" Role="PRO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_CATEGORIA">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="PRO_PRODUCTO">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
+          <End Type="JoyeriaModel.CLI_CLIENTES" Role="CLI_CLIENTES" Multiplicity="1" />
+          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLI_CLIENTES">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="FAC_FACTURA">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
+          <End Type="JoyeriaModel.PRO_PRODUCTO" Role="PRO_PRODUCTO" Multiplicity="1" />
+          <End Type="JoyeriaModel.CQR_CODIGO_QR" Role="CQR_CODIGO_QR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRO_PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="CQR_CODIGO_QR">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
+          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="1" />
+          <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAC_FACTURA">
+              <PropertyRef Name="idFactura" />
+            </Principal>
+            <Dependent Role="DEF_DETALLE_FACTURA">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
+          <End Type="JoyeriaModel.PRO_PRODUCTO" Role="PRO_PRODUCTO" Multiplicity="1" />
+          <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRO_PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DEF_DETALLE_FACTURA">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Type="JoyeriaModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="JoyeriaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -482,43 +482,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="JoyeriaModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CAT_CATEGORIA">
             <EntityTypeMapping TypeName="JoyeriaModel.CAT_CATEGORIA">
               <MappingFragment StoreEntitySet="CAT_CATEGORIA">
-                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CQR_CODIGO_QR">
-            <EntityTypeMapping TypeName="JoyeriaModel.CQR_CODIGO_QR">
-              <MappingFragment StoreEntitySet="CQR_CODIGO_QR">
-                <ScalarProperty Name="idQR" ColumnName="idQR" />
-                <ScalarProperty Name="urlImagen" ColumnName="urlImagen" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DEF_DETALLE_FACTURA">
-            <EntityTypeMapping TypeName="JoyeriaModel.DEF_DETALLE_FACTURA">
-              <MappingFragment StoreEntitySet="DEF_DETALLE_FACTURA">
-                <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
-                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PRO_PRODUCTO">
-            <EntityTypeMapping TypeName="JoyeriaModel.PRO_PRODUCTO">
-              <MappingFragment StoreEntitySet="PRO_PRODUCTO">
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-                <ScalarProperty Name="CodigoNumerico" ColumnName="CodigoNumerico" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Inventario" ColumnName="Inventario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -533,6 +519,25 @@
                 <ScalarProperty Name="NombreJoyeria" ColumnName="NombreJoyeria" />
                 <ScalarProperty Name="NombreEncargado" ColumnName="NombreEncargado" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CQR_CODIGO_QR">
+            <EntityTypeMapping TypeName="JoyeriaModel.CQR_CODIGO_QR">
+              <MappingFragment StoreEntitySet="CQR_CODIGO_QR">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="urlImagen" ColumnName="urlImagen" />
+                <ScalarProperty Name="idQR" ColumnName="idQR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEF_DETALLE_FACTURA">
+            <EntityTypeMapping TypeName="JoyeriaModel.DEF_DETALLE_FACTURA">
+              <MappingFragment StoreEntitySet="DEF_DETALLE_FACTURA">
+                <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+                <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -555,20 +560,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="JoyeriaModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
-                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="PRO_PRODUCTO">
+            <EntityTypeMapping TypeName="JoyeriaModel.PRO_PRODUCTO">
+              <MappingFragment StoreEntitySet="PRO_PRODUCTO">
+                <ScalarProperty Name="Inventario" ColumnName="Inventario" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="CodigoNumerico" ColumnName="CodigoNumerico" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -580,7 +580,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

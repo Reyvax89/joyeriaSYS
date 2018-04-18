@@ -5,20 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ed70a1b93aac40b1abfc6ae470d5913d" Name="Diagram1">
-        <EntityTypeShape EntityType="JoyeriaModel.AspNetRoles" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyeriaModel.CAT_CATEGORIA" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyeriaModel.CQR_CODIGO_QR" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyeriaModel.DEF_DETALLE_FACTURA" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyeriaModel.PRO_PRODUCTO" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <AssociationConnector Association="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="JoyeriaModel.CLI_CLIENTES" Width="1.5" PointX="8" PointY="3.125" />
-        <EntityTypeShape EntityType="JoyeriaModel.FAC_FACTURA" Width="1.5" PointX="10.25" PointY="6.5" />
-        <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" />
-        <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" />
-        <EntityTypeShape EntityType="JoyeriaModel.AspNetUsers" Width="1.5" PointX="8" PointY="6.75" />
+        <EntityTypeShape EntityType="JoyeriaModel.AspNetRoles" PointX="0.75" PointY="2.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JoyeriaModel.AspNetUsers" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="JoyeriaModel.CAT_CATEGORIA" Width="1.5" PointX="3.375" PointY="2.5" />
+        <EntityTypeShape EntityType="JoyeriaModel.CLI_CLIENTES" Width="1.5" PointX="3.375" PointY="8.25" />
+        <EntityTypeShape EntityType="JoyeriaModel.CQR_CODIGO_QR" Width="1.5" PointX="7.875" PointY="5.5" />
+        <EntityTypeShape EntityType="JoyeriaModel.DEF_DETALLE_FACTURA" Width="1.5" PointX="7.875" PointY="2.375" />
+        <EntityTypeShape EntityType="JoyeriaModel.FAC_FACTURA" Width="1.5" PointX="5.625" PointY="9.75" />
+        <EntityTypeShape EntityType="JoyeriaModel.PRO_PRODUCTO" Width="1.5" PointX="5.625" PointY="2" />
         <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" />
+        <AssociationConnector Association="JoyeriaModel.FK_PRO_PRODUCTO_CAT_CATEGORIA" />
+        <AssociationConnector Association="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" />
+        <AssociationConnector Association="JoyeriaModel.FK_CQR_CODIGO_QR_PRO_PRODUCTO" />
+        <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" />
+        <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" />
         <AssociationConnector Association="JoyeriaModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
