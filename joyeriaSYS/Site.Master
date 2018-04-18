@@ -61,7 +61,7 @@
 							<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
 						</li>
 						<li class="<%:Page.Title=="Register"?"active":""%>">
-							<a runat="server" href="~/Account/Register.aspx">Crear usuarios</a>
+							<a runat="server" href="~/Account/Register.aspx">Administrar usuarios</a>
 						</li>
                         <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
                     </ul>
