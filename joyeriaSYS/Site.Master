@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title>SYS</title>
 
     <asp:PlaceHolder runat="server">
         <%--<%: Scripts.Render("~/bundles/modernizr") %>--%>
@@ -60,6 +60,9 @@
 						<li class="<%:Page.Title=="Liquidar factura"?"active":""%>">
 							<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
 						</li>
+						<li class="<%:Page.Title=="Register"?"active":""%>">
+							<a runat="server" href="~/Account/Register.aspx">Administrar usuarios</a>
+						</li>
                         <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -77,7 +80,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - SYS Application</p>
             </footer>
         </div>
     </form>

@@ -148,6 +148,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="AccesoDenegado.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -155,11 +156,12 @@
     <Content Include="Account\Web.config" />
     <Content Include="frmCrearFactura.aspx" />
     <Content Include="frmImprimirFacturas.aspx" />
-    <Content Include="Global.asax" />
     <EntityDeploy Include="Models\factura.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>factura.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Imagenes\fondo_negro.png" />
+    <Content Include="Imagenes\icon.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\x-button.png" />
     <Content Include="Models\factura.edmx.diagram">
@@ -273,6 +275,13 @@
     <Compile Include="Controles\clases\IdQR.cs" />
     <Compile Include="Controles\clases\Producto.cs" />
     <Compile Include="Controles\interfaz\InterfaceFactura.cs" />
+    <Compile Include="AccesoDenegado.aspx.cs">
+      <DependentUpon>AccesoDenegado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccesoDenegado.aspx.designer.cs">
+      <DependentUpon>AccesoDenegado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,9 +303,7 @@
     <Compile Include="frmImprimirFacturas.aspx.designer.cs">
       <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Global.asax.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>factura.tt</DependentUpon>
     </Compile>

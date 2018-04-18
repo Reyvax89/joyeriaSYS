@@ -4,7 +4,9 @@
 
     <div class="jumbotron">
         <center>
-            <asp:Image ID="imgFondo" Align="Center" ImageUrl="~/Imagenes/fondo_negro.png" runat="server" />
+            <h1>Acceso denegado</h1>
+			<br>
+			<p>Este usuario no tiene permisos para ver esta página.</p>
         </center>
     </div>
 

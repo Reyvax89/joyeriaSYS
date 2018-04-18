@@ -39,11 +39,19 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public CAT_CATEGORIA ConsultarPorIdCategoria(CAT_CATEGORIA objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.CAT_CATEGORIA.Where(cat => cat.idCategoria == objeto.idCategoria).FirstOrDefault();
+            }
+        }
+
         public IEnumerable<CAT_CATEGORIA> ConsultarPorNombre(CAT_CATEGORIA objeto)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.CAT_CATEGORIA.Where(cat => cat.Nombre == objeto.Nombre).ToList();
+                return contexto.CAT_CATEGORIA.Where(cat => cat.Nombre.Contains(objeto.Nombre)).ToList();
             }
         }
 

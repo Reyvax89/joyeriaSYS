@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace joyeriaSYS
 {
-    public partial class _Default : Page
+    public partial class _AccesoDenegado : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

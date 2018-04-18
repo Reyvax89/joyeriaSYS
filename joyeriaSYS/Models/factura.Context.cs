@@ -26,12 +26,12 @@ namespace joyeriaSYS.Models
         }
     
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CAT_CATEGORIA> CAT_CATEGORIA { get; set; }
+        public virtual DbSet<CLI_CLIENTES> CLI_CLIENTES { get; set; }
         public virtual DbSet<CQR_CODIGO_QR> CQR_CODIGO_QR { get; set; }
         public virtual DbSet<DEF_DETALLE_FACTURA> DEF_DETALLE_FACTURA { get; set; }
-        public virtual DbSet<PRO_PRODUCTO> PRO_PRODUCTO { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<CLI_CLIENTES> CLI_CLIENTES { get; set; }
         public virtual DbSet<FAC_FACTURA> FAC_FACTURA { get; set; }
+        public virtual DbSet<PRO_PRODUCTO> PRO_PRODUCTO { get; set; }
     }
 }
