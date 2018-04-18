@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.UI;
 using joyeriaSYS.Models;
 using joyeriaSYS.Controles.clases;
+using System.Collections.Generic;
 
 namespace joyeriaSYS.Account
 {
@@ -35,6 +36,32 @@ namespace joyeriaSYS.Account
                 {
                     // Set the session.
                     Session["username"] = result.UserName;
+                    // Verificar el rol.
+                    List<string> pages = new List<string>();
+                    if (result.IdRol == 1)
+                    {
+                        // Paginas que puede ver un admin.
+                        pages.Add("Default");
+                        pages.Add("About");
+                        pages.Add("Contact");
+                        pages.Add("frmCrearFactura");
+                        pages.Add("frmImprimirFacturas");
+                        pages.Add("frmMantenimientoCategoria");
+                        pages.Add("frmMantenimientoClientes");
+                        pages.Add("LeerQR");
+                        pages.Add("QR");
+                        Session["paginas"] = pages;
+                    }
+                    if (result.IdRol == 2)
+                    {
+                        // Paginas que puede ver un facturador
+                        pages.Add("Default");
+                        pages.Add("frmCrearFactura");
+                        pages.Add("LeerQR");
+                        pages.Add("frmImprimirFacturas");
+                        Session["paginas"] = pages;
+                    }
+                   
                     Response.Redirect("/");
                 }
                 else

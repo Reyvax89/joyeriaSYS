@@ -28,6 +28,15 @@ namespace joyeriaSYS
             {
                 Response.Redirect("~/Default.aspx");
             }
+            else
+            {
+                List<string> pages = new List<string>();
+                pages = (List<string>)Session["paginas"];
+                if (!pages.Exists(x => string.Equals(x, "frmCrearFactura", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Response.Redirect("~/AccesoDenegado.aspx");
+                }
+            }
             if (!IsPostBack)
             {
                 Session["Factura"] = "-1";
@@ -455,7 +464,7 @@ namespace joyeriaSYS
             var nuevaFactura = new FAC_FACTURA();
             var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
             nuevaFactura.CodTabla = txtCodFactura.Text;
-            nuevaFactura.estado = false;
+            nuevaFactura.estado = 0;
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
             nuevaFactura.NoFactura = Convert.ToInt32(txtCodFactura.Text);
