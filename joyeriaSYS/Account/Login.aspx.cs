@@ -50,6 +50,7 @@ namespace joyeriaSYS.Account
                         pages.Add("frmMantenimientoClientes");
                         pages.Add("LeerQR");
                         pages.Add("QR");
+                        pages.Add("Register");
                         Session["paginas"] = pages;
                     }
                     if (result.IdRol == 2)
