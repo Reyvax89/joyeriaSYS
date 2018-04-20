@@ -23,12 +23,20 @@ namespace joyeriaSYS
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
         private string[,] arregloTemporal = new string[35, 3];
-        //private 
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((string)Session["username"] == "" || Session["username"] == null)
             {
                 Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
+                List<string> pages = new List<string>();
+                pages = (List<string>)Session["paginas"];
+                if (!pages.Exists(x => string.Equals(x, "frmCrearFactura", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Response.Redirect("~/AccesoDenegado.aspx");
+                }
             }
             if (!IsPostBack)
             {

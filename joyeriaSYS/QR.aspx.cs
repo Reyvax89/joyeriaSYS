@@ -29,6 +29,15 @@ namespace joyeriaSYS
             {
                 Response.Redirect("~/Default.aspx");
             }
+            else
+            {
+                List<string> pages = new List<string>();
+                pages = (List<string>)Session["paginas"];
+                if (!pages.Exists(x => string.Equals(x, "QR", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Response.Redirect("~/AccesoDenegado.aspx");
+                }
+            }
             //QRImage.ImageUrl = "../images/pic01.jpg";
             if (!IsPostBack)
             {

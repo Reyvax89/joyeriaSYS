@@ -31,6 +31,7 @@ namespace joyeriaSYS.Models
         public string Apellido1 { get; set; }
         public string Apellido2 { get; set; }
         public string Celular { get; set; }
+        public Nullable<int> IdRol { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
