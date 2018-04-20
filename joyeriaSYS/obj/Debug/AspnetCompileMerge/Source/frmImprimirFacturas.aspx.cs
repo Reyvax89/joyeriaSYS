@@ -30,6 +30,15 @@ namespace joyeriaSYS
             {
                 Response.Redirect("~/Default.aspx");
             }
+            else
+            {
+                List<string> pages = new List<string>();
+                pages = (List<string>)Session["paginas"];
+                if (!pages.Exists(x => string.Equals(x, "frmImprimirFacturas", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Response.Redirect("~/AccesoDenegado.aspx");
+                }
+            }
             if (!IsPostBack)
             {
                 cargarFacturas();

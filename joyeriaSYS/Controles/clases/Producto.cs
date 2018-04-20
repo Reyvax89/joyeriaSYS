@@ -41,7 +41,7 @@ namespace joyeriaSYS.Controles.clases
             {
                 if(idCategoria == 4)
                 {
-                    return contexto.PRO_PRODUCTO.ToList().OrderByDescending(pro => pro.IdProducto);
+                    return contexto.PRO_PRODUCTO.Where(pro => pro.IdCategoria == 1 || pro.IdCategoria == 2).ToList().OrderByDescending(pro => pro.IdProducto);
                 }
                 else
                 {

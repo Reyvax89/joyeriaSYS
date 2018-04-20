@@ -156,19 +156,19 @@
     <Content Include="Account\Web.config" />
     <Content Include="frmCrearFactura.aspx" />
     <Content Include="frmImprimirFacturas.aspx" />
-    <EntityDeploy Include="Models\factura.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>factura.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Imagenes\fondo_negro.png" />
     <Content Include="Imagenes\icon.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\x-button.png" />
+    <Content Include="ExcelFacturas\000Machote.xls" />
+    <Content Include="ExcelFacturas\Bryan.xls" />
+    <EntityDeploy Include="Models\factura.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>factura.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <Content Include="Models\factura.edmx.diagram">
       <DependentUpon>factura.edmx</DependentUpon>
     </Content>
-    <Content Include="ExcelFacturas\000Machote.xls" />
-    <Content Include="ExcelFacturas\Bryan.xls" />
     <None Include="Properties\PublishProfiles\JQR.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\factura.Context.tt">

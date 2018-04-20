@@ -9,12 +9,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="JoyeriaModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CAT_CATEGORIA">
       <EntityTypeMapping TypeName="JoyeriaModel.CAT_CATEGORIA">
         <MappingFragment StoreEntitySet="CAT_CATEGORIA">
           <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLI_CLIENTES">
+      <EntityTypeMapping TypeName="JoyeriaModel.CLI_CLIENTES">
+        <MappingFragment StoreEntitySet="CLI_CLIENTES">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="NombreEncargado" ColumnName="NombreEncargado" />
+          <ScalarProperty Name="NombreJoyeria" ColumnName="NombreJoyeria" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -37,6 +68,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FAC_FACTURA">
+      <EntityTypeMapping TypeName="JoyeriaModel.FAC_FACTURA">
+        <MappingFragment StoreEntitySet="FAC_FACTURA">
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="NoFactura" ColumnName="NoFactura" />
+          <ScalarProperty Name="CodTabla" ColumnName="CodTabla" />
+          <ScalarProperty Name="montoFactura" ColumnName="montoFactura" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+          <ScalarProperty Name="totalDevuelto" ColumnName="totalDevuelto" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="totalPiezas" ColumnName="totalPiezas" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="fechaLiquidacion" ColumnName="fechaLiquidacion" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idCategoriaMetal" ColumnName="idCategoriaMetal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PRO_PRODUCTO">
       <EntityTypeMapping TypeName="JoyeriaModel.PRO_PRODUCTO">
         <MappingFragment StoreEntitySet="PRO_PRODUCTO">
@@ -49,62 +99,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="JoyeriaModel.AspNetUsers">
-        <MappingFragment StoreEntitySet="AspNetUsers">
-          <ScalarProperty Name="Celular" ColumnName="Celular" />
-          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
-          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CLI_CLIENTES">
-      <EntityTypeMapping TypeName="JoyeriaModel.CLI_CLIENTES">
-        <MappingFragment StoreEntitySet="CLI_CLIENTES">
-          <ScalarProperty Name="Canton" ColumnName="Canton" />
-          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="Celular" ColumnName="Celular" />
-          <ScalarProperty Name="NombreJoyeria" ColumnName="NombreJoyeria" />
-          <ScalarProperty Name="NombreEncargado" ColumnName="NombreEncargado" />
-          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <AssociationSetMapping Name="AspNetUserRoles" TypeName="JoyeriaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="UserId" />
-      </EndProperty>
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="FAC_FACTURA">
-      <EntityTypeMapping TypeName="JoyeriaModel.FAC_FACTURA">
-        <MappingFragment StoreEntitySet="FAC_FACTURA">
-          <ScalarProperty Name="idCategoriaMetal" ColumnName="idCategoriaMetal" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-          <ScalarProperty Name="fechaLiquidacion" ColumnName="fechaLiquidacion" />
-          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-          <ScalarProperty Name="totalPiezas" ColumnName="totalPiezas" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="totalDevuelto" ColumnName="totalDevuelto" />
-          <ScalarProperty Name="saldo" ColumnName="saldo" />
-          <ScalarProperty Name="montoFactura" ColumnName="montoFactura" />
-          <ScalarProperty Name="CodTabla" ColumnName="CodTabla" />
-          <ScalarProperty Name="NoFactura" ColumnName="NoFactura" />
-          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

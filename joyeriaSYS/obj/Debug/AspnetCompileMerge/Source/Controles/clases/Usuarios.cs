@@ -18,6 +18,10 @@ namespace joyeriaSYS.Controles.clases
                 actualizado = contexto.AspNetUsers.Where(user => user.Id == objeto.Id).FirstOrDefault();
                 actualizado.PhoneNumber = objeto.PhoneNumber;
                 actualizado.PasswordHash = objeto.PasswordHash;
+                actualizado.Apellido1 = objeto.Apellido1;
+                actualizado.Nombre = objeto.Nombre;
+                actualizado.UserName = objeto.UserName;
+                actualizado.IdRol = objeto.IdRol;
                 contexto.SaveChanges();
             }
             return actualizado;
@@ -36,6 +40,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.AspNetUsers.Where(user => user.Id == objeto.Id).ToList();
+            }
+        }
+
+        public IEnumerable<AspNetUsers> ConsultarPorUserName(AspNetUsers objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.AspNetUsers.Where(user => user.UserName == objeto.UserName).ToList();
             }
         }
 

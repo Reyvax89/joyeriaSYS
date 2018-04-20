@@ -29,6 +29,7 @@
     <Property Name="Apellido1" Type="varchar" MaxLength="256" />
     <Property Name="Apellido2" Type="varchar" MaxLength="256" />
     <Property Name="Celular" Type="nchar" MaxLength="8" />
+    <Property Name="IdRol" Type="int" />
   </EntityType>
   <EntityType Name="CAT_CATEGORIA">
     <Key>
