@@ -114,6 +114,7 @@ namespace joyeriaSYS
             nuevoDetalle.CantidadProducto = Convert.ToInt32(txtCantidad.Text);
             nuevoDetalle.idFactura = idFactura;
             nuevoDetalle.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+            nuevoDetalle.CantidadDevuelta = 0;
             actualizarCantidadProducto(nuevoDetalle.idProducto, nuevoDetalle.CantidadProducto, true);
             objDeF.Insertar(nuevoDetalle);
             txtCantidad.Text = "";

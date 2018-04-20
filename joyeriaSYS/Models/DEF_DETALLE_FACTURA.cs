@@ -18,6 +18,7 @@ namespace joyeriaSYS.Models
         public int idFactura { get; set; }
         public int idProducto { get; set; }
         public int CantidadProducto { get; set; }
+        public Nullable<int> CantidadDevuelta { get; set; }
     
         public virtual FAC_FACTURA FAC_FACTURA { get; set; }
         public virtual PRO_PRODUCTO PRO_PRODUCTO { get; set; }
