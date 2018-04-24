@@ -68,6 +68,7 @@
     <Property Name="idFactura" Type="int" Nullable="false" />
     <Property Name="idProducto" Type="int" Nullable="false" />
     <Property Name="CantidadProducto" Type="int" Nullable="false" />
+    <Property Name="CantidadDevuelta" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FAC_FACTURA">
     <Key>
@@ -97,6 +98,24 @@
     <Property Name="CodigoNumerico" Type="int" Nullable="false" />
     <Property Name="Precio" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Inventario" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Vista_ProductosPorDetalleFactura">
+    <Key>
+      <PropertyRef Name="idProducto" />
+      <PropertyRef Name="idFactura" />
+      <PropertyRef Name="CodigoNumerico" />
+      <PropertyRef Name="CantidadProducto" />
+      <PropertyRef Name="CantidadDevuelta" />
+      <PropertyRef Name="idDetalleFactura" />
+    </Key>
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="idFactura" Type="int" Nullable="false" />
+    <Property Name="CodigoNumerico" Type="int" Nullable="false" />
+    <Property Name="CantidadProducto" Type="int" Nullable="false" />
+    <Property Name="CantidadDevuelta" Type="int" Nullable="false" />
+    <Property Name="idDetalleFactura" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
     <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
@@ -208,6 +227,16 @@
     <EntitySet Name="DEF_DETALLE_FACTURA" EntityType="Self.DEF_DETALLE_FACTURA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FAC_FACTURA" EntityType="Self.FAC_FACTURA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRO_PRODUCTO" EntityType="Self.PRO_PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vista_ProductosPorDetalleFactura" EntityType="Self.Vista_ProductosPorDetalleFactura" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vista_ProductosPorDetalleFactura].[idProducto] AS [idProducto], 
+    [Vista_ProductosPorDetalleFactura].[idFactura] AS [idFactura], 
+    [Vista_ProductosPorDetalleFactura].[CodigoNumerico] AS [CodigoNumerico], 
+    [Vista_ProductosPorDetalleFactura].[CantidadProducto] AS [CantidadProducto], 
+    [Vista_ProductosPorDetalleFactura].[CantidadDevuelta] AS [CantidadDevuelta], 
+    [Vista_ProductosPorDetalleFactura].[idDetalleFactura] AS [idDetalleFactura]
+    FROM [dbo].[Vista_ProductosPorDetalleFactura] AS [Vista_ProductosPorDetalleFactura]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
       <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
       <End Role="CQR_CODIGO_QR" EntitySet="CQR_CODIGO_QR" />

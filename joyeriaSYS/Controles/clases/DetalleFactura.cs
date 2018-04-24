@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace joyeriaSYS.Controles.clases
 {
@@ -36,16 +38,23 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
+                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
             }
         }
 
-        public IEnumerable<DEF_DETALLE_FACTURA> ConsultarPorIdFactura(int idFactura)
+        public IEnumerable<Vista_ProductosPorDetalleFactura> ConsultarPorIdFactura(int idFactura, string criterio)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idFactura == idFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
-            }
+                return contexto.Vista_ProductosPorDetalleFactura.Where(vis => SqlFunctions.StringConvert((double)vis.CodigoNumerico).Contains(criterio) && vis.idFactura == idFactura).ToList();
+            }// Fin del using
+        }
+
+        public class datosDeDetalleFactura
+        {
+            public int idProductoGlobal { get; set; }
+            public int cantidadProductoGlobal { get; set; }
+            public string codigoNumerico { get; set; }
         }
 
         public DEF_DETALLE_FACTURA ConsultarPorIdFacturaYIdProducto(DEF_DETALLE_FACTURA objeto)

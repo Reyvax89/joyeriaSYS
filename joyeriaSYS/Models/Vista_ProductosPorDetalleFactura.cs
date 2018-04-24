@@ -12,15 +12,14 @@ namespace joyeriaSYS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DEF_DETALLE_FACTURA
+    public partial class Vista_ProductosPorDetalleFactura
     {
-        public int idDetalleFactura { get; set; }
-        public int idFactura { get; set; }
         public int idProducto { get; set; }
+        public int idFactura { get; set; }
+        public int CodigoNumerico { get; set; }
         public int CantidadProducto { get; set; }
         public int CantidadDevuelta { get; set; }
-    
-        public virtual FAC_FACTURA FAC_FACTURA { get; set; }
-        public virtual PRO_PRODUCTO PRO_PRODUCTO { get; set; }
+        public int idDetalleFactura { get; set; }
+        public string NombreProducto { get; set; }
     }
 }

@@ -149,7 +149,7 @@ namespace joyeriaSYS
                 detFacturaActual = objDeF.ConsultarPorIdFacturaYIdProducto(detFacturaActual);
 
                 txtSaldoActual.Text = Session["SaldoActual"].ToString();
-                CargarTablaDetalleFacturas(facturaActual.idFactura);
+                CargarTablaDetalleFacturas(facturaActual.idFactura, txtCriterio.Text);
                 //poner en detalle un campo para ir descontando los productos escaneados
 
                 cargarTablaFacturas(codFactura);
@@ -168,7 +168,7 @@ namespace joyeriaSYS
                 facturaActual.NoFactura = codFactura;
                 facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
                 
-                CargarTablaDetalleFacturas(facturaActual.idFactura);
+                CargarTablaDetalleFacturas(facturaActual.idFactura, txtCriterio.Text);
                 txtSaldoActual.Text = facturaActual.saldo.ToString();
 
                 //poner en detalle un campo para ir descontando los productos escaneados
@@ -227,7 +227,7 @@ namespace joyeriaSYS
             try
             {
                 var dt = new DataTable();
-                var rows = objFact.Consultar();
+                var rows = objFact.ConsultarFacturasFinalizadas();
 
                 ddlFactura.DataTextField = "NoFactura";
                 ddlFactura.DataValueField = "NoFacturaValue";
@@ -256,17 +256,17 @@ namespace joyeriaSYS
             }
         }
         
-        private void CargarTablaDetalleFacturas(int idFactura)
+        private void CargarTablaDetalleFacturas(int idFactura, string criterio)
         {
             try
             {
                 var dt = new DataTable();
-                var rows = objDeF.Consultar();
+                var rows = objDeF.ConsultarPorIdFactura(-1,"");
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
                 if (idFactura != -1)
                 {
-                    rows = objDeF.ConsultarPorIdFactura(idFactura);
+                    rows = objDeF.ConsultarPorIdFactura(idFactura, criterio);
                 }
 
                 //dt.Columns.Add("idFactura", typeof(System.String));
@@ -290,7 +290,7 @@ namespace joyeriaSYS
 
                 // Bandera para saber cuando encontro considencia.
                 bool bandera = false;
-                foreach (DEF_DETALLE_FACTURA r in rows)
+                foreach (Vista_ProductosPorDetalleFactura r in rows)
                 {
                     //cantidades[0] = 1;
                     // Crear una fila por cada unidad del producto.
@@ -318,11 +318,12 @@ namespace joyeriaSYS
                         // Revisar si hay considencia con el codigo que se busca.
                         var productoConsulta = new PRO_PRODUCTO();
                         productoConsulta.IdProducto = r.idProducto;
-                        var arrayProducto = objProd.ConsultarPorId(productoConsulta);
-                        foreach (PRO_PRODUCTO producto in arrayProducto)
-                        {
-                            // Cargar el codigo del producto en la fila.
-                            fila["codProducto"] = producto.CodigoNumerico;
+                        //var arrayProducto = objProd.ConsultarPorId(productoConsulta);
+                        productoConsulta = objProd.ConsultarPorIdProducto(productoConsulta);
+                        //foreach (PRO_PRODUCTO producto in arrayProducto)
+                        //{
+                        // Cargar el codigo del producto en la fila.
+                        fila["codProducto"] = productoConsulta.CodigoNumerico;
                             // Ver si hay considencias con el codigo que se busca.
                             //var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
                             //if (codProducto == producto.CodigoNumerico && !bandera && !revisarNumeroEnListaMarcados(contadorGeneral))
@@ -334,7 +335,7 @@ namespace joyeriaSYS
                             //    bandera = true;
 
                             //}
-                        }
+                        //}
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
                         // Ver si esta marcado.
@@ -397,6 +398,10 @@ namespace joyeriaSYS
             Session["valorDelProducto"] = ValorDevuelto;
         }
         #endregion
-        
+
+        protected void txtCriterio_TextChanged(object sender, EventArgs e)
+        {
+            CargarTablaDetalleFacturas(Convert.ToInt32(ddlFactura.SelectedValue), txtCriterio.Text);
+        }
     }
 }

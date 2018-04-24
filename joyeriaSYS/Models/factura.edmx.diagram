@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="JoyeriaModel.DEF_DETALLE_FACTURA" Width="1.5" PointX="5.25" PointY="7.125" />
         <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" />
         <AssociationConnector Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" />
+        <EntityTypeShape EntityType="JoyeriaModel.Vista_ProductosPorDetalleFactura" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

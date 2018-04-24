@@ -58,16 +58,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DEF_DETALLE_FACTURA">
-      <EntityTypeMapping TypeName="JoyeriaModel.DEF_DETALLE_FACTURA">
-        <MappingFragment StoreEntitySet="DEF_DETALLE_FACTURA">
-          <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
-          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
-          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-          <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="FAC_FACTURA">
       <EntityTypeMapping TypeName="JoyeriaModel.FAC_FACTURA">
         <MappingFragment StoreEntitySet="FAC_FACTURA">
@@ -107,5 +97,28 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="DEF_DETALLE_FACTURA">
+      <EntityTypeMapping TypeName="JoyeriaModel.DEF_DETALLE_FACTURA">
+        <MappingFragment StoreEntitySet="DEF_DETALLE_FACTURA">
+          <ScalarProperty Name="CantidadDevuelta" ColumnName="CantidadDevuelta" />
+          <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vista_ProductosPorDetalleFactura">
+      <EntityTypeMapping TypeName="JoyeriaModel.Vista_ProductosPorDetalleFactura">
+        <MappingFragment StoreEntitySet="Vista_ProductosPorDetalleFactura">
+          <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
+          <ScalarProperty Name="CantidadDevuelta" ColumnName="CantidadDevuelta" />
+          <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
+          <ScalarProperty Name="CodigoNumerico" ColumnName="CodigoNumerico" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

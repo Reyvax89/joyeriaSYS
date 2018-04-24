@@ -63,13 +63,13 @@ namespace joyeriaSYS
             try
             {
                 var dt = new System.Data.DataTable();
-                var rows = objDeF.Consultar();
+                var rows = objDeF.ConsultarPorIdFactura(-1,"");
                 //var contadorDeFilas = 0;
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
                 if (idFactura != -1)
                 {
-                    rows = objDeF.ConsultarPorIdFactura(idFactura);
+                    rows = objDeF.ConsultarPorIdFactura(idFactura, "");
                 }
                 
                 dt.Columns.Add("categoria", typeof(System.String));
@@ -77,7 +77,7 @@ namespace joyeriaSYS
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
 
                 // Recorrer las filas.
-                foreach (DEF_DETALLE_FACTURA r in rows)
+                foreach (Vista_ProductosPorDetalleFactura r in rows)
                 {
                     //// Crear una fila por cada unidad del producto.
                         var tempProducto = new PRO_PRODUCTO();
@@ -150,7 +150,7 @@ namespace joyeriaSYS
             //var rows = objDeF.Consultar();
             var metal = "";
             var contadorDeFilas = 0;
-            var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue));
+            var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(ddlFacturas.SelectedValue), "");
             var datosDeLaFactura = new FAC_FACTURA();
             var tempCategoria = new CAT_CATEGORIA();
             
@@ -162,7 +162,7 @@ namespace joyeriaSYS
             metal = tempCategoria.Nombre;
             llenaArregloConCeros();
             // Recorrer las filas.
-            foreach (DEF_DETALLE_FACTURA r in rows)
+            foreach (Vista_ProductosPorDetalleFactura r in rows)
             {
                 //// Crear una fila por cada unidad del producto.
                 var tempProducto = new PRO_PRODUCTO();

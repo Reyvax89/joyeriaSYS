@@ -27,11 +27,19 @@
 									</div>
 									<div class="col-sm-7 col-md-9">
 										<div class="select-wrapper">
-											<asp:DropDownList ID="ddlFactura" AutoPostBack="true" OnTextChanged="ddlFactura_DropDownChanged" Enabled="true" name="ddlFactura" runat="server">
+											<asp:DropDownList ID="ddlFactura" AutoPostBack="true" OnTextChanged="ddlFactura_DropDownChanged" Enabled="true" runat="server">
 											</asp:DropDownList>
 										</div>
 									</div>
 								</div>
+                                <div class="row margin-b 6u 12u$(xsmall)">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-name">Búsqueda por código producto:</label>
+							</div>
+							<div class="col-sm-7 col-md-3">
+								<asp:TextBox ID="txtCriterio" AutoPostBack="true" OnTextChanged="txtCriterio_TextChanged" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
 								<%--<div class="row margin-b">
 									<div class="col-sm-5 col-md-3">
 										<label for="demo-cliente">Leer los productos de la factura:</label>
@@ -124,6 +132,7 @@
             <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="btnCalcular" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnCalcularSaldo" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="txtCriterio" EventName="TextChanged" />
         </Triggers>
                 </asp:UpdatePanel>
     <%--<script src="Scripts/jquery-1.9.1.min.js"></script>--%>

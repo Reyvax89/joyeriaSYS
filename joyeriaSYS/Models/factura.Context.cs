@@ -33,5 +33,6 @@ namespace joyeriaSYS.Models
         public virtual DbSet<FAC_FACTURA> FAC_FACTURA { get; set; }
         public virtual DbSet<PRO_PRODUCTO> PRO_PRODUCTO { get; set; }
         public virtual DbSet<DEF_DETALLE_FACTURA> DEF_DETALLE_FACTURA { get; set; }
+        public virtual DbSet<Vista_ProductosPorDetalleFactura> Vista_ProductosPorDetalleFactura { get; set; }
     }
 }
