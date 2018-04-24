@@ -508,7 +508,7 @@ namespace joyeriaSYS
             var nuevaFactura = new FAC_FACTURA();
             var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
             nuevaFactura.CodTabla = txtCodFactura.Text;
-            nuevaFactura.estado = Convert.ToByte(EstadoFacturas.EnCreacion);
+            nuevaFactura.estado = Convert.ToInt32(EstadoFacturas.EnCreacion);
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
             nuevaFactura.NoFactura = Convert.ToInt32(txtCodFactura.Text);
