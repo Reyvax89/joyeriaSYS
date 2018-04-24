@@ -43,7 +43,9 @@ namespace joyeriaSYS
                 Session["Factura"] = "-1";
                 cargarClientes();
                 cargarMetales();
-                cargarProductos();
+                cargarCategorias();
+                ddlMetal.SelectedValue = "1";
+                ddlProducto.Items.Add("-Ninguno-");
                 CargarTablaFacturas(txtCriterio.Text);
             }
         }
@@ -154,6 +156,11 @@ namespace joyeriaSYS
 
         protected void ddlMetal_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cargarCategorias(ddlMetal.SelectedValue);
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
             cargarProductos();
         }
         #endregion
@@ -168,6 +175,33 @@ namespace joyeriaSYS
             tempFactura.totalPiezas = tempFactura.totalPiezas - cantidad;
             tempFactura.saldo = tempFactura.saldo - calcularMonto(idProducto, cantidad);
             objFact.Actualizar(tempFactura);
+        }
+
+        private void cargarCategorias(string metal = "1")
+        {
+            if (metal == "1" || metal == "2")
+            {
+                ddlCategoria.Items.Clear();
+                ddlCategoria.Items.Add("-Seleccionar-");
+                ddlCategoria.Items.Add("Cadena");
+                ddlCategoria.Items.Add("Pulsera");
+                ddlCategoria.Items.Add("Dije");
+                ddlCategoria.Items.Add("Juego");
+                ddlCategoria.Items.Add("Arete");
+                ddlCategoria.Items.Add("Anillo");
+            }
+            else
+            {
+                ddlCategoria.Items.Clear();
+                ddlCategoria.Items.Add("-Seleccionar-");
+                ddlCategoria.Items.Add("Omega");
+                ddlCategoria.Items.Add("Cadena");
+                ddlCategoria.Items.Add("Pulsera");
+                ddlCategoria.Items.Add("Arete");
+                ddlCategoria.Items.Add("Juego");
+                ddlCategoria.Items.Add("Aro");
+                ddlCategoria.Items.Add("Anillo");
+            }
         }
 
         private void cargarClientes()
@@ -231,6 +265,7 @@ namespace joyeriaSYS
         {
             try
             {
+                lblLoad.Text = "Cargando...";
                 var dt = new DataTable();
                 var rows = objProd.ConsultarPorCategoria(Convert.ToInt32(ddlMetal.SelectedValue));
 
@@ -246,14 +281,19 @@ namespace joyeriaSYS
                     tempCategoria.idCategoria = r.IdCategoria;
                     tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
 
-                    DataRow fila = dt.NewRow();
+                    // filtrar por nombre seleccionado
+                    if (ddlCategoria.SelectedItem.Text.Equals(r.NombreProducto, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        DataRow fila = dt.NewRow();
 
-                    fila["IdProducto"] = r.IdProducto;
-                    fila["NombreProducto"] = r.NombreProducto+ " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
-                    dt.Rows.Add(fila);
+                        fila["IdProducto"] = r.IdProducto;
+                        fila["NombreProducto"] = r.NombreProducto + " " + tempCategoria.Nombre + " " + r.CodigoNumerico;
+                        dt.Rows.Add(fila);
+                    }
                 }
                 ddlProducto.DataSource = dt;
                 ddlProducto.DataBind();
+                lblLoad.Text = "";
             }
             catch (Exception ex)
             {
