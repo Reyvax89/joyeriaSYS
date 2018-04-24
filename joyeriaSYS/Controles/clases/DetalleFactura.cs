@@ -21,6 +21,7 @@ namespace joyeriaSYS.Controles.clases
                 actualizado.CantidadProducto = objeto.CantidadProducto;
                 actualizado.idFactura = objeto.idFactura;
                 actualizado.idProducto = objeto.idProducto;
+                actualizado.CantidadDevuelta = objeto.CantidadDevuelta;
                 contexto.SaveChanges();
             }
             return actualizado;
@@ -39,6 +40,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.DEF_DETALLE_FACTURA.Where(def => def.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
+            }
+        }
+
+        public DEF_DETALLE_FACTURA ConsultarPorIdDetalleFactura(DEF_DETALLE_FACTURA objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idDetalleFactura == objeto.idDetalleFactura).FirstOrDefault();
             }
         }
 

@@ -52,6 +52,8 @@ namespace joyeriaSYS
                 tempFactura.NoFactura = Convert.ToInt32(ddlFactura.SelectedValue);
                 tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
                 var SaldoActual = tempFactura.saldo;
+                var listaProductos = new List<PRO_PRODUCTO>();
+                var listaDetalles = new List<DEF_DETALLE_FACTURA>();
 
                 foreach (GridViewRow mRow in gvwDetalleFactura.Rows)
                 {
@@ -61,8 +63,17 @@ namespace joyeriaSYS
                         if (mCheck.Checked)
                         {
                             var tempProducto = new PRO_PRODUCTO();
+                            var tempCategoria = new CAT_CATEGORIA();
+                            var splitProducto = mRow.Cells[0].Text.Split(',');
+                            var splitNombreProducto = splitProducto[0];
+
+                            tempCategoria.Nombre = splitProducto[1].TrimStart();
+                            tempCategoria = objCat.ConsultarPorNombreDeCategoria(tempCategoria);
+
                             tempProducto.CodigoNumerico = Convert.ToInt32(mRow.Cells[1].Text);
-                            tempProducto = objProd.ConsultarPorCodigoProducto(tempProducto);
+                            tempProducto.IdCategoria = tempCategoria.idCategoria;
+                            tempProducto.NombreProducto = splitNombreProducto;
+                            tempProducto = objProd.ConsultarProductoPorNombreCodigoCategoria(tempProducto);
                             tempProducto.Inventario = tempProducto.Inventario + 1;
                             SaldoActual = SaldoActual - tempProducto.Precio;
                             txtSaldoActual.Text = SaldoActual.ToString();
@@ -72,17 +83,18 @@ namespace joyeriaSYS
                             tempDetalleFactura.idProducto = tempProducto.IdProducto;
                             tempDetalleFactura = objDeF.ConsultarPorIdFacturaYIdProducto(tempDetalleFactura);
                             tempDetalleFactura.CantidadDevuelta = tempDetalleFactura.CantidadDevuelta + 1;
-
+                            
                             objProd.Actualizar(tempProducto);
                             objDeF.Actualizar(tempDetalleFactura);
-                            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + mRow.Cells[2].Text + "')", true);
                         }
                     }
                 }
-                tempFactura.saldo = SaldoActual;
-                tempFactura.estado = Convert.ToInt32(EstadoFacturas.Cancelada);
-                tempFactura.totalDevuelto = tempFactura.saldo - SaldoActual;
-                objFact.Actualizar(tempFactura);
+                    tempFactura.saldo = SaldoActual;
+                    tempFactura.estado = Convert.ToInt32(EstadoFacturas.Cancelada);
+                    tempFactura.totalDevuelto = tempFactura.saldo - SaldoActual;
+                    objFact.Actualizar(tempFactura);
+                cargarTablaFacturas(tempFactura.NoFactura);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Factura cancelada con éxito, el monto a pagar es: "+ SaldoActual +"')", true);
             }
             catch (Exception ex)
             {
@@ -90,31 +102,13 @@ namespace joyeriaSYS
                 throw ex;
             }
         }
-
-        //protected void txtCodigo_TextChanged(object sender, EventArgs e)
-        //{
-        //    var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
-        //    var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
-        //    if (codFactura != 0 && codProducto != 0)
-        //    {
-        //        gestionarCargaDatos(codProducto, codFactura);
-        //        txtCodigo.Text = "";
-        //    }
-        //}
-
+        
         protected void ddlFactura_DropDownChanged(object sender, EventArgs e)
         {
-            //var codProducto = (txtCodigo.Text != "") ? Convert.ToInt32(txtCodigo.Text) : 0;
             var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
             if (codFactura != 0)
             {
-                //if(codProducto != 0)
-                //{
-                //    gestionarCargaDatos(codProducto, codFactura);
-                //}else
-                //{
                     gestionarCargaDatos(codFactura);
-                //}
             }
         }
         protected void btnCalcularSaldo_Click(object sender, EventArgs e)
@@ -134,8 +128,18 @@ namespace joyeriaSYS
                         if (mCheck.Checked)
                         {
                             var tempProducto = new PRO_PRODUCTO();
+                            var tempCategoria = new CAT_CATEGORIA();
+                            var splitProducto = mRow.Cells[0].Text.Split(',');
+                            var splitNombreProducto = splitProducto[0];
+
+                            tempCategoria.Nombre = splitProducto[1].TrimStart();
+                            tempCategoria = objCat.ConsultarPorNombreDeCategoria(tempCategoria);
+
                             tempProducto.CodigoNumerico = Convert.ToInt32(mRow.Cells[1].Text);
-                            tempProducto = objProd.ConsultarPorCodigoProducto(tempProducto);
+                            tempProducto.IdCategoria = tempCategoria.idCategoria;
+                            tempProducto.NombreProducto = splitNombreProducto;
+                            tempProducto = objProd.ConsultarProductoPorNombreCodigoCategoria(tempProducto);
+                            tempProducto.Inventario = tempProducto.Inventario + 1;
                             SaldoActual = SaldoActual - tempProducto.Precio;
                             txtSaldoActual.Text = SaldoActual.ToString();
                             Session["SaldoActual"] = SaldoActual;
@@ -213,6 +217,7 @@ namespace joyeriaSYS
                 dt.Columns.Add("idFactura", typeof(System.String));
                 dt.Columns.Add("NoFactura", typeof(System.String));
                 dt.Columns.Add("montoFactura", typeof(System.String));
+                dt.Columns.Add("saldo", typeof(System.String));
                 dt.Columns.Add("estado", typeof(System.String));
                 dt.Columns.Add("totalPiezas", typeof(System.String));
                 dt.Columns.Add("idCliente", typeof(System.String));
@@ -227,7 +232,8 @@ namespace joyeriaSYS
                 fila["idFactura"] = row.idFactura;
                 fila["NoFactura"] = row.NoFactura;
                 fila["montoFactura"] = row.montoFactura;
-                fila["estado"] = row.estado;
+                fila["saldo"] = row.saldo;
+                fila["estado"] = EstadoFacturaEnLetras(row.estado);
                 fila["totalPiezas"] = row.totalPiezas;
                 fila["idCliente"] = tempCliente.NombreEncargado;
                 //fila["fechaCreacion"] = r.fechaCreacion;
@@ -275,7 +281,23 @@ namespace joyeriaSYS
                 var err = ex.Message;
             }
         }
-        
+
+        private string EstadoFacturaEnLetras(int num)
+        {
+            if (num == Convert.ToInt32(EstadoFacturas.EnCreacion))
+            {
+                return "En creación";
+            }
+            else if (num == Convert.ToInt32(EstadoFacturas.Finalizada))
+            {
+                return "Finalizada";
+            }
+            else
+            {
+                return "Cancelada";
+            }
+        }
+
         private void CargarTablaDetalleFacturas(int idFactura, string criterio)
         {
             try

@@ -55,6 +55,14 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public CAT_CATEGORIA ConsultarPorNombreDeCategoria(CAT_CATEGORIA objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.CAT_CATEGORIA.Where(cat => cat.Nombre.Contains(objeto.Nombre)).FirstOrDefault();
+            }
+        }
+
         public CAT_CATEGORIA Eliminar(CAT_CATEGORIA objeto)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())

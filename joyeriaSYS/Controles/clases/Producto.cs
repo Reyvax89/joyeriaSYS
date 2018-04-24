@@ -16,15 +16,23 @@ namespace joyeriaSYS.Controles.clases
             var actualizado = new PRO_PRODUCTO();
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
+                try
+            {
+            
                 actualizado = contexto.PRO_PRODUCTO.Where(cat => cat.IdProducto == objeto.IdProducto).FirstOrDefault();
                 actualizado.CodigoNumerico = objeto.CodigoNumerico;
                 actualizado.IdCategoria = objeto.IdCategoria;
                 actualizado.Inventario = objeto.Inventario;
                 actualizado.Precio = objeto.Precio;
                 actualizado.NombreProducto = objeto.NombreProducto;
-                contexto.SaveChanges();
+                    contexto.SaveChanges();
+                    return actualizado;
+                }
+            catch (Exception ex)
+            {
+                    throw ex;
             }
-            return actualizado;
+            }
         }
 
         //public IEnumerable<PRO_PRODUCTO> Consultar(string nombre, int categoria, string codigo)
@@ -98,6 +106,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.PRO_PRODUCTO.Where(pro => pro.NombreProducto == objeto.NombreProducto && pro.IdCategoria == objeto.IdCategoria && pro.CodigoNumerico == objeto.CodigoNumerico).ToList();
+            }
+        }
+
+        public PRO_PRODUCTO ConsultarProductoPorNombreCodigoCategoria(PRO_PRODUCTO objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.Where(pro => pro.NombreProducto == objeto.NombreProducto && pro.IdCategoria == objeto.IdCategoria && pro.CodigoNumerico == objeto.CodigoNumerico).FirstOrDefault();
             }
         }
 

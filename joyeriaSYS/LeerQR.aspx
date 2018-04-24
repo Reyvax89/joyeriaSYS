@@ -78,6 +78,7 @@
 							<asp:BoundField DataField="idFactura" HeaderText="Id" AccessibleHeaderText="idFactura" InsertVisible="False"></asp:BoundField>
 							<asp:BoundField DataField="NoFactura" HeaderText="No Factura" AccessibleHeaderText="NoFactura" InsertVisible="False"></asp:BoundField>
 							<asp:BoundField DataField="montoFactura" HeaderText="Monto Factura" AccessibleHeaderText="montoFactura" InsertVisible="False"></asp:BoundField>
+                            <asp:BoundField DataField="saldo" HeaderText="Saldo" AccessibleHeaderText="saldo" InsertVisible="False"></asp:BoundField>
 							<asp:BoundField DataField="estado" HeaderText="Estado" AccessibleHeaderText="estado" InsertVisible="False"></asp:BoundField>
 							<asp:BoundField DataField="totalPiezas" HeaderText="Total Piezas" AccessibleHeaderText="totalPiezas" InsertVisible="False"></asp:BoundField>
 							<asp:BoundField DataField="idCliente" HeaderText="Vendedor" AccessibleHeaderText="idCliente" InsertVisible="False"></asp:BoundField>
