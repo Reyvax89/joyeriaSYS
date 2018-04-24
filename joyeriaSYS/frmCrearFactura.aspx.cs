@@ -116,6 +116,7 @@ namespace joyeriaSYS
             nuevoDetalle.CantidadProducto = Convert.ToInt32(txtCantidad.Text);
             nuevoDetalle.idFactura = idFactura;
             nuevoDetalle.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+            nuevoDetalle.CantidadDevuelta = 0;
             actualizarCantidadProducto(nuevoDetalle.idProducto, nuevoDetalle.CantidadProducto, true);
             objDeF.Insertar(nuevoDetalle);
             txtCantidad.Text = "";
@@ -339,7 +340,7 @@ namespace joyeriaSYS
             try
             {
                 var dt = new DataTable();
-                var rows = objDeF.Consultar();
+                //var rows = objDeF.Consultar();
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
 
@@ -353,9 +354,9 @@ namespace joyeriaSYS
                 //dt.Columns.Add("Inventario", typeof(System.String));
 
                 if (idFactura != -1){
-                    rows = objDeF.ConsultarPorIdFactura(idFactura);
+                    var rows = objDeF.ConsultarPorIdFactura(idFactura, txtCriterio.Text);
 
-                    foreach (DEF_DETALLE_FACTURA r in rows)
+                    foreach (Vista_ProductosPorDetalleFactura r in rows)
                     {
                         var tempCategoria = new CAT_CATEGORIA();
                         var tempProducto = new PRO_PRODUCTO();
@@ -507,7 +508,7 @@ namespace joyeriaSYS
             var nuevaFactura = new FAC_FACTURA();
             var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
             nuevaFactura.CodTabla = txtCodFactura.Text;
-            nuevaFactura.estado = Convert.ToByte(EstadoFacturas.EnCreacion);
+            nuevaFactura.estado = Convert.ToInt32(EstadoFacturas.EnCreacion);
             nuevaFactura.idCliente = Convert.ToInt32(ddlCliente.SelectedValue);
             nuevaFactura.montoFactura = calcularMonto(Convert.ToInt32(ddlProducto.SelectedValue), Convert.ToInt32(txtCantidad.Text));
             nuevaFactura.NoFactura = Convert.ToInt32(txtCodFactura.Text);
@@ -517,19 +518,19 @@ namespace joyeriaSYS
             nuevaFactura.totalDevuelto = 0;
             nuevaFactura.totalPiezas = Convert.ToInt32(txtCantidad.Text);
             nuevaFactura.idCategoriaMetal = Convert.ToInt32(ddlMetal.SelectedValue);
-            nuevaFactura.idUsuario = 4;
+            nuevaFactura.idUsuario = Convert.ToInt32(Session["userId"]);
 
             nuevaFactura = objFact.Insertar(nuevaFactura);
 
             return nuevaFactura.idFactura;
         }
 
-        private string EstadoFacturaEnLetras(byte num)
+        private string EstadoFacturaEnLetras(int num)
         {
-            if(num == Convert.ToByte(EstadoFacturas.EnCreacion))
+            if(num == Convert.ToInt32(EstadoFacturas.EnCreacion))
             {
                 return "En creación";
-            }else if (num == Convert.ToByte(EstadoFacturas.Finalizada))
+            }else if (num == Convert.ToInt32(EstadoFacturas.Finalizada))
             {
                 return "Finalizada";
             }
@@ -552,7 +553,7 @@ namespace joyeriaSYS
             {
                 var metal = "";
                 var contadorDeFilas = 0;
-                var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(hdfIdFactura.Value));
+                var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(hdfIdFactura.Value), txtCriterio.Text);
                 var datosDeLaFactura = new FAC_FACTURA();
                 var tempCategoria = new CAT_CATEGORIA();
                 var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
@@ -565,7 +566,7 @@ namespace joyeriaSYS
                 metal = tempCategoria.Nombre;
                 llenaArregloConCeros();
                 // Recorrer las filas.
-                foreach (DEF_DETALLE_FACTURA r in rows)
+                foreach (Vista_ProductosPorDetalleFactura r in rows)
                 {
                     //// Crear una fila por cada unidad del producto.
                     var tempProducto = new PRO_PRODUCTO();

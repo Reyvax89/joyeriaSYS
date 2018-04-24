@@ -26,7 +26,7 @@ namespace joyeriaSYS.Models
         public decimal montoFactura { get; set; }
         public decimal saldo { get; set; }
         public decimal totalDevuelto { get; set; }
-        public byte estado { get; set; }
+        public int estado { get; set; }
         public int totalPiezas { get; set; }
         public System.DateTime fechaCreacion { get; set; }
         public System.DateTime fechaLiquidacion { get; set; }

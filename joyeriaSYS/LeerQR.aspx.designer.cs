@@ -49,6 +49,15 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.DropDownList ddlFactura;
         
         /// <summary>
+        /// txtCriterio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCriterio;
+        
+        /// <summary>
         /// txtSaldoActual control.
         /// </summary>
         /// <remarks>

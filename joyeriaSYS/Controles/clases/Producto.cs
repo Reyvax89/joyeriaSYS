@@ -66,7 +66,15 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.PRO_PRODUCTO.Where(cat => cat.IdProducto == objeto.IdProducto).ToList();
+                return contexto.PRO_PRODUCTO.Where(pro => pro.IdProducto == objeto.IdProducto).ToList();
+            }
+        }
+
+        public PRO_PRODUCTO ConsultarPorIdProducto(PRO_PRODUCTO objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.PRO_PRODUCTO.Where(pro => pro.IdProducto == objeto.IdProducto).FirstOrDefault();
             }
         }
 
