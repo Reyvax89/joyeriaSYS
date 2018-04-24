@@ -85,7 +85,7 @@
           <Property Name="montoFactura" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="saldo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="totalDevuelto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="estado" Type="tinyint" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="totalPiezas" Type="int" Nullable="false" />
           <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="fechaLiquidacion" Type="datetime" Nullable="false" />
@@ -105,7 +105,7 @@
           <Property Name="Inventario" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'JoyeriaPRUEBAS.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Vista_ProductosPorDetalleFactura">
           <Key>
             <PropertyRef Name="idProducto" />
@@ -115,6 +115,7 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
             <PropertyRef Name="CantidadDevuelta" />
             <PropertyRef Name="idDetalleFactura" />
             <PropertyRef Name="NombreProducto" />
+            <PropertyRef Name="IdCategoria" />
           </Key>
           <Property Name="idProducto" Type="int" Nullable="false" />
           <Property Name="idFactura" Type="int" Nullable="false" />
@@ -123,6 +124,7 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="CantidadDevuelta" Type="int" Nullable="false" />
           <Property Name="idDetalleFactura" Type="int" Nullable="false" />
           <Property Name="NombreProducto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
           <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
@@ -242,7 +244,8 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
     [Vista_ProductosPorDetalleFactura].[CantidadProducto] AS [CantidadProducto], 
     [Vista_ProductosPorDetalleFactura].[CantidadDevuelta] AS [CantidadDevuelta], 
     [Vista_ProductosPorDetalleFactura].[idDetalleFactura] AS [idDetalleFactura], 
-    [Vista_ProductosPorDetalleFactura].[NombreProducto] AS [NombreProducto]
+    [Vista_ProductosPorDetalleFactura].[NombreProducto] AS [NombreProducto], 
+    [Vista_ProductosPorDetalleFactura].[IdCategoria] AS [IdCategoria]
     FROM [dbo].[Vista_ProductosPorDetalleFactura] AS [Vista_ProductosPorDetalleFactura]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
@@ -305,8 +308,8 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="Apellido2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Celular" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
           <Property Name="IdRol" Type="Int32" />
-          <NavigationProperty Name="FAC_FACTURA" Relationship="Self.FK_FAC_FACTURA_AspNetUsers" FromRole="AspNetUsers" ToRole="FAC_FACTURA" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" FromRole="AspNetUsers" ToRole="FAC_FACTURA" />
         </EntityType>
         <EntityType Name="CAT_CATEGORIA">
           <Key>
@@ -329,7 +332,7 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Canton" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FAC_FACTURA" Relationship="Self.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="CLI_CLIENTES" ToRole="FAC_FACTURA" />
+          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="CLI_CLIENTES" ToRole="FAC_FACTURA" />
         </EntityType>
         <EntityType Name="CQR_CODIGO_QR">
           <Key>
@@ -339,27 +342,6 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="urlImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRO_PRODUCTO" Relationship="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="CQR_CODIGO_QR" ToRole="PRO_PRODUCTO" />
-        </EntityType>
-        <EntityType Name="FAC_FACTURA">
-          <Key>
-            <PropertyRef Name="idFactura" />
-          </Key>
-          <Property Name="idFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NoFactura" Type="Int32" Nullable="false" />
-          <Property Name="CodTabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="montoFactura" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="saldo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="totalDevuelto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="estado" Type="Byte" Nullable="false" />
-          <Property Name="totalPiezas" Type="Int32" Nullable="false" />
-          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaLiquidacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="idCategoriaMetal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_FAC_FACTURA_AspNetUsers" FromRole="FAC_FACTURA" ToRole="AspNetUsers" />
-          <NavigationProperty Name="CLI_CLIENTES" Relationship="Self.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="FAC_FACTURA" ToRole="CLI_CLIENTES" />
-          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="FAC_FACTURA" ToRole="DEF_DETALLE_FACTURA" />
         </EntityType>
         <EntityType Name="PRO_PRODUCTO">
           <Key>
@@ -375,18 +357,6 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <NavigationProperty Name="CQR_CODIGO_QR" Relationship="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="CQR_CODIGO_QR" />
           <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="PRO_PRODUCTO" ToRole="DEF_DETALLE_FACTURA" />
         </EntityType>
-        <Association Name="FK_FAC_FACTURA_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FAC_FACTURA">
-              <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PRO_PRODUCTO_CAT_CATEGORIA">
           <End Role="CAT_CATEGORIA" Type="Self.CAT_CATEGORIA" Multiplicity="1" />
           <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="*" />
@@ -396,18 +366,6 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
             </Principal>
             <Dependent Role="PRO_PRODUCTO">
               <PropertyRef Name="IdCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
-          <End Role="CLI_CLIENTES" Type="Self.CLI_CLIENTES" Multiplicity="1" />
-          <End Role="FAC_FACTURA" Type="Self.FAC_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLI_CLIENTES">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="FAC_FACTURA">
-              <PropertyRef Name="idCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -433,19 +391,10 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <EntitySet Name="CAT_CATEGORIA" EntityType="Self.CAT_CATEGORIA" />
           <EntitySet Name="CLI_CLIENTES" EntityType="Self.CLI_CLIENTES" />
           <EntitySet Name="CQR_CODIGO_QR" EntityType="Self.CQR_CODIGO_QR" />
-          <EntitySet Name="FAC_FACTURA" EntityType="Self.FAC_FACTURA" />
           <EntitySet Name="PRO_PRODUCTO" EntityType="Self.PRO_PRODUCTO" />
-          <AssociationSet Name="FK_FAC_FACTURA_AspNetUsers" Association="Self.FK_FAC_FACTURA_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
-          </AssociationSet>
           <AssociationSet Name="FK_PRO_PRODUCTO_CAT_CATEGORIA" Association="Self.FK_PRO_PRODUCTO_CAT_CATEGORIA">
             <End Role="CAT_CATEGORIA" EntitySet="CAT_CATEGORIA" />
             <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FAC_FACTURA_CLI_CLIENTES" Association="Self.FK_FAC_FACTURA_CLI_CLIENTES">
-            <End Role="CLI_CLIENTES" EntitySet="CLI_CLIENTES" />
-            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
           </AssociationSet>
           <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">
             <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
@@ -456,15 +405,24 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="DEF_DETALLE_FACTURA" EntityType="JoyeriaModel.DEF_DETALLE_FACTURA" />
-          <AssociationSet Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA" Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
-            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
-            <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
-          </AssociationSet>
           <AssociationSet Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
             <End Role="PRO_PRODUCTO" EntitySet="PRO_PRODUCTO" />
             <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
           </AssociationSet>
           <EntitySet Name="Vista_ProductosPorDetalleFactura" EntityType="JoyeriaModel.Vista_ProductosPorDetalleFactura" />
+          <EntitySet Name="FAC_FACTURA" EntityType="JoyeriaModel.FAC_FACTURA" />
+          <AssociationSet Name="FK_FAC_FACTURA_AspNetUsers" Association="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FAC_FACTURA_CLI_CLIENTES" Association="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES">
+            <End Role="CLI_CLIENTES" EntitySet="CLI_CLIENTES" />
+            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA" Association="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
+            <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
+            <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DEF_DETALLE_FACTURA">
           <Key>
@@ -475,21 +433,9 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="CantidadProducto" Type="Int32" Nullable="false" />
           <Property Name="CantidadDevuelta" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="DEF_DETALLE_FACTURA" ToRole="FAC_FACTURA" />
           <NavigationProperty Name="PRO_PRODUCTO" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO" FromRole="DEF_DETALLE_FACTURA" ToRole="PRO_PRODUCTO" />
+          <NavigationProperty Name="FAC_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="DEF_DETALLE_FACTURA" ToRole="FAC_FACTURA" />
         </EntityType>
-        <Association Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
-          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="1" />
-          <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FAC_FACTURA">
-              <PropertyRef Name="idFactura" />
-            </Principal>
-            <Dependent Role="DEF_DETALLE_FACTURA">
-              <PropertyRef Name="idFactura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DEF_DETALLE_FACTURA_PRO_PRODUCTO">
           <End Type="JoyeriaModel.PRO_PRODUCTO" Role="PRO_PRODUCTO" Multiplicity="1" />
           <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
@@ -511,6 +457,7 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
             <PropertyRef Name="CantidadDevuelta" />
             <PropertyRef Name="idDetalleFactura" />
             <PropertyRef Name="NombreProducto" />
+            <PropertyRef Name="IdCategoria" />
           </Key>
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="idFactura" Type="Int32" Nullable="false" />
@@ -519,7 +466,65 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <Property Name="CantidadDevuelta" Type="Int32" Nullable="false" />
           <Property Name="idDetalleFactura" Type="Int32" Nullable="false" />
           <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="FAC_FACTURA">
+          <Key>
+            <PropertyRef Name="idFactura" />
+          </Key>
+          <Property Name="idFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoFactura" Type="Int32" Nullable="false" />
+          <Property Name="CodTabla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="montoFactura" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="saldo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="totalDevuelto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="totalPiezas" Type="Int32" Nullable="false" />
+          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaLiquidacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCategoriaMetal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="JoyeriaModel.FK_FAC_FACTURA_AspNetUsers" FromRole="FAC_FACTURA" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CLI_CLIENTES" Relationship="JoyeriaModel.FK_FAC_FACTURA_CLI_CLIENTES" FromRole="FAC_FACTURA" ToRole="CLI_CLIENTES" />
+          <NavigationProperty Name="DEF_DETALLE_FACTURA" Relationship="JoyeriaModel.FK_DEF_DETALLE_FACTURA_FAC_FACTURA" FromRole="FAC_FACTURA" ToRole="DEF_DETALLE_FACTURA" />
+        </EntityType>
+        <Association Name="FK_FAC_FACTURA_AspNetUsers">
+          <End Type="JoyeriaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FAC_FACTURA">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FAC_FACTURA_CLI_CLIENTES">
+          <End Type="JoyeriaModel.CLI_CLIENTES" Role="CLI_CLIENTES" Multiplicity="1" />
+          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLI_CLIENTES">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="FAC_FACTURA">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEF_DETALLE_FACTURA_FAC_FACTURA">
+          <End Type="JoyeriaModel.FAC_FACTURA" Role="FAC_FACTURA" Multiplicity="1" />
+          <End Type="JoyeriaModel.DEF_DETALLE_FACTURA" Role="DEF_DETALLE_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAC_FACTURA">
+              <PropertyRef Name="idFactura" />
+            </Principal>
+            <Dependent Role="DEF_DETALLE_FACTURA">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -583,25 +588,6 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FAC_FACTURA">
-            <EntityTypeMapping TypeName="JoyeriaModel.FAC_FACTURA">
-              <MappingFragment StoreEntitySet="FAC_FACTURA">
-                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
-                <ScalarProperty Name="NoFactura" ColumnName="NoFactura" />
-                <ScalarProperty Name="CodTabla" ColumnName="CodTabla" />
-                <ScalarProperty Name="montoFactura" ColumnName="montoFactura" />
-                <ScalarProperty Name="saldo" ColumnName="saldo" />
-                <ScalarProperty Name="totalDevuelto" ColumnName="totalDevuelto" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="totalPiezas" ColumnName="totalPiezas" />
-                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-                <ScalarProperty Name="fechaLiquidacion" ColumnName="fechaLiquidacion" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idCategoriaMetal" ColumnName="idCategoriaMetal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PRO_PRODUCTO">
             <EntityTypeMapping TypeName="JoyeriaModel.PRO_PRODUCTO">
               <MappingFragment StoreEntitySet="PRO_PRODUCTO">
@@ -636,6 +622,7 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
           <EntitySetMapping Name="Vista_ProductosPorDetalleFactura">
             <EntityTypeMapping TypeName="JoyeriaModel.Vista_ProductosPorDetalleFactura">
               <MappingFragment StoreEntitySet="Vista_ProductosPorDetalleFactura">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
                 <ScalarProperty Name="idDetalleFactura" ColumnName="idDetalleFactura" />
                 <ScalarProperty Name="CantidadDevuelta" ColumnName="CantidadDevuelta" />
@@ -643,6 +630,25 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
                 <ScalarProperty Name="CodigoNumerico" ColumnName="CodigoNumerico" />
                 <ScalarProperty Name="idFactura" ColumnName="idFactura" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAC_FACTURA">
+            <EntityTypeMapping TypeName="JoyeriaModel.FAC_FACTURA">
+              <MappingFragment StoreEntitySet="FAC_FACTURA">
+                <ScalarProperty Name="idCategoriaMetal" ColumnName="idCategoriaMetal" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="fechaLiquidacion" ColumnName="fechaLiquidacion" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="totalPiezas" ColumnName="totalPiezas" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="totalDevuelto" ColumnName="totalDevuelto" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="montoFactura" ColumnName="montoFactura" />
+                <ScalarProperty Name="CodTabla" ColumnName="CodTabla" />
+                <ScalarProperty Name="NoFactura" ColumnName="NoFactura" />
+                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

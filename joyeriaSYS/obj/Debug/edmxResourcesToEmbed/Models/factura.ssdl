@@ -80,7 +80,7 @@
     <Property Name="montoFactura" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="saldo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="totalDevuelto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="estado" Type="tinyint" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
     <Property Name="totalPiezas" Type="int" Nullable="false" />
     <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="fechaLiquidacion" Type="datetime" Nullable="false" />
@@ -100,7 +100,7 @@
     <Property Name="Inventario" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'JoyeriaPRUEBAS.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Vista_ProductosPorDetalleFactura">
     <Key>
       <PropertyRef Name="idProducto" />
@@ -109,6 +109,8 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
       <PropertyRef Name="CantidadProducto" />
       <PropertyRef Name="CantidadDevuelta" />
       <PropertyRef Name="idDetalleFactura" />
+      <PropertyRef Name="NombreProducto" />
+      <PropertyRef Name="IdCategoria" />
     </Key>
     <Property Name="idProducto" Type="int" Nullable="false" />
     <Property Name="idFactura" Type="int" Nullable="false" />
@@ -116,6 +118,8 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
     <Property Name="CantidadProducto" Type="int" Nullable="false" />
     <Property Name="CantidadDevuelta" Type="int" Nullable="false" />
     <Property Name="idDetalleFactura" Type="int" Nullable="false" />
+    <Property Name="NombreProducto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCategoria" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO">
     <End Role="PRO_PRODUCTO" Type="Self.PRO_PRODUCTO" Multiplicity="1" />
@@ -234,7 +238,9 @@ warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does
     [Vista_ProductosPorDetalleFactura].[CodigoNumerico] AS [CodigoNumerico], 
     [Vista_ProductosPorDetalleFactura].[CantidadProducto] AS [CantidadProducto], 
     [Vista_ProductosPorDetalleFactura].[CantidadDevuelta] AS [CantidadDevuelta], 
-    [Vista_ProductosPorDetalleFactura].[idDetalleFactura] AS [idDetalleFactura]
+    [Vista_ProductosPorDetalleFactura].[idDetalleFactura] AS [idDetalleFactura], 
+    [Vista_ProductosPorDetalleFactura].[NombreProducto] AS [NombreProducto], 
+    [Vista_ProductosPorDetalleFactura].[IdCategoria] AS [IdCategoria]
     FROM [dbo].[Vista_ProductosPorDetalleFactura] AS [Vista_ProductosPorDetalleFactura]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_CQR_CODIGO_QR_PRO_PRODUCTO" Association="Self.FK_CQR_CODIGO_QR_PRO_PRODUCTO">

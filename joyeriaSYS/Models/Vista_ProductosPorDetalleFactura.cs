@@ -21,5 +21,6 @@ namespace joyeriaSYS.Models
         public int CantidadDevuelta { get; set; }
         public int idDetalleFactura { get; set; }
         public string NombreProducto { get; set; }
+        public int IdCategoria { get; set; }
     }
 }

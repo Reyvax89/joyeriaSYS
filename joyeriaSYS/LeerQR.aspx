@@ -62,7 +62,7 @@
 									</div>
 									<div class="col-sm-7 col-md-9">
                                         <asp:Button ID="btnCalcularSaldo" runat="server" OnClick="btnCalcularSaldo_Click" Text="Calcular saldo hasta el momento" CssClass="btn btn-info" />
-										<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Visible="false" Text="Finalizar Factura" CssClass="btn btn-primary special" />
+										<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Visible="true" Text="Finalizar Factura" CssClass="btn btn-primary special" />
 									</div>
 								</div>
 							</div>

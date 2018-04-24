@@ -20,7 +20,7 @@ namespace joyeriaSYS.Models
         public int CantidadProducto { get; set; }
         public int CantidadDevuelta { get; set; }
     
-        public virtual FAC_FACTURA FAC_FACTURA { get; set; }
         public virtual PRO_PRODUCTO PRO_PRODUCTO { get; set; }
+        public virtual FAC_FACTURA FAC_FACTURA { get; set; }
     }
 }

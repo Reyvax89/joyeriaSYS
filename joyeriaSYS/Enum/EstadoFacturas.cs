@@ -5,7 +5,7 @@ using System.Web;
 
 namespace joyeriaSYS.Enum
 {
-    public enum EstadoFacturas: byte
+    public enum EstadoFacturas: int
     {
         EnCreacion = 0,
         Finalizada = 1,
