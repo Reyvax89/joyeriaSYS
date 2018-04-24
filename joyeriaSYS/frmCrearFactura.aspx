@@ -45,7 +45,18 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlMetal" AutoPostBack="true" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
+									<asp:DropDownList ID="ddlMetal" AutoPostBack="false" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
+									</asp:DropDownList>
+								</div>
+							</div>
+                        </div>
+                        <div class="row margin-b 12u$">
+							<div class="col-sm-5 col-md-3">
+								<label for="demo-cliente">Categoría</label>
+							</div>
+							<div class="col-sm-7 col-md-9">
+								<div class="select-wrapper">
+									<asp:DropDownList ID="ddlCategoria" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -88,6 +99,7 @@
                         </div>
                         <div class="row margin-b 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
+							<asp:Label id="lblLoad" runat="server" CssClass="control-label"></asp:Label>
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:Button ID="btnNuevaFactura"  runat="server" OnClick="btnNuevaFactura_Click" Text="Nueva Factura" CssClass="btn btn-default" />

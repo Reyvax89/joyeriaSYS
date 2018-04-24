@@ -67,6 +67,15 @@ namespace joyeriaSYS {
         protected global::System.Web.UI.WebControls.DropDownList ddlMetal;
         
         /// <summary>
+        /// ddlCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
+        
+        /// <summary>
         /// ddlProducto control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace joyeriaSYS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFinalizarLaFactura;
+        
+        /// <summary>
+        /// lblLoad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLoad;
         
         /// <summary>
         /// btnNuevaFactura control.
