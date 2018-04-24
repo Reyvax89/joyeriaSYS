@@ -310,7 +310,7 @@ namespace joyeriaSYS
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
                         //fila["idFactura"] = r.idFactura;
-                        fila["idProducto"] = r.NombreProducto +" "+ tempCategoria.Nombre;
+                        fila["idProducto"] = r.NombreProducto +", "+ tempCategoria.Nombre;
                         
                         fila["codProducto"] = r.CodigoNumerico;
                         // La catidad siempre va ser 1.
