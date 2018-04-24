@@ -41,6 +41,14 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public IEnumerable<FAC_FACTURA> ConsultarFacturasFinalizadas()
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.FAC_FACTURA.Where(pro => pro.estado==1).ToList().OrderByDescending(fac => fac.NoFactura);
+            }
+        }
+
         public IEnumerable<FAC_FACTURA> ConsultarPorNoFactura(string criterio)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())

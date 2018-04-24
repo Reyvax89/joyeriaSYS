@@ -344,6 +344,9 @@
     <Compile Include="Models\PRO_PRODUCTO.cs">
       <DependentUpon>factura.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vista_ProductosPorDetalleFactura.cs">
+      <DependentUpon>factura.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
