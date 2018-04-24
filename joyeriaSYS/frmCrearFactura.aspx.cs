@@ -517,19 +517,19 @@ namespace joyeriaSYS
             nuevaFactura.totalDevuelto = 0;
             nuevaFactura.totalPiezas = Convert.ToInt32(txtCantidad.Text);
             nuevaFactura.idCategoriaMetal = Convert.ToInt32(ddlMetal.SelectedValue);
-            nuevaFactura.idUsuario = 4;
+            nuevaFactura.idUsuario = Convert.ToInt32(Session["userId"]);
 
             nuevaFactura = objFact.Insertar(nuevaFactura);
 
             return nuevaFactura.idFactura;
         }
 
-        private string EstadoFacturaEnLetras(byte num)
+        private string EstadoFacturaEnLetras(int num)
         {
-            if(num == Convert.ToByte(EstadoFacturas.EnCreacion))
+            if(num == Convert.ToInt32(EstadoFacturas.EnCreacion))
             {
                 return "En creación";
-            }else if (num == Convert.ToByte(EstadoFacturas.Finalizada))
+            }else if (num == Convert.ToInt32(EstadoFacturas.Finalizada))
             {
                 return "Finalizada";
             }

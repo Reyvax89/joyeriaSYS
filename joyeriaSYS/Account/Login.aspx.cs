@@ -36,6 +36,7 @@ namespace joyeriaSYS.Account
                 {
                     // Set the session.
                     Session["username"] = result.UserName;
+                    Session["userId"] = result.Id;
                     // Verificar el rol.
                     List<string> pages = new List<string>();
                     if (result.IdRol == 1)
