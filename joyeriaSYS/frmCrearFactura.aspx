@@ -45,7 +45,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlMetal" AutoPostBack="false" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
+									<asp:DropDownList ID="ddlMetal" AutoPostBack="true" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
@@ -159,6 +159,7 @@
                                 <asp:BoundField DataField="totalPiezas" HeaderText="# Piezas" AccessibleHeaderText="totalPiezas" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="idCliente" HeaderText="Cliente" AccessibleHeaderText="idCliente" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="idTipoMetal" HeaderText="Metal" AccessibleHeaderText="idTipoMetal" InsertVisible="False"></asp:BoundField>
+								<asp:BoundField DataField="nombreUsuario" HeaderText="Facturado por" AccessibleHeaderText="nombreUsuario" InsertVisible="False"></asp:BoundField>
                                 <%--<asp:BoundField DataField="fechaCreacion" HeaderText="fechaCreacion" AccessibleHeaderText="fechaCreacion" InsertVisible="False"></asp:BoundField>
                                 <asp:BoundField DataField="fechaLiquidacion" HeaderText="fechaLiquidacion" AccessibleHeaderText="fechaLiquidacion" InsertVisible="False"></asp:BoundField>--%>
                                 <asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
