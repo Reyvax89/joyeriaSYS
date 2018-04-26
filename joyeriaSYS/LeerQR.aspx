@@ -34,10 +34,10 @@
 								</div>
                                 <div class="row margin-b 6u 12u$(xsmall)">
 							<div class="col-sm-5 col-md-3">
-								<label for="demo-name">Búsqueda por código producto:</label>
+								<%--<label for="demo-name">Búsqueda por código producto:</label>--%>
 							</div>
 							<div class="col-sm-7 col-md-3">
-								<asp:TextBox ID="txtCriterio" AutoPostBack="true" OnTextChanged="txtCriterio_TextChanged" runat="server"></asp:TextBox>
+								<asp:TextBox ID="txtCriterio" Visible="false" AutoPostBack="true" OnTextChanged="txtCriterio_TextChanged" runat="server"></asp:TextBox>
                             </div>
                         </div>
 								<%--<div class="row margin-b">
