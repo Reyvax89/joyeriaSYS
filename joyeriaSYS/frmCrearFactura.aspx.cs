@@ -188,7 +188,6 @@ namespace joyeriaSYS
                 ddlCategoria.Items.Add("Pulsera");
                 ddlCategoria.Items.Add("Dije");
                 ddlCategoria.Items.Add("Juego");
-                ddlCategoria.Items.Add("Aro");
                 ddlCategoria.Items.Add("Arete");
                 ddlCategoria.Items.Add("Anillo");
             }

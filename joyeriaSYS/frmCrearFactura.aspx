@@ -45,7 +45,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<div class="select-wrapper">
-									<asp:DropDownList ID="ddlMetal" AutoPostBack="false" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
+									<asp:DropDownList ID="ddlMetal" AutoPostBack="true" OnSelectedIndexChanged="ddlMetal_SelectedIndexChanged" runat="server">
 									</asp:DropDownList>
 								</div>
 							</div>
