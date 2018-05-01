@@ -22,6 +22,7 @@ namespace joyeriaSYS
         private Clientes objCli = new Clientes();
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
+        private Usuarios objUsu = new Usuarios();
         private string[,] arregloTemporal = new string[35, 3];
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -414,6 +415,7 @@ namespace joyeriaSYS
                 dt.Columns.Add("totalPiezas", typeof(System.String));
                 dt.Columns.Add("idCliente", typeof(System.String));
                 dt.Columns.Add("idTipoMetal", typeof(System.String));
+                dt.Columns.Add("nombreUsuario", typeof(System.String));
                 //dt.Columns.Add("fechaCreacion", typeof(System.String));
                 //dt.Columns.Add("fechaLiquidacion", typeof(System.String));
 
@@ -436,6 +438,7 @@ namespace joyeriaSYS
                     fila["totalPiezas"] = r.totalPiezas;
                     fila["idCliente"] = tempCliente.NombreEncargado;
                     fila["idTipoMetal"] = tempCategoria.Nombre;
+                    fila["nombreUsuario"] = obtenerNombreUsuarioPorId(r.idUsuario);
                     //fila["fechaCreacion"] = r.fechaCreacion;
                     //fila["fechaLiquidacion"] = r.fechaLiquidacion;
                     dt.Rows.Add(fila);
@@ -447,6 +450,14 @@ namespace joyeriaSYS
             {
                 var err = ex.Message;
             }
+        }
+
+        private string obtenerNombreUsuarioPorId(int idUsuario)
+        {
+            var manager = new AspNetUsers();
+            manager.Id = idUsuario;
+            var usuario = objUsu.ConsultarPorId(manager).FirstOrDefault();
+            return usuario.UserName.ToString();
         }
 
         private void actualizarFacturaYaInsertada(int idFactura, int cantidad, int idProducto)
@@ -559,7 +570,12 @@ namespace joyeriaSYS
                 var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
 
                 datosDeLaFactura.idFactura = Convert.ToInt32(hdfIdFactura.Value);
+
+                // obteber el objeto
                 datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
+
+                // actulizar el estado de la factura
+                datosDeLaFactura = actulizarDatosFactura(datosDeLaFactura);
 
                 tempCategoria.idCategoria = datosDeLaFactura.idCategoriaMetal;
                 tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
@@ -650,6 +666,22 @@ namespace joyeriaSYS
                     excelApp.Quit();
                 }
             }//Fin else
+        }
+
+        private FAC_FACTURA actulizarDatosFactura(FAC_FACTURA factura)
+        {
+            DateTime fechaActual = DateTime.Today;
+            var dia = Convert.ToInt32(fechaActual.Day.ToString());
+            var mes = Convert.ToInt32(fechaActual.Month.ToString());
+            var año = Convert.ToInt32(fechaActual.Year.ToString());
+            DateTime fechaCreacion = new DateTime(año, mes, dia);
+
+            factura.estado = Convert.ToInt32(EstadoFacturas.Finalizada);
+            factura.fechaCreacion = fechaCreacion;
+            factura.fechaLiquidacion = fechaCreacion.AddDays(50);
+            factura.idUsuario = Convert.ToInt32(Session["userId"]);
+            var actulizado = objFact.Actualizar(factura);
+            return actulizado;
         }
 
         private void llenaArregloConCeros()
