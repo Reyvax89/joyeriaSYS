@@ -351,13 +351,14 @@ namespace joyeriaSYS
                 dt.Columns.Add("CodProducto", typeof(System.String));
                 dt.Columns.Add("idCategoria", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
-                //dt.Columns.Add("Precio", typeof(System.String));
-                //dt.Columns.Add("Inventario", typeof(System.String));
 
                 if (idFactura != -1){
-                    var rows = objDeF.ConsultarPorIdFactura(idFactura, txtCriterio.Text);
+                    //var rows = objDeF.ConsultarPorIdFactura(idFactura, txtCriterio.Text);
+                    var tempDetalleFactura = new DEF_DETALLE_FACTURA();
+                    tempDetalleFactura.idFactura = idFactura;
+                    var rows = objDeF.ConsultarDetalleFacturaPorIdFactura(tempDetalleFactura);
 
-                    foreach (Vista_ProductosPorDetalleFactura r in rows)
+                    foreach (DEF_DETALLE_FACTURA r in rows)
                     {
                         var tempCategoria = new CAT_CATEGORIA();
                         var tempProducto = new PRO_PRODUCTO();
@@ -390,7 +391,16 @@ namespace joyeriaSYS
                     fila["CantidadProducto"] = "---";
                     dt.Rows.Add(fila);
                 }
-                
+                var estadoFactura = new FAC_FACTURA();
+                estadoFactura.idFactura = idFactura;
+                estadoFactura = objFact.ConsultarPorId(estadoFactura).FirstOrDefault();
+                if (estadoFactura.estado == Convert.ToInt32(EstadoFacturas.EnCreacion))
+                {
+                    this.gvwDetalleFactura.Columns[6].Visible = true;
+                }
+                else {
+                    this.gvwDetalleFactura.Columns[6].Visible = false;
+                }
                 gvwDetalleFactura.DataSource = dt;
                 gvwDetalleFactura.DataBind();
             }
@@ -479,8 +489,8 @@ namespace joyeriaSYS
         private DateTime CreacionDeFechaDesdeElTxtFecha()
         {
             var ArregloFecha = txtFechaFactura.Text.Split('/');
-            var dia = Convert.ToInt32(ArregloFecha[0]);
-            var mes = Convert.ToInt32(ArregloFecha[1]);
+            var dia = Convert.ToInt32(ArregloFecha[1]);
+            var mes = Convert.ToInt32(ArregloFecha[0]);
             var año = Convert.ToInt32(ArregloFecha[2]);
 
             DateTime fechaCrea = new DateTime(año, mes, dia);
@@ -575,7 +585,10 @@ namespace joyeriaSYS
                 datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
 
                 // actulizar el estado de la factura
-                datosDeLaFactura = actulizarDatosFactura(datosDeLaFactura);
+                if(datosDeLaFactura.estado == Convert.ToInt32(EstadoFacturas.EnCreacion))
+                {
+                    datosDeLaFactura = actualizarDatosFactura(datosDeLaFactura);
+                }
 
                 tempCategoria.idCategoria = datosDeLaFactura.idCategoriaMetal;
                 tempCategoria = objCat.ConsultarPorId(tempCategoria).FirstOrDefault();
@@ -668,7 +681,7 @@ namespace joyeriaSYS
             }//Fin else
         }
 
-        private FAC_FACTURA actulizarDatosFactura(FAC_FACTURA factura)
+        private FAC_FACTURA actualizarDatosFactura(FAC_FACTURA factura)
         {
             DateTime fechaActual = DateTime.Today;
             var dia = Convert.ToInt32(fechaActual.Day.ToString());

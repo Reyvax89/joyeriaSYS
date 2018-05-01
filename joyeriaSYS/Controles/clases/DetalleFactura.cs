@@ -43,6 +43,14 @@ namespace joyeriaSYS.Controles.clases
             }
         }
 
+        public IEnumerable<DEF_DETALLE_FACTURA> ConsultarDetalleFacturaPorIdFactura(DEF_DETALLE_FACTURA objeto)
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idFactura == objeto.idFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
+            }
+        }
+
         public DEF_DETALLE_FACTURA ConsultarPorIdDetalleFactura(DEF_DETALLE_FACTURA objeto)
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())

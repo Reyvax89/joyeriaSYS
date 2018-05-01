@@ -86,7 +86,7 @@
 							</div>
 							<div class="col-sm-7 col-md-9">
 								<asp:TextBox ID="txtFechaFactura" runat="server"></asp:TextBox>
-                                <ajaxToolkit:CalendarExtender ID="Calendar1" runat="server" TargetControlID="txtFechaFactura" Format="dd/MM/yyyy" />
+                                <ajaxToolkit:CalendarExtender ID="Calendar1" runat="server" TargetControlID="txtFechaFactura" Format="MM/dd/yyyy" />
 							</div>
                         </div>
                         <div class="row margin-b 12u$(xsmall)">
