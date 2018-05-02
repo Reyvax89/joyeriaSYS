@@ -181,28 +181,40 @@ namespace joyeriaSYS
 
         private void cargarCategorias(string metal = "1")
         {
-            if (metal == "1" || metal == "2")
+            switch (metal)
             {
-                ddlCategoria.Items.Clear();
-                ddlCategoria.Items.Add("-Seleccionar-");
-                ddlCategoria.Items.Add("Cadena");
-                ddlCategoria.Items.Add("Pulsera");
-                ddlCategoria.Items.Add("Dije");
-                ddlCategoria.Items.Add("Juego");
-                ddlCategoria.Items.Add("Arete");
-                ddlCategoria.Items.Add("Anillo");
-            }
-            else
-            {
-                ddlCategoria.Items.Clear();
-                ddlCategoria.Items.Add("-Seleccionar-");
-                ddlCategoria.Items.Add("Omega");
-                ddlCategoria.Items.Add("Cadena");
-                ddlCategoria.Items.Add("Pulsera");
-                ddlCategoria.Items.Add("Arete");
-                ddlCategoria.Items.Add("Juego");
-                ddlCategoria.Items.Add("Aro");
-                ddlCategoria.Items.Add("Anillo");
+                case "1":
+                case "2":
+                    ddlCategoria.Items.Clear();
+                    ddlCategoria.Items.Add("-Seleccionar-");
+                    ddlCategoria.Items.Add("Cadena");
+                    ddlCategoria.Items.Add("Pulsera");
+                    ddlCategoria.Items.Add("Dije");
+                    ddlCategoria.Items.Add("Juego");
+                    ddlCategoria.Items.Add("Arete");
+                    ddlCategoria.Items.Add("Anillo");
+                    break;
+                case "3":
+                    ddlCategoria.Items.Clear();
+                    ddlCategoria.Items.Add("-Seleccionar-");
+                    ddlCategoria.Items.Add("Omega");
+                    ddlCategoria.Items.Add("Cadena");
+                    ddlCategoria.Items.Add("Pulsera");
+                    ddlCategoria.Items.Add("Arete");
+                    ddlCategoria.Items.Add("Juego");
+                    ddlCategoria.Items.Add("Aro");
+                    ddlCategoria.Items.Add("Anillo");
+                    break;
+                default:
+                    ddlCategoria.Items.Clear();
+                    ddlCategoria.Items.Add("-Seleccionar-");
+                    ddlCategoria.Items.Add("Cadena");
+                    ddlCategoria.Items.Add("Pulsera");
+                    ddlCategoria.Items.Add("Dije");
+                    ddlCategoria.Items.Add("Arete");
+                    ddlCategoria.Items.Add("Juego");
+                    ddlCategoria.Items.Add("Anillo");
+                    break;
             }
         }
 
