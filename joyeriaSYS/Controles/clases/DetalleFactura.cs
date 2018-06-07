@@ -15,15 +15,22 @@ namespace joyeriaSYS.Controles.clases
         public DEF_DETALLE_FACTURA Actualizar(DEF_DETALLE_FACTURA objeto)
         {
             var actualizado = new DEF_DETALLE_FACTURA();
-            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            try
             {
-                actualizado = contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idDetalleFactura == objeto.idDetalleFactura).FirstOrDefault();
-                actualizado.CantidadProducto = objeto.CantidadProducto;
-                actualizado.idFactura = objeto.idFactura;
-                actualizado.idProducto = objeto.idProducto;
-                actualizado.CantidadDevuelta = objeto.CantidadDevuelta;
-                contexto.SaveChanges();
+                using (JoyeriaEntities contexto = new JoyeriaEntities())
+                {
+                    actualizado = contexto.DEF_DETALLE_FACTURA.Where(cat => cat.idDetalleFactura == objeto.idDetalleFactura).FirstOrDefault();
+                    actualizado.CantidadProducto = objeto.CantidadProducto;
+                    actualizado.idFactura = objeto.idFactura;
+                    actualizado.idProducto = objeto.idProducto;
+                    actualizado.CantidadDevuelta = objeto.CantidadDevuelta;
+                    contexto.SaveChanges();
+                }
+            }catch (Exception ex)
+            {
+                var err = ex.Message;
             }
+            
             return actualizado;
         }
 
@@ -31,7 +38,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.ToList().OrderByDescending(det => det.idDetalleFactura);
+                return contexto.DEF_DETALLE_FACTURA.ToList().OrderBy(det => det.idDetalleFactura);
             }
         }
         
@@ -39,7 +46,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
+                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idDetalleFactura == objeto.idDetalleFactura).ToList().OrderBy(det => det.idDetalleFactura);
             }
         }
 
@@ -47,7 +54,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idFactura == objeto.idFactura).ToList().OrderByDescending(det => det.idDetalleFactura);
+                return contexto.DEF_DETALLE_FACTURA.Where(def => def.idFactura == objeto.idFactura).ToList().OrderBy(det => det.idDetalleFactura);
             }
         }
 
@@ -76,10 +83,18 @@ namespace joyeriaSYS.Controles.clases
 
         public DEF_DETALLE_FACTURA ConsultarPorIdFacturaYIdProducto(DEF_DETALLE_FACTURA objeto)
         {
-            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            var resultado = new DEF_DETALLE_FACTURA();
+            try
             {
-                return contexto.DEF_DETALLE_FACTURA.Where(det => det.idFactura == objeto.idFactura && det.idProducto == objeto.idProducto).FirstOrDefault();
+                using (JoyeriaEntities contexto = new JoyeriaEntities())
+                {
+                    resultado = contexto.DEF_DETALLE_FACTURA.Where(det => det.idFactura == objeto.idFactura && det.idProducto == objeto.idProducto).FirstOrDefault();
+                }
+            }catch (Exception ex)
+            {
+                var err = ex.Message;
             }
+            return resultado;
         }
 
         public DEF_DETALLE_FACTURA Eliminar(DEF_DETALLE_FACTURA objeto)

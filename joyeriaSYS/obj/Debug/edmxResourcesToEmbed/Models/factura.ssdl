@@ -100,7 +100,7 @@
     <Property Name="Inventario" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'JoyeriaPRUEBAS.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Joyeria.dbo.Vista_ProductosPorDetalleFactura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Vista_ProductosPorDetalleFactura">
     <Key>
       <PropertyRef Name="idProducto" />
@@ -221,6 +221,18 @@ warning 6002: The table/view 'JoyeriaPRUEBAS.dbo.Vista_ProductosPorDetalleFactur
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_CantidadProductosEnLaFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_SaldoDeFacturaCancelada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_SaldoDeFacturaNOCancelada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoFactura" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="JoyeriaModelStoreContainer">
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />

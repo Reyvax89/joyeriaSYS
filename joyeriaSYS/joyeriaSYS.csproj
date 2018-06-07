@@ -156,6 +156,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="frmCrearFactura.aspx" />
     <Content Include="frmImprimirFacturas.aspx" />
+    <Content Include="frmLeerFacturaCanceladas.aspx" />
     <Content Include="Imagenes\fondo_negro.png" />
     <Content Include="Imagenes\icon.png" />
     <Content Include="Imagenes\Logo.png" />
@@ -266,6 +267,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controles\clases\ProcedimientosAlmacenados.cs" />
     <Compile Include="Controles\clases\Roles.cs" />
     <Compile Include="Controles\clases\Usuarios.cs" />
     <Compile Include="Controles\clases\Categoria.cs" />
@@ -303,6 +305,13 @@
     </Compile>
     <Compile Include="frmImprimirFacturas.aspx.designer.cs">
       <DependentUpon>frmImprimirFacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmLeerFacturaCanceladas.aspx.cs">
+      <DependentUpon>frmLeerFacturaCanceladas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmLeerFacturaCanceladas.aspx.designer.cs">
+      <DependentUpon>frmLeerFacturaCanceladas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs" />
     <Compile Include="Models\AspNetRoles.cs">

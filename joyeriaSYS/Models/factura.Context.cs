@@ -12,6 +12,8 @@ namespace joyeriaSYS.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class JoyeriaEntities : DbContext
     {
@@ -34,5 +36,41 @@ namespace joyeriaSYS.Models
         public virtual DbSet<DEF_DETALLE_FACTURA> DEF_DETALLE_FACTURA { get; set; }
         public virtual DbSet<Vista_ProductosPorDetalleFactura> Vista_ProductosPorDetalleFactura { get; set; }
         public virtual DbSet<FAC_FACTURA> FAC_FACTURA { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> SP_CantidadProductosEnLaFactura(Nullable<int> noFactura)
+        {
+            var noFacturaParameter = noFactura.HasValue ?
+                new ObjectParameter("NoFactura", noFactura) :
+                new ObjectParameter("NoFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_CantidadProductosEnLaFactura", noFacturaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> SP_SaldoDeFacturaCancelada(Nullable<int> noFactura)
+        {
+            var noFacturaParameter = noFactura.HasValue ?
+                new ObjectParameter("NoFactura", noFactura) :
+                new ObjectParameter("NoFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("SP_SaldoDeFacturaCancelada", noFacturaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> SP_SaldoDeFacturaNOCancelada(Nullable<int> noFactura)
+        {
+            var noFacturaParameter = noFactura.HasValue ?
+                new ObjectParameter("NoFactura", noFactura) :
+                new ObjectParameter("NoFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("SP_SaldoDeFacturaNOCancelada", noFacturaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun(Nullable<int> noFactura)
+        {
+            var noFacturaParameter = noFactura.HasValue ?
+                new ObjectParameter("NoFactura", noFactura) :
+                new ObjectParameter("NoFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun", noFacturaParameter);
+        }
     }
 }

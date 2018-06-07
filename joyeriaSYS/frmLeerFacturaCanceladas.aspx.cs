@@ -1,9 +1,4 @@
 ﻿using System;
-using Gma.QrCodeNet.Encoding;
-using System.Drawing;
-using System.IO;
-using Gma.QrCodeNet.Encoding.Windows.Render;
-using System.Drawing.Imaging;
 using System.Data;
 using System.Web.UI;
 using System.Collections.Generic;
@@ -11,19 +6,17 @@ using System.Web.UI.WebControls;
 using joyeriaSYS.Controles.clases;
 using joyeriaSYS.Models;
 using joyeriaSYS.Enum;
-using System.Data.SqlClient;
-using System.Data.Entity;
 
 namespace joyeriaSYS
 {
-    public partial class LeerQR : Page
+    public partial class frmLeerFacturaCanceladas : System.Web.UI.Page
     {
+
         private Producto objProd = new Producto();
         private Clientes objCli = new Clientes();
         private Factura objFact = new Factura();
         private Categoria objCat = new Categoria();
         private DetalleFactura objDeF = new DetalleFactura();
-        private ProcedimientosAlmacenados objProcedimientos = new ProcedimientosAlmacenados();
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((string)Session["username"] == "" || Session["username"] == null)
@@ -34,7 +27,7 @@ namespace joyeriaSYS
             {
                 List<string> pages = new List<string>();
                 pages = (List<string>)Session["paginas"];
-                if (!pages.Exists(x => string.Equals(x, "LeerQR", StringComparison.OrdinalIgnoreCase)))
+                if (!pages.Exists(x => string.Equals(x, "frmLeerFacturaCanceladas", StringComparison.OrdinalIgnoreCase)))
                 {
                     Response.Redirect("~/AccesoDenegado.aspx");
                 }
@@ -47,160 +40,52 @@ namespace joyeriaSYS
             }
         }
         #region Eventos
-        protected void btnCalcular_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var tempFactura = new FAC_FACTURA();
-                tempFactura.NoFactura = Convert.ToInt32(ddlFactura.SelectedValue);
-                tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
-                var SaldoActual = tempFactura.saldo;
-                var listaProductos = new List<PRO_PRODUCTO>();
-                var listaDetalles = new List<DEF_DETALLE_FACTURA>();
-
-                foreach (GridViewRow mRow in gvwDetalleFactura.Rows)
-                {
-                    CheckBox mCheck = (CheckBox)mRow.FindControl("cbSelect");
-                    if (mCheck != null)
-                    {
-                        if (mCheck.Checked)
-                        {
-                            var tempProducto = new PRO_PRODUCTO();
-                            var tempCategoria = new CAT_CATEGORIA();
-                            var splitProducto = (mRow.Cells[0].Text.ToString().Trim()).Split(',');
-                            var splitNombreProducto = splitProducto[0];
-
-                            tempCategoria.Nombre = splitProducto[1].TrimStart();
-                            tempCategoria = objCat.ConsultarPorNombreDeCategoria(tempCategoria);
-
-                            tempProducto.CodigoNumerico = Convert.ToInt32(mRow.Cells[1].Text.ToString().Trim());
-                            tempProducto.IdCategoria = tempCategoria.idCategoria;
-                            tempProducto.NombreProducto = splitNombreProducto;
-                            tempProducto = objProd.ConsultarProductoPorNombreCodigoCategoria(tempProducto);
-                            tempProducto.Inventario = tempProducto.Inventario + 1;
-                            SaldoActual = SaldoActual - tempProducto.Precio;
-                            txtSaldoActual.Text = SaldoActual.ToString();
-                            Session["SaldoActual"] = SaldoActual;
-                            var tempDetalleFactura = new DEF_DETALLE_FACTURA();
-                            tempDetalleFactura.idFactura = tempFactura.idFactura;
-                            tempDetalleFactura.idProducto = tempProducto.IdProducto;
-                            tempDetalleFactura = objDeF.ConsultarPorIdFacturaYIdProducto(tempDetalleFactura);
-                            tempDetalleFactura.CantidadDevuelta = tempDetalleFactura.CantidadDevuelta + 1;
-                            
-                            objProd.Actualizar(tempProducto);
-                            objDeF.Actualizar(tempDetalleFactura);
-                        }
-                    }
-                }
-                var saldoSinActualizar = objProcedimientos.SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun(tempFactura.NoFactura);
-                tempFactura.saldo = saldoSinActualizar;
-                    tempFactura.estado = Convert.ToInt32(EstadoFacturas.Cancelada);
-                tempFactura.totalDevuelto = tempFactura.saldo - saldoSinActualizar;
-                    objFact.Actualizar(tempFactura);
-                cargarTablaFacturas(tempFactura.NoFactura);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Factura cancelada con éxito, el monto a pagar es: "+ SaldoActual +"')", true);
-            }
-            catch (Exception ex)
-            {
-                var err = ex.Message;
-                throw ex;
-            }
-        }
-        
         protected void ddlFactura_DropDownChanged(object sender, EventArgs e)
         {
             var codFactura = (ddlFactura.Text != "") ? Convert.ToInt32(ddlFactura.Text) : 0;
             if (codFactura != 0)
             {
-                    gestionarCargaDatos(codFactura);
+                gestionarCargaDatos(codFactura);
             }
         }
-        protected void btnCalcularSaldo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var tempFactura = new FAC_FACTURA();
-                tempFactura.NoFactura = Convert.ToInt32(ddlFactura.SelectedValue);
-                tempFactura = objFact.ConsultaPorNumeroDeFactura(tempFactura);
-                var SaldoActual = tempFactura.saldo;
 
-                foreach (GridViewRow mRow in gvwDetalleFactura.Rows)
-                {
-                    CheckBox mCheck = (CheckBox)mRow.FindControl("cbSelect");
-                    if (mCheck != null)
-                    {
-                        if (mCheck.Checked)
-                        {
-                            var tempProducto = new PRO_PRODUCTO();
-                            var tempCategoria = new CAT_CATEGORIA();
-                            var splitProducto = mRow.Cells[0].Text.ToString().Trim().Split(',');
-                            var splitNombreProducto = splitProducto[0];
-
-                            tempCategoria.Nombre = splitProducto[1].TrimStart();
-                            tempCategoria = objCat.ConsultarPorNombreDeCategoria(tempCategoria);
-
-                            tempProducto.CodigoNumerico = Convert.ToInt32(mRow.Cells[1].Text.ToString().Trim());
-                            tempProducto.IdCategoria = tempCategoria.idCategoria;
-                            tempProducto.NombreProducto = splitNombreProducto;
-                            tempProducto = objProd.ConsultarProductoPorNombreCodigoCategoria(tempProducto);
-                            SaldoActual = SaldoActual - tempProducto.Precio;
-                            txtSaldoActual.Text = SaldoActual.ToString();
-                            Session["SaldoActual"] = SaldoActual.ToString();
-                            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + mRow.Cells[2].Text + "')", true);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var err = ex.Message;
-                throw ex;
-            }
-        }
-        
         #endregion
         #region Metodos privados
-        private void gestionarCargaDatos(int codProducto, int codFactura)
-        {
-            try
-            {
-                var facturaActual = new FAC_FACTURA();
-                var detFacturaActual = new DEF_DETALLE_FACTURA();
-                var productoActual = new PRO_PRODUCTO();
-                productoActual.CodigoNumerico = codProducto;
-                productoActual = objProd.ConsultarPorCodigoProducto(productoActual);
-                facturaActual.NoFactura = codFactura;
-                facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
-                detFacturaActual.idFactura = facturaActual.idFactura;
-                detFacturaActual.idProducto = productoActual.IdProducto;
-                detFacturaActual = objDeF.ConsultarPorIdFacturaYIdProducto(detFacturaActual);
+        //private void gestionarCargaDatos(int codProducto, int codFactura)
+        //{
+        //    try
+        //    {
+        //        var facturaActual = new FAC_FACTURA();
+        //        var detFacturaActual = new DEF_DETALLE_FACTURA();
+        //        var productoActual = new PRO_PRODUCTO();
+        //        productoActual.CodigoNumerico = codProducto;
+        //        productoActual = objProd.ConsultarPorCodigoProducto(productoActual);
+        //        facturaActual.NoFactura = codFactura;
+        //        facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
+        //        detFacturaActual.idFactura = facturaActual.idFactura;
+        //        detFacturaActual.idProducto = productoActual.IdProducto;
+        //        detFacturaActual = objDeF.ConsultarPorIdFacturaYIdProducto(detFacturaActual);
 
-                txtSaldoActual.Text = Session["SaldoActual"].ToString();
-                CargarTablaDetalleFacturas(facturaActual.idFactura, txtCriterio.Text);
-                //poner en detalle un campo para ir descontando los productos escaneados
-
-                cargarTablaFacturas(codFactura);
-            }
-            catch (Exception ex)
-            {
-                var err = ex.Message;
-            }
-        }
+        //        cargarTablaFacturas(codFactura);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var err = ex.Message;
+        //    }
+        //}
         private void gestionarCargaDatos(int codFactura)
         {
             try
             {
                 var facturaActual = new FAC_FACTURA();
                 var detFacturaActual = new DEF_DETALLE_FACTURA();
-                
-                decimal saldoTemp = objProcedimientos.SP_SaldoDeFacturaNOCancelada(codFactura);
                 facturaActual.NoFactura = codFactura;
                 facturaActual = objFact.ConsultaPorNumeroDeFactura(facturaActual);
-                
-                CargarTablaDetalleFacturas(facturaActual.idFactura, txtCriterio.Text);
-                txtSaldoActual.Text = saldoTemp.ToString();
 
-                Session["SaldoActual"] = saldoTemp.ToString();
+                CargarTablaDetalleFacturas(facturaActual.idFactura, "");
+
+                //poner en detalle un campo para ir descontando los productos escaneados
+                Session["SaldoActual"] = facturaActual.saldo.ToString();
                 cargarTablaFacturas(codFactura);
             }
             catch (Exception ex)
@@ -208,7 +93,7 @@ namespace joyeriaSYS
                 var err = ex.Message;
             }
         }
-        
+
         private void cargarTablaFacturas(int codFactura)
         {
             try
@@ -257,7 +142,7 @@ namespace joyeriaSYS
             try
             {
                 var dt = new DataTable();
-                var rows = objFact.ConsultarFacturasFinalizadas();
+                var rows = objFact.ConsultarFacturasCanceladas();
 
                 ddlFactura.DataTextField = "NoFactura";
                 ddlFactura.DataValueField = "NoFacturaValue";
@@ -307,7 +192,7 @@ namespace joyeriaSYS
             try
             {
                 var dt = new DataTable();
-                var rows = objDeF.ConsultarPorIdFactura(-1,"");
+                var rows = objDeF.ConsultarPorIdFactura(-1, "");
                 gvwDetalleFactura.DataSource = null;
                 gvwDetalleFactura.DataBind();
                 if (idFactura != -1)
@@ -320,13 +205,13 @@ namespace joyeriaSYS
                 dt.Columns.Add("codProducto", typeof(System.String));
                 dt.Columns.Add("CantidadProducto", typeof(System.String));
                 dt.Columns.Add("Regresado", typeof(System.String));
-                
+
                 foreach (Vista_ProductosPorDetalleFactura r in rows)
                 {
                     // Crear una fila por cada unidad del producto.
                     int cantidadDeProductos = r.CantidadProducto;
                     int cantidadDeDevueltos = r.CantidadDevuelta;
-                 
+
                     for (int i = 0; i < cantidadDeProductos; i++)
                     {
                         var tempCategoria = new CAT_CATEGORIA();
@@ -336,17 +221,18 @@ namespace joyeriaSYS
                         // Crear la fila, asignar valores y agregarla.
                         DataRow fila = dt.NewRow();
                         //fila["idFactura"] = r.idFactura;
-                        fila["idProducto"] = r.NombreProducto +", "+ tempCategoria.Nombre;
-                        
+                        fila["idProducto"] = r.NombreProducto + ", " + tempCategoria.Nombre;
+
                         fila["codProducto"] = r.CodigoNumerico;
                         // La catidad siempre va ser 1.
                         fila["CantidadProducto"] = "1";
                         // Ver si esta marcado.
-                        if(cantidadDeDevueltos > 0)
+                        if (cantidadDeDevueltos > 0)
                         {
                             fila["Regresado"] = "true";
                             cantidadDeDevueltos--;
-                        }else
+                        }
+                        else
                         {
                             fila["Regresado"] = "false";
                         }
@@ -363,7 +249,7 @@ namespace joyeriaSYS
         }
         #endregion
         #region Metodos publicos
-        public List<int> getListaMarcados ()
+        public List<int> getListaMarcados()
         {
             return Session["marcados"] as List<int>;
         }
@@ -404,10 +290,5 @@ namespace joyeriaSYS
             Session["valorDelProducto"] = ValorDevuelto;
         }
         #endregion
-
-        protected void txtCriterio_TextChanged(object sender, EventArgs e)
-        {
-            CargarTablaDetalleFacturas(Convert.ToInt32(ddlFactura.SelectedValue), txtCriterio.Text);
-        }
     }
 }

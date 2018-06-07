@@ -14,23 +14,30 @@ namespace joyeriaSYS.Controles.clases
         public FAC_FACTURA Actualizar(FAC_FACTURA objeto)
         {
             var actualizado = new FAC_FACTURA();
-            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            try
             {
-                actualizado = contexto.FAC_FACTURA.Where(cat => cat.idFactura == objeto.idFactura).FirstOrDefault();
-                actualizado.CodTabla = objeto.CodTabla;
-                actualizado.estado = objeto.estado;
-                actualizado.fechaCreacion = objeto.fechaCreacion;
-                actualizado.fechaLiquidacion = objeto.fechaLiquidacion;
-                actualizado.montoFactura = objeto.montoFactura;
-                actualizado.NoFactura = objeto.NoFactura;
-                actualizado.saldo = objeto.saldo;
-                actualizado.totalDevuelto = objeto.totalDevuelto;
-                actualizado.totalPiezas = objeto.totalPiezas;
-                actualizado.idCliente = objeto.idCliente;
-                actualizado.idCategoriaMetal = objeto.idCategoriaMetal;
-                actualizado.idUsuario = objeto.idUsuario;
-                contexto.SaveChanges();
+                using (JoyeriaEntities contexto = new JoyeriaEntities())
+                {
+                    actualizado = contexto.FAC_FACTURA.Where(cat => cat.idFactura == objeto.idFactura).FirstOrDefault();
+                    //actualizado.CodTabla = objeto.CodTabla;
+                    actualizado.estado = objeto.estado;
+                    actualizado.fechaCreacion = objeto.fechaCreacion;
+                    actualizado.fechaLiquidacion = objeto.fechaLiquidacion;
+                    actualizado.montoFactura = objeto.montoFactura;
+                    actualizado.NoFactura = objeto.NoFactura;
+                    actualizado.saldo = objeto.saldo;
+                    actualizado.totalDevuelto = objeto.totalDevuelto;
+                    actualizado.totalPiezas = objeto.totalPiezas;
+                    actualizado.idCliente = objeto.idCliente;
+                    actualizado.idCategoriaMetal = objeto.idCategoriaMetal;
+                    actualizado.idUsuario = objeto.idUsuario;
+                    contexto.SaveChanges();
+                }
+            }catch(Exception ex)
+            {
+                var err = ex.Message;
             }
+            
             return actualizado;
         }
 
@@ -47,6 +54,14 @@ namespace joyeriaSYS.Controles.clases
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
                 return contexto.FAC_FACTURA.Where(pro => pro.estado==1).ToList().OrderByDescending(fac => fac.NoFactura);
+            }
+        }
+
+        public IEnumerable<FAC_FACTURA> ConsultarFacturasCanceladas()
+        {
+            using (JoyeriaEntities contexto = new JoyeriaEntities())
+            {
+                return contexto.FAC_FACTURA.Where(pro => pro.estado == 2).ToList().OrderByDescending(fac => fac.NoFactura);
             }
         }
 

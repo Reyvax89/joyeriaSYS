@@ -122,5 +122,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_CantidadProductosEnLaFactura" FunctionName="JoyeriaModel.Store.SP_CantidadProductosEnLaFactura" />
+    <FunctionImportMapping FunctionImportName="SP_SaldoDeFacturaCancelada" FunctionName="JoyeriaModel.Store.SP_SaldoDeFacturaCancelada" />
+    <FunctionImportMapping FunctionImportName="SP_SaldoDeFacturaNOCancelada" FunctionName="JoyeriaModel.Store.SP_SaldoDeFacturaNOCancelada" />
+    <FunctionImportMapping FunctionImportName="SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun" FunctionName="JoyeriaModel.Store.SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun" />
   </EntityContainerMapping>
 </Mapping>

@@ -52,6 +52,7 @@ namespace joyeriaSYS.Account
                         pages.Add("LeerQR");
                         pages.Add("QR");
                         pages.Add("Register");
+                        pages.Add("frmLeerFacturaCanceladas");
                         Session["paginas"] = pages;
                     }
                     if (result.IdRol == 2)
@@ -61,6 +62,7 @@ namespace joyeriaSYS.Account
                         pages.Add("frmCrearFactura");
                         pages.Add("LeerQR");
                         pages.Add("frmImprimirFacturas");
+                        pages.Add("frmLeerFacturaCanceladas");
                         Session["paginas"] = pages;
                     }
                    

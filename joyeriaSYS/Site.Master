@@ -46,13 +46,13 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
 						<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
-							<a runat="server" href="~/frmMantenimientoCategoria.aspx">Administrar Metales</a>
+							<a runat="server" href="~/frmMantenimientoCategoria.aspx">Adm. Metales</a>
 						</li>
 						<li class="<%:Page.Title=="Administrar clientes"?"active":""%>">
-							<a runat="server" href="~/frmMantenimientoClientes.aspx">Administrar clientes</a>
+							<a runat="server" href="~/frmMantenimientoClientes.aspx">Adm. clientes</a>
 						</li>
 						<li class="<%:Page.Title=="Administrar inventario"?"active":""%>">
-							<a runat="server" href="~/QR.aspx">Administrar inventario</a>
+							<a runat="server" href="~/QR.aspx">Adm. inventario</a>
 						</li>
 						<li class="<%:Page.Title=="Crear factura"?"active":""%>">
 							<a runat="server" href="~/frmCrearFactura.aspx">Crear factura</a>
@@ -60,8 +60,11 @@
 						<li class="<%:Page.Title=="Liquidar factura"?"active":""%>">
 							<a runat="server" href="~/LeerQR.aspx">Liquidar factura</a>
 						</li>
+                        <li class="<%:Page.Title=="Ver Facturas Liquidadas"?"active":""%>">
+							<a runat="server" href="~/frmLeerFacturaCanceladas.aspx">Facturas Liquidadas</a>
+						</li>
 						<li class="<%:Page.Title=="Register"?"active":""%>">
-							<a runat="server" href="~/Account/Register.aspx">Administrar usuarios</a>
+							<a runat="server" href="~/Account/Register.aspx">Adm. usuarios</a>
 						</li>
                         <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
                     </ul>

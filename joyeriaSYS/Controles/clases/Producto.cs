@@ -49,11 +49,11 @@ namespace joyeriaSYS.Controles.clases
             {
                 if(idCategoria == 4)
                 {
-                    return contexto.PRO_PRODUCTO.Where(pro => pro.IdCategoria == 1 || pro.IdCategoria == 2).ToList().OrderByDescending(pro => pro.IdProducto);
+                    return contexto.PRO_PRODUCTO.Where(pro => pro.IdCategoria == 1 || pro.IdCategoria == 2).ToList().OrderBy(pro => pro.CodigoNumerico);
                 }
                 else
                 {
-                    return contexto.PRO_PRODUCTO.ToList().Where(pro => pro.IdCategoria == idCategoria).OrderByDescending(pro => pro.IdProducto);
+                    return contexto.PRO_PRODUCTO.ToList().Where(pro => pro.IdCategoria == idCategoria).OrderBy(pro => pro.CodigoNumerico);
                 }
             }
         }

@@ -23,6 +23,7 @@ namespace joyeriaSYS
         private Factura objFact = new Factura();
         private DetalleFactura objDeF = new DetalleFactura();
         private Usuarios objUsu = new Usuarios();
+        private ProcedimientosAlmacenados objProcedimientos = new ProcedimientosAlmacenados();
         private string[,] arregloTemporal = new string[35, 3];
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,7 +45,7 @@ namespace joyeriaSYS
                 Session["Factura"] = "-1";
                 cargarClientes();
                 cargarMetales();
-                cargarCategorias();
+                cargarCategorias("1");
                 ddlMetal.SelectedValue = "1";
                 ddlProducto.Items.Add("-Ninguno-");
                 CargarTablaFacturas(txtCriterio.Text);
@@ -70,6 +71,13 @@ namespace joyeriaSYS
             cargarProductosPorIdCategoria(tempFactura.idCategoriaMetal);
             DynamicHyperLink1.Visible = false;
             DynamicHyperLink1.NavigateUrl = "~/ExcelFacturas/000Machote.xls";
+            if(tempFactura.estado == 0)
+            {
+                btnInsertarActualizar.Enabled = true;
+            }else
+            {
+                btnInsertarActualizar.Enabled = false;
+            }
         }
         protected void gvwDetalleFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -141,6 +149,7 @@ namespace joyeriaSYS
             hdfIdDetalleFactura.Value = "-1";
             hdfIdFactura.Value = "-1";
             Session["Factura"] = "-1";
+            btnInsertarActualizar.Enabled = true;
 
             cargarClientes();
             cargarMetales();
@@ -179,7 +188,7 @@ namespace joyeriaSYS
             objFact.Actualizar(tempFactura);
         }
 
-        private void cargarCategorias(string metal = "1")
+        private void cargarCategorias(string metal)
         {
             switch (metal)
             {
@@ -203,6 +212,7 @@ namespace joyeriaSYS
                     ddlCategoria.Items.Add("Arete");
                     ddlCategoria.Items.Add("Juego");
                     ddlCategoria.Items.Add("Aro");
+                    ddlCategoria.Items.Add("Dije");
                     ddlCategoria.Items.Add("Anillo");
                     break;
                 default:
@@ -581,21 +591,24 @@ namespace joyeriaSYS
             {
                 //No imprime nada
                 DynamicHyperLink1.Visible = false;
+                btnInsertarActualizar.Enabled = true;
             }
             else
             {
+                btnInsertarActualizar.Enabled = false;
+                var tempIdFacturaDeDetalleFactura = new DEF_DETALLE_FACTURA();
+                tempIdFacturaDeDetalleFactura.idFactura = Convert.ToInt32(hdfIdFactura.Value);
+
                 var metal = "";
                 var contadorDeFilas = 0;
-                var rows = objDeF.ConsultarPorIdFactura(Convert.ToInt32(hdfIdFactura.Value), txtCriterio.Text);
+                var rows = objDeF.ConsultarDetalleFacturaPorIdFactura(tempIdFacturaDeDetalleFactura);
                 var datosDeLaFactura = new FAC_FACTURA();
                 var tempCategoria = new CAT_CATEGORIA();
                 var fechaCreacion = CreacionDeFechaDesdeElTxtFecha();
 
                 datosDeLaFactura.idFactura = Convert.ToInt32(hdfIdFactura.Value);
-
-                // obteber el objeto
                 datosDeLaFactura = objFact.ConsultarPorId(datosDeLaFactura).FirstOrDefault();
-
+                
                 // actulizar el estado de la factura
                 if(datosDeLaFactura.estado == Convert.ToInt32(EstadoFacturas.EnCreacion))
                 {
@@ -607,7 +620,7 @@ namespace joyeriaSYS
                 metal = tempCategoria.Nombre;
                 llenaArregloConCeros();
                 // Recorrer las filas.
-                foreach (Vista_ProductosPorDetalleFactura r in rows)
+                foreach (DEF_DETALLE_FACTURA r in rows)
                 {
                     //// Crear una fila por cada unidad del producto.
                     var tempProducto = new PRO_PRODUCTO();
@@ -625,6 +638,7 @@ namespace joyeriaSYS
                 contadorDeFilas = 0;
                 //string sFile = "C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\000Machote.xls";
                 string sFile = "C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\000Machote.xls";
+                //string sFile = "C:\\inetpub\\wwwroot\\JoyeriaPRUEBAS\\ExcelFacturas\\000Machote.xls";
                 //string sTemplate = "C:\\Template.xls";
                 object opc = Type.Missing;
 
@@ -660,6 +674,7 @@ namespace joyeriaSYS
                     excelSheet.Cells[48, 3] = fechaCreacion.AddDays(50);
 
                     excelSheet.SaveAs("C:\\inetpub\\wwwroot\\joyeriasys\\ExcelFacturas\\" + datosDeLaFactura.NoFactura + ".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                    //excelSheet.SaveAs("C:\\inetpub\\wwwroot\\JoyeriaPRUEBAS\\ExcelFacturas\\" + datosDeLaFactura.NoFactura + ".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
                     //excelSheet.SaveAs("C:\\joyeriaSYS\\joyeriaSYS\\ExcelFacturas\\" + datosDeLaFactura.NoFactura + ".xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, opc, opc, true, false, Excel.XlSaveAsAccessMode.xlNoChange, Excel.XlSaveConflictResolution.xlLocalSessionChanges, opc, opc);
                     //excelApp.Visible = true;
 
@@ -686,7 +701,7 @@ namespace joyeriaSYS
                 }
                 catch (Exception ex)
                 {
-                    //Console.Error.Write(ex.Message);
+                    Console.Error.Write(ex.Message);
                     excelBook.Close();
                     excelApp.Quit();
                 }
@@ -700,13 +715,18 @@ namespace joyeriaSYS
             var mes = Convert.ToInt32(fechaActual.Month.ToString());
             var año = Convert.ToInt32(fechaActual.Year.ToString());
             DateTime fechaCreacion = new DateTime(año, mes, dia);
+            var cantidadPiezasFinal = objProcedimientos.SP_CantidadProductosEnLaFactura(factura.NoFactura);
+            var saldoFinal = objProcedimientos.SP_SaldoDeFacturaNOCancelada(factura.NoFactura);
 
             factura.estado = Convert.ToInt32(EstadoFacturas.Finalizada);
             factura.fechaCreacion = fechaCreacion;
             factura.fechaLiquidacion = fechaCreacion.AddDays(50);
             factura.idUsuario = Convert.ToInt32(Session["userId"]);
-            var actulizado = objFact.Actualizar(factura);
-            return actulizado;
+            factura.totalPiezas = cantidadPiezasFinal;
+            factura.saldo = saldoFinal;
+            factura.montoFactura = saldoFinal;
+            var actualizado = objFact.Actualizar(factura);
+            return actualizado;
         }
 
         private void llenaArregloConCeros()

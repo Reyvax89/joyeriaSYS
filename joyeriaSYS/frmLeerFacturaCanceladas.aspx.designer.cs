@@ -10,51 +10,60 @@
 namespace joyeriaSYS {
     
     
-    public partial class SiteMaster {
+    public partial class frmLeerFacturaCanceladas {
         
         /// <summary>
-        /// head control.
+        /// udpLeerFactura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.UpdatePanel udpLeerFactura;
         
         /// <summary>
-        /// imgLogo control.
+        /// hdfIdFactura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLogo;
+        protected global::System.Web.UI.WebControls.HiddenField hdfIdFactura;
         
         /// <summary>
-        /// lblUserName control.
+        /// hdfIdDetalleFactura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.HiddenField hdfIdDetalleFactura;
         
         /// <summary>
-        /// btnSession control.
+        /// ddlFactura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink btnSession;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFactura;
         
         /// <summary>
-        /// MainContent control.
+        /// gvwFacturas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.GridView gvwFacturas;
+        
+        /// <summary>
+        /// gvwDetalleFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwDetalleFactura;
     }
 }

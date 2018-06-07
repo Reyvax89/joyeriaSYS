@@ -138,6 +138,18 @@
       <End Role="FAC_FACTURA" EntitySet="FAC_FACTURA" />
       <End Role="DEF_DETALLE_FACTURA" EntitySet="DEF_DETALLE_FACTURA" />
     </AssociationSet>
+    <FunctionImport Name="SP_CantidadProductosEnLaFactura" ReturnType="Collection(Int32)">
+      <Parameter Name="NoFactura" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SaldoDeFacturaCancelada" ReturnType="Collection(Decimal)">
+      <Parameter Name="NoFactura" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SaldoDeFacturaNOCancelada" ReturnType="Collection(Decimal)">
+      <Parameter Name="NoFactura" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SaldoDeFacturaCanceladaSINActualizarLaFacturaAun" ReturnType="Collection(Decimal)">
+      <Parameter Name="NoFactura" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="DEF_DETALLE_FACTURA">
     <Key>

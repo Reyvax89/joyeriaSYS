@@ -1,10 +1,10 @@
-﻿<%@ Page Title="Liquidar factura" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LeerQR.aspx.cs" Inherits="joyeriaSYS.LeerQR" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmLeerFacturaCanceladas.aspx.cs" Inherits="joyeriaSYS.frmLeerFacturaCanceladas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<div class="container">
 		<div class="row">
             <br />
 			<div class="col-sm12 col-md-12">
-				<h1>Liquidar factura.</h1>
+				<h1>Consultar facturas.</h1>
 			</div>
 		</div>
 	</div>
@@ -30,39 +30,6 @@
 											<asp:DropDownList ID="ddlFactura" AutoPostBack="true" OnTextChanged="ddlFactura_DropDownChanged" Enabled="true" runat="server">
 											</asp:DropDownList>
 										</div>
-									</div>
-								</div>
-                                <div class="row margin-b 6u 12u$(xsmall)">
-							<div class="col-sm-5 col-md-3">
-								<%--<label for="demo-name">Búsqueda por código producto:</label>--%>
-							</div>
-							<div class="col-sm-7 col-md-3">
-								<asp:TextBox ID="txtCriterio" Visible="false" AutoPostBack="true" OnTextChanged="txtCriterio_TextChanged" runat="server"></asp:TextBox>
-                            </div>
-                        </div>
-								<%--<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-										<label for="demo-cliente">Leer los productos de la factura:</label>
-									</div>
-									<div class="col-sm-7 col-md-9">
-										<asp:TextBox ID="txtCodigo"  AutoPostBack="true" OnTextChanged="txtCodigo_TextChanged" placeholder="Código del Producto" runat="server"></asp:TextBox>
-									</div>
-								</div>--%>
-								<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-										<label for="demo-name">Saldo Actual:</label>
-									</div>
-									<div class="col-sm-7 col-md-9">
-										<asp:TextBox ID="txtSaldoActual" Enabled="false" AutoPostBack="false" runat="server" ></asp:TextBox>
-									</div>
-								</div>
-								<div class="row margin-b">
-									<div class="col-sm-5 col-md-3">
-												
-									</div>
-									<div class="col-sm-7 col-md-9">
-                                        <asp:Button ID="btnCalcularSaldo" runat="server" OnClick="btnCalcularSaldo_Click" Text="Calcular saldo hasta el momento" CssClass="btn btn-info" />
-										<asp:Button ID="btnCalcular" runat="server" OnClick="btnCalcular_Click" Visible="true" Text="Cancelar Factura" CssClass="btn btn-primary special" />
 									</div>
 								</div>
 							</div>
@@ -110,7 +77,7 @@
 								<asp:templatefield HeaderText="Regresado">
 									<itemtemplate>
 										<asp:checkbox ID="cbSelect"
-										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Regresado"))%>' Enabled="true"></asp:checkbox>
+										CssClass="gridCB" runat="server" Checked='<%# Convert.ToBoolean(Eval("Regresado"))%>' Enabled="false"></asp:checkbox>
 									</itemtemplate>
 								</asp:templatefield>
                             </Columns>
@@ -128,12 +95,6 @@
             </section>
         </ContentTemplate>
         <Triggers>
-            <%--<asp:AsyncPostBackTrigger ControlID="btnInsertarActualizar" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnFinalizar" EventName="Click" />--%>
-            <asp:AsyncPostBackTrigger ControlID="gvwDetalleFactura" EventName="SelectedIndexChanged" />
-            <asp:AsyncPostBackTrigger ControlID="btnCalcular" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnCalcularSaldo" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="txtCriterio" EventName="TextChanged" />
         </Triggers>
                 </asp:UpdatePanel>
     <%--<script src="Scripts/jquery-1.9.1.min.js"></script>--%>
