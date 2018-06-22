@@ -202,6 +202,7 @@ namespace joyeriaSYS
                     ddlCategoria.Items.Add("Juego");
                     ddlCategoria.Items.Add("Arete");
                     ddlCategoria.Items.Add("Anillo");
+                    ddlCategoria.Items.Add("Reloj");
                     break;
                 case "3":
                     ddlCategoria.Items.Clear();
@@ -214,6 +215,7 @@ namespace joyeriaSYS
                     ddlCategoria.Items.Add("Aro");
                     ddlCategoria.Items.Add("Dije");
                     ddlCategoria.Items.Add("Anillo");
+                    ddlCategoria.Items.Add("Reloj");
                     break;
                 default:
                     ddlCategoria.Items.Clear();
@@ -224,6 +226,7 @@ namespace joyeriaSYS
                     ddlCategoria.Items.Add("Arete");
                     ddlCategoria.Items.Add("Juego");
                     ddlCategoria.Items.Add("Anillo");
+                    ddlCategoria.Items.Add("Reloj");
                     break;
             }
         }
