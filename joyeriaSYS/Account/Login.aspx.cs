@@ -4,6 +4,7 @@ using System.Web.UI;
 using joyeriaSYS.Models;
 using joyeriaSYS.Controles.clases;
 using System.Collections.Generic;
+using System.Text;
 
 namespace joyeriaSYS.Account
 {
@@ -37,6 +38,7 @@ namespace joyeriaSYS.Account
                     // Set the session.
                     Session["username"] = result.UserName;
                     Session["userId"] = result.Id;
+                    Session["idRol"] = result.IdRol;
                     // Verificar el rol.
                     List<string> pages = new List<string>();
                     if (result.IdRol == 1)
@@ -70,7 +72,7 @@ namespace joyeriaSYS.Account
                 }
                 else
                 {
-                    FailureText.Text = "Usuario o correo inválido.";
+                    FailureText.Text = "Usuario inválido.";
                     ErrorMessage.Visible = true;
                 }
             }

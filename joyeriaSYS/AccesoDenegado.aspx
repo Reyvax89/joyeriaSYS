@@ -4,9 +4,9 @@
 
     <div class="jumbotron">
         <center>
-            <h1>Acceso denegado</h1>
+            <h1>Acceso restringido</h1>
 			<br>
-			<p>Este usuario no tiene permisos para ver esta página.</p>
+			<p>No posee los permisos necesarios para acceder a la página.</p>
         </center>
     </div>
 

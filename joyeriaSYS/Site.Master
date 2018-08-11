@@ -44,8 +44,8 @@
                         <asp:Image ID="imgLogo" ImageUrl="~/Imagenes/Logo.png" runat="server" /></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-						<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
+                    <ul class="nav navbar-nav" id="menuPrincipal" runat="server">
+					<%--	<li class="<%:Page.Title=="Administrar Metales"?"active":""%>">
 							<a runat="server" href="~/frmMantenimientoCategoria.aspx">Adm. Metales</a>
 						</li>
 						<li class="<%:Page.Title=="Administrar clientes"?"active":""%>">
@@ -65,8 +65,7 @@
 						</li>
 						<li class="<%:Page.Title=="Register"?"active":""%>">
 							<a runat="server" href="~/Account/Register.aspx">Adm. usuarios</a>
-						</li>
-                        <%--<li><a runat="server" href="~/Account/RegisterExternalLogin.aspx">Contáctenos</a></li>--%>
+						</li>--%>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 						<asp:Label ID="lblUserName" runat="server" Text="" CssClass="lbl username"></asp:Label>

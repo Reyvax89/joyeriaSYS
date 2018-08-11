@@ -71,8 +71,52 @@ namespace joyeriaSYS
         {
             if ((string)Session["username"] != "" && Session["username"] != null)
             {
+                menuPrincipal.InnerHtml = "";
                 lblUserName.Text = "Bienvenido " + (string)Session["username"];
                 btnSession.Text = "Cerrar sesión";
+                var userIDSession = Session["idRol"].ToString();
+                if (Convert.ToInt32(userIDSession) == 1)
+                {
+                    menuPrincipal.InnerHtml = "<li class='<%:Page.Title=='Administrar Metales'?'active':''%>" +
+                        "    <a runat = 'server' href='frmMantenimientoCategoria.aspx'>Adm.Metales</a> " +
+                        "</li> " +
+                        "<li class='<%:Page.Title=='Administrar clientes'?'active':''%>" +
+                        "	<a runat = 'server' href='frmMantenimientoClientes.aspx'>Adm.clientes</a>" +
+                        "</li>" +
+                        "<li class='<%:Page.Title=='Administrar inventario'?'active':''%>" +
+                        "	<a runat = 'server' href='QR.aspx'>Adm.inventario</a>" +
+                        "</li>" +
+                        "<li class='<%:Page.Title=='Crear factura'?'active':''%>" +
+                        "	<a runat = 'server' href='frmCrearFactura.aspx'>Crear factura</a>" +
+                        "</li>" +
+                        "<li class='<%:Page.Title=='Liquidar factura'?'active':''%>" +
+                        "	<a runat = 'server' href='LeerQR.aspx'>Liquidar factura</a>" +
+                        "</li>" +
+                        "<li class='<%:Page.Title=='Ver Facturas Liquidadas'?'active':''%>" +
+                        "	<a runat = 'server' href='frmLeerFacturaCanceladas.aspx'>Facturas Liquidadas</a>" +
+                        "</li>" +
+                        "<li class='<%:Page.Title=='Register'?'active':''%>" +
+                        "	<a runat = 'server' href='Account/Register.aspx'>Adm.usuarios</a>" +
+                        "</li>";
+                }
+                else if (Convert.ToInt32(userIDSession) == 2)
+                {
+                    menuPrincipal.InnerHtml = "<li class='<%:Page.Title=='Crear factura'?'active':''%>" +
+                            "	<a runat = 'server' href='frmCrearFactura.aspx'>Crear factura</a>" +
+                            "</li>" +
+                            "<li class='<%:Page.Title=='Liquidar factura'?'active':''%>" +
+                            "	<a runat = 'server' href='LeerQR.aspx'>Liquidar factura</a>" +
+                            "</li>" +
+                            "<li class='<%:Page.Title=='Ver Facturas Liquidadas'?'active':''%>" +
+                            "	<a runat = 'server' href='frmLeerFacturaCanceladas.aspx'>Facturas Liquidadas</a>" +
+                            "</li>";
+                }
+                else if (Convert.ToInt32(userIDSession) == 3)
+                {
+                    menuPrincipal.InnerHtml = "<li class='<%:Page.Title=='Liquidar factura'?'active':''%>" +
+                            "	<a runat = 'server' href='LeerQR.aspx'>Liquidar factura</a>" +
+                            "</li>";
+                }
             }
         }
 

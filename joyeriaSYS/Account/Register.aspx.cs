@@ -45,6 +45,7 @@ namespace joyeriaSYS.Account
                 manager.UserName = txtUserName.Text;
                 manager.Nombre = txtName.Text;
                 manager.Apellido1 = txtLastname.Text;
+                manager.LockoutEnabled = obtenerEstadoDelCheckBoxInactivar();
                 manager.IdRol = obtenerRolSeleccionado();
       
                 if (objUsu.ConsultarPorId(manager).Count() > 0)
@@ -68,6 +69,17 @@ namespace joyeriaSYS.Account
             }
         }
 
+        private bool obtenerEstadoDelCheckBoxInactivar()
+        {
+            if (chbActivoInactivo.Checked)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
+
         private void validarResultado(AspNetUsers user)
         {
             if (user != null)
@@ -79,6 +91,7 @@ namespace joyeriaSYS.Account
                 txtLastname.Text = "";
                 hdfId.Value = "";
                 ddlRol.ClearSelection();
+                chbActivoInactivo.Checked = false;
                 ddlRol.Items.FindByValue("-Seleccionar-").Selected = true;
                 CargarTablaUsuarios();
                 btnInsertarActualizar.Text = "Guardar";
@@ -99,8 +112,20 @@ namespace joyeriaSYS.Account
             txtUserName.Text = gvwUsuario.SelectedRow.Cells[2].Text;
             txtLastname.Text = gvwUsuario.SelectedRow.Cells[3].Text;
             ddlRol.SelectedItem.Text = gvwUsuario.SelectedRow.Cells[4].Text;
+            chbActivoInactivo.Checked = obtenerEstadoInactivoDelUsuarioSeleccionado(gvwUsuario.SelectedRow.Cells[5].Text);
 
             btnInsertarActualizar.Text = "Actualizar";
+        }
+
+        private bool obtenerEstadoInactivoDelUsuarioSeleccionado(string text)
+        {
+            if(text == "Inactivo")
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
         private int obtenerRolSeleccionado()
@@ -166,6 +191,7 @@ namespace joyeriaSYS.Account
                 dt.Columns.Add("mombreUsuario", typeof(System.String));
                 dt.Columns.Add("apellido", typeof(System.String));
                 dt.Columns.Add("rol", typeof(System.String));
+                dt.Columns.Add("LockoutEnabled", typeof(System.String));
 
                 foreach (AspNetUsers r in rows)
                 {
@@ -176,6 +202,7 @@ namespace joyeriaSYS.Account
                     fila["mombreUsuario"] = r.UserName;
                     fila["apellido"] = r.Apellido1;
                     fila["rol"] = obtenerNombreRol(r.IdRol.GetValueOrDefault());
+                    fila["LockoutEnabled"] = obtenerInactivadadUsuario(r.LockoutEnabled);
                     dt.Rows.Add(fila);
                 }
                 gvwUsuario.DataSource = dt;
@@ -184,6 +211,18 @@ namespace joyeriaSYS.Account
             catch (Exception ex)
             {
                 var err = ex.Message;
+            }
+        }
+
+        private string obtenerInactivadadUsuario(bool lockoutEnabled)
+        {
+            if (lockoutEnabled)
+            {
+                return "Inactivo";
+            }
+            else
+            {
+                return "Activo";
             }
         }
     }

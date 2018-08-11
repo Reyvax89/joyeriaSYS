@@ -7,6 +7,12 @@
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group row">
+            <asp:Label runat="server" CssClass="col-md-4 control-label">Inactivar:</asp:Label>
+            <div class="col-md-5">
+                <asp:CheckBox ID="chbActivoInactivo" runat="server" />
+            </div>
+        </div>
+        <div class="form-group row">
             <asp:Label runat="server" CssClass="col-md-4 control-label">Nombre:</asp:Label>
             <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control" />
@@ -66,7 +72,8 @@
 						<asp:BoundField DataField="mombre" HeaderText="Nombre" AccessibleHeaderText="nombre" InsertVisible="False"></asp:BoundField>
 						<asp:BoundField DataField="mombreUsuario" HeaderText="Nombre de usuario" AccessibleHeaderText="nombreUsuario" InsertVisible="False"></asp:BoundField>
 						<asp:BoundField DataField="apellido" HeaderText="Apellido" AccessibleHeaderText="apellido" InsertVisible="False"></asp:BoundField>
-						<asp:BoundField DataField="rol" HeaderText="Rol" AccessibleHeaderText="rol" InsertVisible="False"></asp:BoundField>
+                        <asp:BoundField DataField="rol" HeaderText="Rol" AccessibleHeaderText="rol" InsertVisible="False"></asp:BoundField>
+                        <asp:BoundField DataField="LockoutEnabled" HeaderText="Inactivo" AccessibleHeaderText="LockoutEnabled" InsertVisible="False"></asp:BoundField>
 						<asp:CommandField ShowSelectButton="True" HeaderText="Seleccionar"></asp:CommandField>
 					</Columns>
 					<FooterStyle BackColor="#CCCC99" ForeColor="Black"></FooterStyle>

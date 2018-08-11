@@ -19,6 +19,7 @@ namespace joyeriaSYS.Controles.clases
                 actualizado.PhoneNumber = objeto.PhoneNumber;
                 actualizado.PasswordHash = objeto.PasswordHash;
                 actualizado.Apellido1 = objeto.Apellido1;
+                actualizado.LockoutEnabled = objeto.LockoutEnabled;
                 actualizado.Nombre = objeto.Nombre;
                 actualizado.UserName = objeto.UserName;
                 actualizado.IdRol = objeto.IdRol;
@@ -55,7 +56,7 @@ namespace joyeriaSYS.Controles.clases
         {
             using (JoyeriaEntities contexto = new JoyeriaEntities())
             {
-                return contexto.AspNetUsers.Where(user => user.PasswordHash == objeto.PasswordHash && user.UserName == objeto.UserName).FirstOrDefault();
+                return contexto.AspNetUsers.Where(user => user.PasswordHash == objeto.PasswordHash && user.UserName == objeto.UserName && user.LockoutEnabled == false).FirstOrDefault();
             }
         }
 

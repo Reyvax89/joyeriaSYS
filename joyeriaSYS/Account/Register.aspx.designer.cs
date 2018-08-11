@@ -13,14 +13,14 @@ namespace joyeriaSYS.Account {
     public partial class Register {
         
         /// <summary>
-        /// ErrorMessage control.
+        /// chbActivoInactivo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
-
+        protected global::System.Web.UI.WebControls.CheckBox chbActivoInactivo;
+        
         /// <summary>
         /// txtName control.
         /// </summary>
@@ -29,7 +29,7 @@ namespace joyeriaSYS.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtName;
-
+        
         /// <summary>
         /// txtLastname control.
         /// </summary>
@@ -38,7 +38,7 @@ namespace joyeriaSYS.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLastname;
-
+        
         /// <summary>
         /// txtUserName control.
         /// </summary>
@@ -65,7 +65,7 @@ namespace joyeriaSYS.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
-
+        
         /// <summary>
         /// ddlRol control.
         /// </summary>
@@ -74,25 +74,7 @@ namespace joyeriaSYS.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRol;
-
-        /// <summary>
-        /// gvwUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwUsuario;
-
-        /// <summary>
-        /// hdfId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfId;
-
+        
         /// <summary>
         /// btnInsertarActualizar control.
         /// </summary>
@@ -101,5 +83,32 @@ namespace joyeriaSYS.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInsertarActualizar;
+        
+        /// <summary>
+        /// ErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        
+        /// <summary>
+        /// hdfId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfId;
+        
+        /// <summary>
+        /// gvwUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwUsuario;
     }
 }

@@ -695,7 +695,7 @@ namespace joyeriaSYS
                     //string _open = "window.open('/ExcelFacturas/" + datosDeLaFactura.NoFactura + ".xls', '_newtab');";
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
-                    //btnImprimir.PostBackUrl = "198.38.93.222/ExcelFacturas/"+ datosDeLaFactura.NoFactura +".xls";
+                    //btnImprimir.PostBackUrl = "204.93.157.126/ExcelFacturas/"+ datosDeLaFactura.NoFactura +".xls";
                     //MostrarMensaje("Excel creado");
                     excelBook = null;
                     excelSheet = null;
